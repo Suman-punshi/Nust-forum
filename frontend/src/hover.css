@@ -1,0 +1,12 @@
+.card.rounded-4.mb-3:hover {
+    /* Styles for hover effect */
+    /* For example, change background color */
+    background-color: #4D869C;
+    /* Or add a box shadow */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  }
+
+.badge.badge-dark.ms-1:hover{
+    color: #4D869C;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
