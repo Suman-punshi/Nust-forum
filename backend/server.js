@@ -1,18 +1,23 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors'); // Import the cors package
-const projectsRouter = require('./routes/project');
+const userRouter = require('./routes/users');
+const projectsRouter=require('./routes/project')
 
 
 const app = express();
 
 // Enable CORS
 app.use(cors());
-
-mongoose.connect('mongodb+srv://sumankumarpunshi:Z3xPUTBGUkGMtkNv@cluster0.etnafwn.mongodb.net/forum-db', {
+app.use(express.json());
+mongoose.connect('mongodb+srv://arham:arham@cluster1.rej9jmc.mongodb.net/lab12', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
+app.get('/favicon.ico', (req, res) => {
+    res.status(204).end();
+  });
+  
 
 // Check if MongoDB is connected
 const db = mongoose.connection;
@@ -21,16 +26,17 @@ db.on('error', (error) => {
 });
 db.once('open', () => {
     console.log('Connected to MongoDB database:', db.name);
-
-
+    
     // Add routes after MongoDB is connected
+    app.use('/users', userRouter);
     app.use('/', projectsRouter);
     app.use('/post/:postId', projectsRouter);
-    console.log("test test");
-
+   
+    
+   
+    
     app.listen(5000, () => {
         console.log('Server started on port 5000');
     });
-});
-
+})
 
