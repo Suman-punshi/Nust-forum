@@ -29,7 +29,7 @@ db.once('open', () => {
     // Add routes after MongoDB is connected
     app.use('/users', userRouter);
     app.use('/cards', hp);
-    app.use('/:postId', projectsRouter);
+    app.use('/post', projectsRouter);
    
     
    
