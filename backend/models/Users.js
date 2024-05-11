@@ -31,6 +31,10 @@ const postSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now
+  },
+  group:{
+    type: string,
+    required: true
   }
 }, { collection: 'post' });
 
