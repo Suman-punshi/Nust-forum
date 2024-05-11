@@ -10,7 +10,7 @@ const app = express();
 // Enable CORS
 app.use(cors());
 app.use(express.json());
-mongoose.connect('mongodb+srv://arham:arham@cluster1.rej9jmc.mongodb.net/lab12', {
+mongoose.connect('mongodb+srv://sumankumarpunshi:Z3xPUTBGUkGMtkNv@cluster0.etnafwn.mongodb.net/forum-db', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
