@@ -1,10 +1,15 @@
 // projectsController.js
 const Project = require('../models/Users');
+const User = require('../models/usermodel');
+
 console.log('a');
 const getProjects = async (req, res) => {
+  const userId = req.params.userId
     try {
         console.log('a');
-        const projects = await Project.find();
+        const user = await User.findById(userId);
+        // const projects = await Project.find();
+        const projects = await Project.find({ group: { $in: user.groupsjoined } });
         console.log('Projects:', projects); // Log the projects to see if they are fetched correctly
         res.json(projects);
        

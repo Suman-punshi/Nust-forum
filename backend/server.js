@@ -2,9 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors'); // Import the cors package
 const userRouter = require('./routes/users');
-const projectsRouter=require('./routes/project')
-
-
+const projectsRouter=require('./routes/project');
+const hp=require('./routes/hpage');
 const app = express();
 
 // Enable CORS
@@ -29,8 +28,8 @@ db.once('open', () => {
     
     // Add routes after MongoDB is connected
     app.use('/users', userRouter);
-    app.use('/', projectsRouter);
-    app.use('/post/:postId', projectsRouter);
+    app.use('/cards', hp);
+    app.use('/:postId', projectsRouter);
    
     
    

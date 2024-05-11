@@ -15,12 +15,12 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  groups_joined: {
-    type: array,
+  groupsjoined: {
+    type: Array,
     required: false
   }
-}, { collection: 'usertable' });
+}, { collection: 'accounts' });
 
-const User = mongoose.model('usertable', userSchema);
+const User = mongoose.model('accounts', userSchema);
 
 module.exports = User;

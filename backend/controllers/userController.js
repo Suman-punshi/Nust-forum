@@ -53,7 +53,7 @@ exports.loginUser = (req, res) => {
 
       // If login successful, return user data (you can customize this)
       console.log('User logged in successfully');
-      res.status(200).json(user);
+      res.status(200).json({ message: 'Login successful', userdata: user });
     })
     .catch(err => {
       console.error('Error logging in user:', err);

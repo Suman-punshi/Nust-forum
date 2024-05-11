@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import '../hover.css'; 
 
 
 
 export const Card = () => {
+
+  const { userId } = useParams();
 
   const cardcolor = {backgroundColor: "#EEF7FF"}
   const tagcolor = {backgroundColor: "#547aeb"}
@@ -25,7 +28,7 @@ export const Card = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/');
+        const response = await axios.get(`http://localhost:5000/cards/${userId}`);
         setPosts(response.data);
         console.log(posts);
       } catch (error) {

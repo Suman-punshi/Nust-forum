@@ -33,7 +33,7 @@ const postSchema = new mongoose.Schema({
     default: Date.now
   },
   group:{
-    type: string,
+    type: String,
     required: true
   }
 }, { collection: 'post' });

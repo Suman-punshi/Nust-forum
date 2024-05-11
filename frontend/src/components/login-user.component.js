@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+
 
 const LoginUser = () => {
+  const navigate = useNavigate();
+
   const [loginIdentifier, setLoginIdentifier] = useState('');
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState(null); // State to handle login error
@@ -42,14 +46,17 @@ const LoginUser = () => {
     axios.post('http://localhost:5000/users/login', user)
       .then(res => {
         console.log('Response from server:', res.data);
-        // Clear any previous error message
-        setLoginError(null);
-        // Set login success message
-        setLoginSuccess(true);
-        // Reset form fields
-        setLoginIdentifier('');
-        setPassword('');
-      })
+        if (res.data.message === 'Login successful') {
+          // Clear any previous error message
+          setLoginError(null);
+          // Set login success message
+          setLoginSuccess(true);
+          // Reset form fields
+          setLoginIdentifier('');
+          setPassword('');
+          // Redirect to home after successful login
+          navigate(`/cards/${res.data.userdata._id}`);
+        } })
       .catch(err => {
         console.error('Error sending request:', err);
         // Display error message if login fails
