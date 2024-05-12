@@ -6,7 +6,7 @@ const postcont = require('../controllers/postbyid');
 
 
 
-router.get('/:postId', postcont.getPostById);
+router.get('/:userId/:postId', postcont.getPostById);
 // router.get('/post/:postId', comcont.getcommentById);
 
 

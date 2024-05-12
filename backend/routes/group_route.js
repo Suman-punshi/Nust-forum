@@ -5,8 +5,8 @@ const projectsController = require('../controllers/projectsController');
 
 
 
-router.get('/:group', projectsController.getGroupProjects);
-
+router.get('/:userId/:group', projectsController.getGroupProjects);
+router.get('/:userId/:tag_name/:group', projectsController.getTagProjects);
 
 
 console.log("now in routes.js");
