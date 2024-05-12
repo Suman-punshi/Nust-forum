@@ -15,7 +15,7 @@ const IndividualPost = () => {
     const fetchPost = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/post/${postId}`
+          `http://localhost:4000/post/${postId}`
         );
         setPost(response.data.project);
         setComments(response.data.comments);
