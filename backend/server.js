@@ -3,13 +3,14 @@ const mongoose = require('mongoose');
 const cors = require('cors'); // Import the cors package
 const userRouter = require('./routes/users');
 const projectsRouter=require('./routes/project');
+const groupRouter=require('./routes/groups')
 const hp=require('./routes/hpage');
 const app = express();
 
 // Enable CORS
 app.use(cors());
 app.use(express.json());
-mongoose.connect('mongodb+srv://sumankumarpunshi:Z3xPUTBGUkGMtkNv@cluster0.etnafwn.mongodb.net/forum-db', {
+mongoose.connect('mongodb+srv://arham:arham@cluster1.rej9jmc.mongodb.net/lab12', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
@@ -30,6 +31,7 @@ db.once('open', () => {
     app.use('/users', userRouter);
     app.use('/cards', hp);
     app.use('/post', projectsRouter);
+    app.use('/groups', groupRouter);
    
     
    

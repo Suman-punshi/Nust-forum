@@ -32,12 +32,17 @@ const postSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
+  
   group:{
     type: String,
+    required: true
+  },
+  groupID:{
+    type: Number,
     required: true
   }
 }, { collection: 'post' });
 
-const User = mongoose.model('User', postSchema);
+const User = mongoose.model('post', postSchema);
 
 module.exports = User;

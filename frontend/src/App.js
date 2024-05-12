@@ -5,6 +5,7 @@ import IndividualPost from './components/individualpost';
 import Navbar from './components/navbar'; 
 import CreateUser from "./components/create-user.component";
 import LoginUser from "./components/login-user.component";
+import GroupPosts from './components/GroupPosts';
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
           <Route path="/post/:postId" element={<IndividualPost />} />
           <Route path="/create-user" element={<CreateUser />} />
           <Route path="/cards/:userId" element={<Card />} />
+          <Route path="/group/:group" element={<GroupPosts />} /> {/* Define the route for GroupPosts */}
         </Routes>
       </div>
     </Router>

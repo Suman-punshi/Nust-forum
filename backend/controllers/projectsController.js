@@ -19,7 +19,48 @@ const getProjects = async (req, res) => {
     }
 };
 
+
+
+
+const getGroupProjects = async (req, res) => {
+  const group_name= req.params.group;
+  try {
+    const projects = await Project.find({ group: group_name });
+    res.json(projects);
+    console.log('aaala');
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: err.message });
+  }
+};
+
+module.exports = {
+  getProjects,
+  getGroupProjects
+};
+
+ 
+/*const getAllGroups = async (req, res) => {
+  try {
+    const groups = await Group.find();
+    res.json(groups);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: err.message });
+  }
+};
+const getPostsByGroup = async (req, res) => {
+  const groupName = req.params.groupName;
+  try {
+    const posts = await Post.find({ group: groupName });
+    res.json(posts);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: err.message });
+  }
+};
+
   
   module.exports = {
     getProjects
-  };
+  };*/
