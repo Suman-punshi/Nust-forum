@@ -4,6 +4,7 @@ const cors = require('cors'); // Import the cors package
 const userRouter = require('./routes/users');
 const projectsRouter=require('./routes/project');
 const hp=require('./routes/hpage');
+const group_r=require('./routes/group_route');
 const app = express();
 
 // Enable CORS
@@ -30,6 +31,8 @@ db.once('open', () => {
     app.use('/users', userRouter);
     app.use('/cards', hp);
     app.use('/post', projectsRouter);
+    app.use('/group', group_r);
+   
    
     
    
