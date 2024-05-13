@@ -9,10 +9,7 @@ const app = express();
 // Enable CORS
 app.use(cors());
 app.use(express.json());
-mongoose.connect('mongodb+srv://sumankumarpunshi:Z3xPUTBGUkGMtkNv@cluster0.etnafwn.mongodb.net/forum-db', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-});
+mongoose.connect('mongodb+srv://sumankumarpunshi:Z3xPUTBGUkGMtkNv@cluster0.etnafwn.mongodb.net/forum-db', {});
 app.get('/favicon.ico', (req, res) => {
     res.status(204).end();
   });
@@ -34,8 +31,8 @@ db.once('open', () => {
     
    
     
-    app.listen(5000, () => {
-        console.log('Server started on port 5000');
+    app.listen(4000, () => {
+        console.log('Server started on port 4000');
     });
 })
 
