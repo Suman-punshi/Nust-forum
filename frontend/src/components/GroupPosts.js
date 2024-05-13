@@ -10,7 +10,7 @@ const GroupPosts = () => {
   useEffect(() => {
     const fetchGroupPosts = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/cards/group/${group}`);
+        const response = await axios.get(`http://localhost:4000/cards/group/${group}`);
         setGroupPosts(response.data);
       } catch (error) {
         console.error('Error fetching group posts:', error);
