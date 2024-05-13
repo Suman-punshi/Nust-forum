@@ -65,6 +65,7 @@ exports.addUser = (req, res) => {
 exports.loginUser = (req, res) => {
   const { loginIdentifier, password } = req.body;
 
+
   console.log('Received request to login user:', req.body); // Log the received request body
 
   // Check if loginIdentifier or password is undefined or null
@@ -98,6 +99,7 @@ exports.loginUser = (req, res) => {
 
           // If login successful, return user data (you can customize this)
           console.log('User logged in successfully');
+          console.log(user._id);
           res.status(200).json({ message: 'Login successful', userdata: {
               id: user._id,
               username: user.username,
