@@ -99,7 +99,7 @@ exports.loginUser = (req, res) => {
           // If login successful, return user data (you can customize this)
           console.log('User logged in successfully');
           res.status(200).json({ message: 'Login successful', userdata: {
-              id: user._id,
+              id: user.id,
               username: user.username,
               email: user.email,
               password: user.password
