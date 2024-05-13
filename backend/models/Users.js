@@ -22,10 +22,11 @@ const postSchema = new mongoose.Schema({
   },
   num_comments: {
     type: Number,
-    required: false
+    required: false,
+    default: 0
   },
   tags: {
-    type: Array,
+    type: String,
     required: false
   },
   createdAt: {

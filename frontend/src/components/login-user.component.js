@@ -43,7 +43,7 @@ const LoginUser = () => {
   
     console.log('Sending user data:', user);
   
-    axios.post('http://localhost:5000/users/login', user)
+    axios.post('http://localhost:4000/users/login', user)
       .then(res => {
         console.log('Response from server:', res.data);
         if (res.data.message === 'Login successful') {
