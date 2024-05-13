@@ -113,12 +113,15 @@ exports.loginUser = (req, res) => {
 
           // If login successful, return user data (you can customize this)
           console.log('User logged in successfully');
+          const token = createToken(user.id);
           res.status(200).json({ message: 'Login successful', userdata: {
               id: user.id,
               username: user.username,
               email: user.email,
               password: user.password
-          }});
+            },
+             token: token
+            });
       });
   })
   .catch(err => {
