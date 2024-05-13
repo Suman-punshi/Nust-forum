@@ -30,7 +30,7 @@ const CreateUser = () => {
 
         console.log('Sending user data:', user);
 
-        axios.post('http://localhost:5000/users', user)
+        axios.post('http://localhost:4000/users', user)
             .then(res => {
                 console.log('Response from server:', res.data);
                 setAlertMessage('User created successfully!');

@@ -11,6 +11,24 @@ const Navbar = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
+
+          
+              <li className="nav-item">
+                <Link to="/" className="nav-link text-white">Home</Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/create-user" className="nav-link text-white">Sign up</Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/login-user" className="nav-link text-white">Login</Link>
+              </li>
+         
+
+
+
+
+
+
             <li className="nav-item">
               <form className="d-flex">
                 <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />

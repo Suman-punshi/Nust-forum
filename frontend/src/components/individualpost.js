@@ -7,6 +7,7 @@ const IndividualPost = () => {
   const cardcolor = { backgroundColor: "#EEF7FF" };
 
   const { postId } = useParams();
+  const {userId} = useParams();
   const [post, setPost] = useState(null);
   const [comments, setComments] = useState(null);
 
@@ -15,7 +16,7 @@ const IndividualPost = () => {
     const fetchPost = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/post/${postId}`
+          `http://localhost:4000/post/${userId}/${postId}`
         );
         setPost(response.data.project);
         setComments(response.data.comments);
@@ -49,19 +50,18 @@ const IndividualPost = () => {
                 <p className="card-subtitle text-muted">{post.username}</p>
                 <h5 className="card-title">{post.Title}</h5>
               </div>
-              {/*post.tags && (
+              
                 <div className="tags">
-                  {JSON.parse(post.tags).map((tag, index) => (
+                  
                     <span
-                      key={index}
                       className="badge ms-1"
                       style={{ backgroundColor: "#4D869C", color: "white" }}
                     >
-                      {tag}
+                      {post.tags}
                     </span>
-                  ))}
+               
                 </div>
-              )*/}
+           
               <div className="card-body">
                 <p className="card-text">{post.text}</p>
                 {post.images && (

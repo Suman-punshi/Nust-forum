@@ -10,3 +10,7 @@
     color: #4D869C;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
+
+.card-subtitle.text-success:hover {
+  text-decoration: underline;
+}
