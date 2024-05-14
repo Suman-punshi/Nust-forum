@@ -9,6 +9,7 @@ import LoginUser from "./components/login-user.component";
 import CreatePostDialog from "./components/createPostDialog";
 import TagPosts from "./components/tags";
 import DisplaySearchResults from "./components/DisplaySearchResults";
+import Sidebar from "./components/Sidebar";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
@@ -17,6 +18,8 @@ function App() {
     <Router>
       <div className="container">
         <Navbar />
+        <Sidebar/>
+        
         <nav className="navbar"></nav>
 
         <Routes>
