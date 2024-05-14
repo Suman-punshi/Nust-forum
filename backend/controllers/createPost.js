@@ -3,17 +3,19 @@ const users = require('../models/usermodel');
 
 
 exports.addpost = async(req, res) => {
+    console.log("inside addpost");
     const userId = req.params.userId;
     const group = req.params.group;
     const c_user = await users.findById(userId);
     console.log('Received request to add user:', req.body); // Log the received request body
-    console.log(req.username);
+    console.log(c_user.username);
     console.log('Received request to add user:', req.body);
 
-    const { title, text, image, tag } = req.body;
+    const { Title, text, image, tags } = req.body;
 
-    const newposts = new posts({ username: c_user.username, title, text, image, tag, group});
+    const newposts = new posts({ username: c_user.username, Title: Title, text: text, images: image, tags: tags, group: group});
 
+    console.log(newposts);
     newposts.save()
         .then(() => {
             console.log('Post created succesfully');
