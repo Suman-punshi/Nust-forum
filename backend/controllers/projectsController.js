@@ -55,11 +55,41 @@ const getTagProjects = async (req, res) => {
 };
 
 
+const getAllTags = async (req, res) => {
+  try {
+    const projects = await Project.find();
+    const tags = projects.reduce((acc, project) => {
+      project.tags.forEach(tag => {
+        if (!acc.includes(tag)) {
+          acc.push(tag);
+        }
+      });
+      return acc;
+    }, []);
+    res.json(tags);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: err.message });
+  }
+};
+
+const getPostsByTag = async (req, res) => {
+  const tag = req.params.tag;
+  try {
+    const projects = await Project.find({ tags: tag });
+    res.json(projects);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: err.message });
+  }
+};
 
 
   
   module.exports = {
     getProjects,
     getGroupProjects,
-    getTagProjects
+    getTagProjects,
+    getAllTags,
+    getPostsByTag
   };

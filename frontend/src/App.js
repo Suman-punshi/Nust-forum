@@ -8,6 +8,8 @@ import CreateUser from "./components/create-user.component";
 import LoginUser from "./components/login-user.component";
 import CreatePostDialog from "./components/createPostDialog";
 import TagPosts from "./components/tags";
+import DisplaySearchResults from "./components/DisplaySearchResults";
+import Sidebar from "./components/Sidebar";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
@@ -16,6 +18,8 @@ function App() {
     <Router>
       <div className="container">
         <Navbar />
+        <Sidebar/>
+        
         <nav className="navbar"></nav>
 
         <Routes>
@@ -26,7 +30,8 @@ function App() {
           <Route path="/group/:userId/:group" element={<GroupPosts />} />
           <Route path="/tags/:userId/:tag_name/:group" element={<TagPosts />} />
           <Route path="/create/:userId/:group" element={<CreatePostDialog />} />
-
+          {/* Pass searchResults as a prop to DisplaySearchResults */}
+          <Route path="/search/:groupName" element={<DisplaySearchResults />} />
         </Routes>
       </div>
     </Router>
