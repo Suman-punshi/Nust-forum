@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import "../hover.css";
+import Sidebar from "./Sidebar";
 
 export const Card = () => {
   const { userId } = useParams();
@@ -31,6 +32,8 @@ export const Card = () => {
   }, []);
 
   return (
+    <div>
+      <Sidebar id = {userId}/>
     <div className="w-75 container d-flex justify-content-center mt-5">
       <div className="row">
         {" "}
@@ -98,6 +101,7 @@ export const Card = () => {
         </div>
       </div>
     </div>
+  </div>
   );
 };
 
