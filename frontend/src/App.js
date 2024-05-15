@@ -32,7 +32,7 @@ function App() {
           <Route path="/group/:userId/:group" element={<GroupPosts />} />
           <Route path="/tags/:userId/:tag_name/:group" element={<TagPosts />} />
           <Route path="/create/:userId/:group" element={<CreatePostDialog />} />
-          <Route path="/tags/:userID/:tag_name" element={<JustTagPosts />} />
+          <Route path="/tag/:userID/:tag_name" element={<JustTagPosts />} />
           {/* Pass searchResults as a prop to DisplaySearchResults */}
           <Route path="/search/:groupName" element={<DisplaySearchResults />} />
         </Routes>

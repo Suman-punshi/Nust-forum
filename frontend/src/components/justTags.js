@@ -16,7 +16,7 @@ const JustTagPosts = () => {
   useEffect(() => {
     const fetchtagPosts = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/tags/${userId}/${tag_name}`);
+        const response = await axios.get(`http://localhost:4000/tag/${userId}/${tag_name}`);
         setTagPosts(response.data);
       } catch (error) {
         console.error('Error fetching group posts:', error);

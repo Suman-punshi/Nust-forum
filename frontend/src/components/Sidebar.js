@@ -10,7 +10,7 @@ const Sidebar = (props) => {
   useEffect(() => {
     const fetchTags = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/tags`);
+        const response = await axios.get(`http://localhost:4000/tagS`);
         setTags(response.data);
       } catch (error) {
         console.error('Error fetching tags:', error);
@@ -29,11 +29,11 @@ const Sidebar = (props) => {
   };
 
   return (
-    <div className="sidebar" style={{ width: '100px' }}>
+    <div className="sidebar col-4" style={{ width: '100px' }}>
       <h3>Tags</h3>
       <ul className="list-group">
         {tags.map((tag) => (
-           <Link to={`/tags/${props.id}/${tag.text}`}>
+           <Link to={`/tag/${props.id}/${tag.text}`}>
           <li key={tag._id} className="list-group-item">
             {/* <button className="btn btn-link" onClick={() => handleTagClick(tag.text)}> */}
               {tag.text}
