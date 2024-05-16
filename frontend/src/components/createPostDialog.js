@@ -7,7 +7,7 @@ const CreatePostDialog = () => {
     const { group, userId } = useParams();
     const [Title, setTitle] = useState('');
     const [text, setText] = useState('');
-    const [image, setImage] = useState('');
+    const [image, setImage] = useState(null); // Change to single image state, initialized as null
     const [tags, setTags] = useState('');
     const [alertMessage, setAlertMessage] = useState('');
 
@@ -20,7 +20,8 @@ const CreatePostDialog = () => {
     };
 
     const onChangeImage = (e) => {
-        setImage(e.target.value);
+        const file = e.target.files[0]; // Get the selected file
+        setImage(file); // Set the file in the state
     };
 
     const onChangeTag = (e) => {
@@ -30,14 +31,13 @@ const CreatePostDialog = () => {
     const onSubmit = (e) => {
         e.preventDefault();
 
-        const post = {
-            Title: Title,
-            text: text,
-            images: image,
-            tags: tags
-        };
+        const formData = new FormData();
+        formData.append('Title', Title);
+        formData.append('text', text);
+        formData.append('image', image); // Append the selected file to the form data
+        formData.append('tags', tags);
 
-        axios.post(`http://localhost:4000/create/${userId}/${group}`, post)
+        axios.post(`http://localhost:4000/create/${userId}/${group}`, formData)
             .then(res => {
                 console.log('Response from server:', res.data);
                 setAlertMessage('Post created successfully!');
@@ -50,7 +50,7 @@ const CreatePostDialog = () => {
         // Reset form fields
         setTitle('');
         setText('');
-        setImage('');
+        setImage(null);
         setTags('');
     };
 
@@ -67,7 +67,7 @@ const CreatePostDialog = () => {
                         <textarea className="form-control" placeholder="Text" value={text} onChange={onChangeText} />
                     </div>
                     <div className="form-group" style={{ marginTop: '20px' }}>
-                        <input className="form-control" type="text" placeholder="Image URL" value={image} onChange={onChangeImage} />
+                        <input className="form-control" type="file" onChange={onChangeImage} />
                     </div>
                     <div className="form-group" style={{ marginTop: '20px' }}>
                         <select className="form-control" value={tags} onChange={onChangeTag}>
