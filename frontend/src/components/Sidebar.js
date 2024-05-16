@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import "./style.css"; // Importing style.css from the src folder
 
 const Sidebar = (props) => {
-
   const [tags, setTags] = useState([]);
 
   useEffect(() => {
@@ -19,29 +18,22 @@ const Sidebar = (props) => {
     fetchTags();
   }, []);
 
-  const handleTagClick = async (tag) => {
-    try {
-      const response = await axios.get(`http://localhost:4000/tags/${tag}`);
-      // Handle the fetched posts (display or store in state)
-    } catch (error) {
-      console.error('Error fetching posts by tag:', error);
-    }
-  };
-
   return (
-    <div className="sidebar col-4" style={{ width: '100px' }}>
-      <h3>Tags</h3>
-      <ul className="list-group">
-        {tags.map((tag) => (
-           <Link to={`/tag/${props.id}/${tag.text}`}>
-          <li key={tag._id} className="list-group-item">
-            {/* <button className="btn btn-link" onClick={() => handleTagClick(tag.text)}> */}
-              {tag.text}
-            {/* </button> */}
-          </li>
-          </Link>
-        ))}
-      </ul>
+    <div className="sidebar-container">
+      <div className="sidebar" style={{ backgroundColor: '#4D869C', padding: '20px', position: 'fixed', left: '0', top: '0', bottom: '0', overflowY: 'auto', width: '250px' }}>
+        <h3 style={{ color: '#fff' }}>Tags</h3>
+        <ul className="list-group" style={{ listStyle: 'none', padding: '0' }}>
+          {tags.map((tag) => (
+            <Link to={`/tag/${props.id}/${tag.text}`} key={tag._id} style={{ textDecoration: 'none', color: '#fff' }}>
+              <li className="list-group-item tag-item" style={{ marginBottom: '5px', borderRadius: '5px', backgroundColor: 'transparent', transition: 'background-color 0.3s' }}>{tag.text}</li>
+            </Link>
+          ))}
+        </ul>
+      </div>
+      <div className="lines">
+        <div className="horizontal-line"></div>
+        <div className="vertical-line"></div>
+      </div>
     </div>
   );
 };

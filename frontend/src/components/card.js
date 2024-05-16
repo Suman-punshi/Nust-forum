@@ -197,14 +197,14 @@
 
 // export default Card;
 
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import "../hover.css";
+import "./style.css"; // Importing style.css from the src folder
 import Sidebar from "./Sidebar";
-
+import Layout from "./Layout"; // Import the layout component
 export const Card = () => {
   const { userId } = useParams();
 
@@ -232,10 +232,15 @@ export const Card = () => {
   }, []);
 
   return (
-    <div>
-      <Sidebar id={userId} />
-      <div className="container mt-5">
-        <div className="row">
+    <Layout>
+    <div className="container mt-5">
+      <div className="row">
+        {/* Left Sidebar */}
+        <div className="col-lg-2">
+         
+        </div>
+        {/* Main Content */}
+        <div className="col-lg-7">
           {posts.map((post) => (
             <div key={post._id} className="col-12 mb-3">
               <div className="card rounded-4" style={cardcolor}>
@@ -267,12 +272,19 @@ export const Card = () => {
             </div>
           ))}
         </div>
+        {/* Right Sidebar */}
+        <div className="col-lg-3">
+          <Sidebar id={userId} />
+        </div>
       </div>
     </div>
+    </Layout>
   );
 };
 
 export default Card;
+
+
 
 
 

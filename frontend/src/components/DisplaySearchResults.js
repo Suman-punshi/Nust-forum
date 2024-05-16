@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-
+import Layout from "./Layout"; // Import the layout component
 const DisplaySearchResults = () => {
     const { groupName } = useParams();
     const [searchResults, setSearchResults] = useState([]);
@@ -22,6 +22,7 @@ const DisplaySearchResults = () => {
     const cardcolor = { backgroundColor: "#EEF7FF" };
 
     return (
+        <Layout>
         <div className="w-75 container d-flex justify-content-center mt-5">
             <div className="row">
                 <div className="col">
@@ -45,6 +46,7 @@ const DisplaySearchResults = () => {
                 </div>
             </div>
         </div>
+        </Layout>
     );
 };
 
