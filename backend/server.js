@@ -7,6 +7,7 @@ const hp=require('./routes/hpage');
 const group_r=require('./routes/group_route');
 const create_r=require('./routes/cPost');
 const tag_r=require('./routes/tag_route');
+const comment_r=require('./routes/c_comment');
 const searchRouter = require('./routes/search'); // Import the route for handling post search
 const app = express();
 
@@ -36,7 +37,7 @@ db.once('open', () => {
     app.use('/tags', group_r);
     app.use('/tag', tag_r);
     app.use('/search', searchRouter); // Mount the route for handling post search
-   
+    app.use('/comment', comment_r);
    
     
    
