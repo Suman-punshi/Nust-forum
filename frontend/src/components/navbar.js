@@ -1,11 +1,15 @@
 // Navbar.js
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { useLogout } from '../hooks/useLogout';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const Navbar = () => {
     const [groupName, setGroupName] = useState('');
     const navigate = useNavigate();
+    const { logout } = useLogout();
+    const { user } = useAuthContext();
 
     const handleSearch = async (e) => {
         e.preventDefault();
@@ -21,6 +25,11 @@ const Navbar = () => {
         }
     };
 
+    const handleLogout = () => {
+        logout(); // deletes token from local storage
+        navigate('/');
+    }
+
     return (
         <nav className="navbar navbar-expand-lg fixed-top" style={{ backgroundColor: '#4D869C', color: 'white' }}>
             <div className="container">
@@ -29,6 +38,18 @@ const Navbar = () => {
                     <button className="btn btn-light" type="submit">Search</button>
                 </form>
             </div>
+            {user && (
+            <div>
+                <button className='btn btn-light' onClick={ handleLogout }>Log out</button>
+            </div>
+            )}
+            {!user && (
+                <div>
+                    <Link to = "/" className='btn btn-light'>Login</Link>
+                    <Link to = "/create-user" className='btn btn-light'>Sign Up</Link>
+                </div>
+            )}
+
         </nav>
     );
 };

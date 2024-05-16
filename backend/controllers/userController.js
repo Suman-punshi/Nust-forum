@@ -57,7 +57,7 @@ exports.addUser = (req, res) => {
                       const token = createToken(user.id);
                       res.json({
                           message: 'User added successfully',
-                          user: {
+                          userdata: {
                               id: user.id,
                               username: user.username,
                               email: user.email
