@@ -2,6 +2,12 @@ const User = require('../models/usermodel');
 const bcrypt = require('bcrypt');
 const validator = require('validator');
 const saltRounds = 10; // Number of salt rounds for hashing the password
+const jwt = require('jsonwebtoken');
+
+
+const createToken = (id) => {
+  return jwt.sign({id}, 'SECRET_KEY = WebEngineering123SecretKey', {expiresIn: '1d'});
+}
 
 exports.addUser = (req, res) => {
   console.log('Received request to add user:', req.body);
@@ -46,19 +52,28 @@ exports.addUser = (req, res) => {
 
               // Save the new user to the database
               newUser.save()
-                  .then(() => {
+                  .then(user => {
                       console.log('User added successfully');
-                      res.json('User added!');
+                      const token = createToken(user.id);
+                      res.json({
+                          message: 'User added successfully',
+                          userdata: {
+                              id: user.id,
+                              username: user.username,
+                              email: user.email
+                          },
+                          token: token
+                      });
                   })
                   .catch(err => {
                       console.error('Error adding user:', err);
-                      res.status(400).json('Error: ' + err);
+                      res.status(400).json({ message: 'Error: ' + err });
                   });
           });
       })
       .catch(err => {
           console.error('Error checking user existence:', err);
-          res.status(500).json('Internal server error');
+          res.status(500).json({ message: 'Internal server error' });
       });
 };
 
@@ -99,13 +114,16 @@ exports.loginUser = (req, res) => {
 
           // If login successful, return user data (you can customize this)
           console.log('User logged in successfully');
+          const token = createToken(user.id);
           console.log(user._id);
           res.status(200).json({ message: 'Login successful', userdata: {
-              id: user._id,
+              id: user.id,
               username: user.username,
               email: user.email,
               password: user.password
-          }});
+            },
+             token: token
+            });
       });
   })
   .catch(err => {
