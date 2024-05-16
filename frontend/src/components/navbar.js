@@ -1,45 +1,36 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-
+// Navbar.js
+import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-  return (
-    <nav className="navbar navbar-expand-lg fixed-top" style={{ backgroundColor: '#4D869C', color: 'white' }}>
-      <div className="container">
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav ms-auto">
+    const [groupName, setGroupName] = useState('');
+    const navigate = useNavigate();
 
-          
-              <li className="nav-item">
-                <Link to="/" className="nav-link text-white">Home</Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/create-user" className="nav-link text-white">Sign up</Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/login-user" className="nav-link text-white">Login</Link>
-              </li>
-         
+    const handleSearch = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.get(`http://localhost:4000/search/${groupName}`);
+            if (response.data.length > 0) {
+                navigate(`/search/${groupName}`);
+            } else {
+                alert('No such group found!');
+            }
+        } catch (error) {
+            console.error('Error searching posts:', error);
+        }
+    };
 
-
-
-
-
-
-            <li className="nav-item">
-              <form className="d-flex">
-                <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                <button className="btn btn-light" type="submit">Search</button>
-              </form>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  );
+    return (
+        <nav className="navbar navbar-expand-lg fixed-top" style={{ backgroundColor: '#4D869C', color: 'white' }}>
+            <div className="container">
+                <form className="d-flex" onSubmit={handleSearch}>
+                    <input className="form-control me-2" type="search" placeholder="Search by group name" value={groupName} onChange={(e) => setGroupName(e.target.value)} />
+                    <button className="btn btn-light" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+    );
 };
 
 export default Navbar;

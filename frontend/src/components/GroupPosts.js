@@ -1,44 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from "react-router-dom";
-import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
-import Card from './card';
-
-
-const TagPosts = () => {
+const GroupPosts = () => {
   const { group } = useParams();
-  const { userId } = useParams();
-  const { tag_name } = useParams();
   const cardcolor = { backgroundColor: "#EEF7FF" };
-  const [tagPosts, setTagPosts] = useState([]);
+  const [groupPosts, setGroupPosts] = useState([]);
 
   useEffect(() => {
-    const fetchtagPosts = async () => {
+    const fetchGroupPosts = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/tags/${userId}/${tag_name}/${group}`);
-        setTagPosts(response.data);
+        const response = await axios.get(`http://localhost:4000/cards/group/${group}`);
+        setGroupPosts(response.data);
       } catch (error) {
         console.error('Error fetching group posts:', error);
       }
     };
-
-    
-
-
-
-    fetchtagPosts();
+    fetchGroupPosts();
   }, [group]);
 
   return (
     <div className="w-75 container d-flex justify-content-center mt-5">
-      <Link to={`/create/${userId}/${group}`}>
-        <p className="card-subtitle text-success">New Post</p>
-      </Link>
       <div className="row">
         <div className="col">
           <div className="">
-            {tagPosts.map(post => (
+            {groupPosts.map(post => (
               <div key={post._id} className="card rounded-4 mb-3" style={cardcolor}>
                 <div className="card-header">
                   <p className="card-subtitle text-muted">{post.username}</p>
@@ -60,4 +46,4 @@ const TagPosts = () => {
   );
 };
 
-export default TagPosts;
+export default GroupPosts;

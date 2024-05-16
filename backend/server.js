@@ -6,6 +6,8 @@ const projectsRouter=require('./routes/project');
 const hp=require('./routes/hpage');
 const group_r=require('./routes/group_route');
 const create_r=require('./routes/cPost');
+const tag_r=require('./routes/tag_route');
+const searchRouter = require('./routes/search'); // Import the route for handling post search
 const app = express();
 
 // Enable CORS
@@ -32,6 +34,8 @@ db.once('open', () => {
     app.use('/group', group_r);
     app.use('/create', create_r);
     app.use('/tags', group_r);
+    app.use('/tag', tag_r);
+    app.use('/search', searchRouter); // Mount the route for handling post search
    
    
     
@@ -41,4 +45,3 @@ db.once('open', () => {
         console.log('Server started on port 4000');
     });
 })
-

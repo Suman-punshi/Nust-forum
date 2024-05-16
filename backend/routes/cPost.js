@@ -5,7 +5,7 @@ const create = require('../controllers/createPost');
 
 
 
-router.get('/:userId/:group', create.addpost);
+router.post('/:userId/:group', create.addpost);
 
 
 

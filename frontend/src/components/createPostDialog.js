@@ -4,12 +4,12 @@ import { useParams } from "react-router-dom";
 
 // Dialog component for creating a post
 const CreatePostDialog = () => {
-    const { group } = useParams();
+  const { group } = useParams();
   const { userId } = useParams();
-  const [title, setTitle] = useState('');
+  const [Title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [image, setImage] = useState('');
-  const [tag, setTag] = useState('');
+  const [tags, setTags] = useState('');
   const [alertMessage, setAlertMessage] = useState('');
 
 
@@ -27,29 +27,33 @@ const onChangeImage = (e) => {
 };
 
 const onChangeTag = (e) => {
-    setTag(e.target.value);
+    setTags(e.target.value);
 };
 
 
 const onSubmit = (e) => {
     e.preventDefault();
+    alert("inside onsubmit");
 
     const post = {
-        Title: title,
+        Title: Title,
         text: text,
         images: image,
-        tags: tag
+        tags: tags
     };
 
     console.log('Sending the post data:', post);
+    
 
     axios.post(`http://localhost:4000/create/${userId}/${group}`, post)
         .then(res => {
+          alert("sending axios ");
             console.log('Response from server:', res.data);
             setAlertMessage('post created successfully!');
             // You can also redirect the user or perform any other action here
         })
         .catch(err => {
+            alert("inside error block" + err);
             console.error('Error sending request:', err);
             setAlertMessage('Error creating post. Please try again later.');
         });
@@ -57,7 +61,7 @@ const onSubmit = (e) => {
     setTitle('');
     setText('');
     setImage('');
-    setTag('');
+    setTags('');
 
 };
 
@@ -67,13 +71,13 @@ const onSubmit = (e) => {
       <h2>Create Post</h2>
       <form onSubmit={onSubmit}>
     
-      <input type="text" placeholder="Title" value={title} onChange={onChangeTitle} />
+      <input type="text" placeholder="Title" value={Title} onChange={onChangeTitle} />
       
       <textarea placeholder="Text" value={text} onChange={onChangeText} />
       <input type="text" placeholder="Image URL" value={image} onChange={onChangeImage} />
-      <select value={tag} onChange={onChangeTag}>
+      <select value={tags} onChange={onChangeTag}>
         <option value="tag1">Tag 1</option>
-        <option value="tag2">Tag 2</option>
+        <option value="nodejs">nodejs</option>
         {/* Add more options as needed */}
       </select>
       {/* <div style={{ paddingTop: '20px' }} className="form-group">

@@ -3,10 +3,9 @@ const mongoose = require('mongoose');
 const postSchema = new mongoose.Schema({
   username: {
     type: String,
-    required: true,
-    unique: true
+    required: true
   },
-  title: {
+  Title: {
     type: String,
     required: true,
   },
@@ -33,12 +32,13 @@ const postSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
+  
   group:{
     type: String,
     required: true
   }
 }, { collection: 'post' });
 
-const User = mongoose.model('User', postSchema);
+const User = mongoose.model('post', postSchema);
 
 module.exports = User;

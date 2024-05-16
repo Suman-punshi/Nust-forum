@@ -55,6 +55,7 @@ const LoginUser = () => {
           setLoginIdentifier('');
           setPassword('');
           // Redirect to home after successful login
+          console.log(res.data.userdata._id);
           navigate(`/cards/${res.data.userdata.id}`);
         } })
       .catch(err => {
