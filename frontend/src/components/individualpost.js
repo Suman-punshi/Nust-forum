@@ -306,7 +306,7 @@ const IndividualPost = () => {
         <div className="row justify-content-center">
           <div className="col-md-8">
             <div key={post._id} className="card rounded-4 mb-3" style={{ backgroundColor: "#EEF7FF" }}>
-              <div className={`${ss.cardHeader} card-header`}>
+              <div className={`${ss.cardHeader} card-header`} style={{ backgroundColor: "#035b69" }} >
                 <p className="card-subtitle text-muted">{post.username}</p>
                 <h5 className="card-title">{post.Title}</h5>
               </div>
