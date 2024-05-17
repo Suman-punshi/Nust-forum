@@ -302,7 +302,7 @@ const IndividualPost = () => {
 
   return (
     <Layout>
-      <div className="container mt-5">
+      <div className="container mt-5" width="100%">
         <div className="row justify-content-center">
           <div className="col-md-8">
             <div key={post._id} className="card rounded-4 mb-3" style={{ backgroundColor: "#EEF7FF" }}>
