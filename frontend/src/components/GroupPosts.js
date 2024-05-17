@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Layout from "./Layout"; // Import the layout component
 const GroupPosts = () => {
   const { group } = useParams();
   const cardcolor = { backgroundColor: "#EEF7FF" };
@@ -20,6 +21,7 @@ const GroupPosts = () => {
   }, [group]);
 
   return (
+    <Layout>
     <div className="w-75 container d-flex justify-content-center mt-5">
       <div className="row">
         <div className="col">
@@ -43,6 +45,7 @@ const GroupPosts = () => {
         </div>
       </div>
     </div>
+    </Layout>
   );
 };
 

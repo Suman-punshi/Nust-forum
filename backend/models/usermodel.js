@@ -16,19 +16,19 @@ const userSchema = new mongoose.Schema({
     required: true
   },
   groups_joined: {
-    type: Array,
+    type: Int32,
     required: false
   },
-  createdAt: {
-    type: mongoose.Schema.Types.Timestamp,
-    required: false
+  createdAt:{
+    type: TimeStamp,
+    required: true,
   },
-  updatedAt: {
-    type: mongoose.Schema.Types.Timestamp,
-    required: false
+  updatedAt:{
+    type: TimeStamp,
+    required: true,
   }
 }, { collection: 'users' });
 
-const User = mongoose.model('accounts', userSchema);
+const User = mongoose.model('users', userSchema);
 
 module.exports = User
