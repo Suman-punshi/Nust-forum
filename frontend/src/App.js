@@ -19,7 +19,7 @@ function App() {
   return (
     <Router>
       <div className="container">
-        <Navbar />
+        {/* <Navbar /> */}
         {/* <Sidebar/> */}
         
         <nav className="navbar"></nav>

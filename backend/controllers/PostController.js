@@ -9,7 +9,7 @@ const getProjects = async (req, res) => {
         console.log('a');
         const user = await User.findById(userId);
         // const projects = await Project.find();
-        const projects = await Project.find({ group: { $in: user.groupsjoined } });
+        const projects = await Project.find({ group_name: { $in: user.groups_joined } });
         console.log('Projects:', projects); // Log the projects to see if they are fetched correctly
         res.json(projects);
        

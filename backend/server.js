@@ -17,7 +17,7 @@ const app = express();
 // Enable CORS
 app.use(cors());
 app.use(express.json());
-mongoose.connect('mongodb+srv://sumankumarpunshi:Z3xPUTBGUkGMtkNv@cluster0.etnafwn.mongodb.net/forum-db', {});
+mongoose.connect('mongodb+srv://hira:hira@nust-forum.r2zvg63.mongodb.net/database?retryWrites=true&w=majority&appName=NUST-forum', {});
 app.get('/favicon.ico', (req, res) => {
     res.status(204).end();
   });
