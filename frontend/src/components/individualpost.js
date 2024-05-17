@@ -112,8 +112,8 @@ const IndividualPost = () => {
   const [post, setPost] = useState(null);
   const [comments, setComments] = useState(null);
   const [showCommentForm, setShowCommentForm] = useState(false);
-  const [text, setText] = useState("");
-  
+  const [comment_text, setcomment_text] = useState("");
+  const [p_id, setp_id] = useState("");
 
   useEffect(() => {
     // Fetch post data using postId
@@ -137,12 +137,12 @@ const IndividualPost = () => {
       const response = await axios.post(
         `http://localhost:4000/comment/${userId}/${postId}`,
         {
-          text: text
+          comment_text: comment_text
         }
       );
       // Assuming the server responds with the newly created comment
       setComments([...comments, response.data]);
-      setText("");
+      setcomment_text("");
       setShowCommentForm(false);
     } catch (error) {
       console.error("Error submitting comment:", error);
@@ -166,18 +166,18 @@ const IndividualPost = () => {
             >
               <div className="card-header">
                 <p className="card-subtitle text-muted">{post.username}</p>
-                <h5 className="card-title">{post.post_title}</h5>
+                <h5 className="card-title">{post.Title}</h5>
               </div>
               <div className="tags">
                 <span
                   className="badge ms-1"
                   style={{ backgroundColor: "#4D869C", color: "white" }}
                 >
-                  {post.tag}
+                  {post.tags}
                 </span>
               </div>
               <div className="card-body">
-                <p className="card-text">{post.post_text}</p>
+                <p className="card-text">{post.text}</p>
                 {post.images && (
                   <img src={post.images} className="card-img-top" alt="" />
                 )}
@@ -205,15 +205,15 @@ const IndividualPost = () => {
                         {com.username}
                       </a>
                       <p className="card-subtitle text-muted text-primary">
-                        {com.text}
+                        {com.comment_text}
                       </p>
                     </div>
                   ))}
                 {showCommentForm ? (
                   <div>
                     <textarea
-                      value={text}
-                      onChange={(e) => setText(e.target.value)}
+                      value={comment_text}
+                      onChange={(e) => setcomment_text(e.target.value)}
                       className="form-control mb-2"
                       placeholder="Write your comment..."
                     ></textarea>
