@@ -40,10 +40,10 @@ export const GroupPosts = () => {
                 <div key={post._id} className="card rounded-4 mb-3" style={cardcolor}>
                   <div className="card-header">
                     <p className="card-subtitle text-muted">{post.username}</p>
-                    <h5 className="card-title">{post.Title}</h5>
+                    <h5 className="card-title">{post.post_title}</h5>
                   </div>
                   <div className="card-body">
-                    <p className="card-text">{post.text}</p>
+                    <p className="card-text">{post.post_text}</p>
                     {post.images && <img src={post.images} className="card-img-top" alt="" />}
                     <span className="badge badge-dark ms-1" style={{ backgroundColor: '#4D869C', color: 'white' }}>
                       {post.num_comments} comments

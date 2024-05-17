@@ -1,5 +1,5 @@
 // projectsController.js
-const Project = require('../models/Users');
+const Project = require('../models/posts');
 const User = require('../models/usermodel');
 
 console.log('a');
@@ -9,7 +9,7 @@ const getProjects = async (req, res) => {
         console.log('a');
         const user = await User.findById(userId);
         // const projects = await Project.find();
-        const projects = await Project.find({ group: { $in: user.groupsjoined } });
+        const projects = await Project.find({ group_name: { $in: user.groups_joined } });
         console.log('Projects:', projects); // Log the projects to see if they are fetched correctly
         res.json(projects);
        
@@ -25,7 +25,7 @@ const getGroupProjects = async (req, res) => {
   console.log("in getttt group controller");
   try {
     console.log("in try of group controller");
-    const projects = await Project.find({ group: group_name });
+    const projects = await Project.find({ group_name: group_name });
     res.json(projects);
     console.log("empty1: ", projects);
   } catch (err) {
@@ -44,7 +44,7 @@ const getTagProjects = async (req, res) => {
   console.log("in get 1 group controller");
   try {
     console.log("in try 1 of group controller");
-    const projects = await Project.find({ group: group_name, tags: tag_name });
+    const projects = await Project.find({ group_name: group_name, tag: tag_name });
     res.json(projects);
     console.log("empty 2: ", projects);
   } catch (err) {
@@ -78,7 +78,7 @@ const getPostsByTag = async (req, res) => {
   console.log("get post by tags:", tag);
 
   try {
-    const projects = await Project.find({ tags: tag });
+    const projects = await Project.find({ tag: tag });
     res.json(projects);
   } catch (err) {
     console.error(err);

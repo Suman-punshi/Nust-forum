@@ -14,3 +14,21 @@
 .card-subtitle.text-success:hover {
   text-decoration: underline;
 }
+
+.flex-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+}
+.flex-container > div {
+  margin: 10px;;
+}
+
+.btn:hover{
+  color: #4D869C;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}

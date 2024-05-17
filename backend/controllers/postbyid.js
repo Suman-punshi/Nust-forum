@@ -1,4 +1,4 @@
-const Project = require('../models/Users');
+const Project = require('../models/posts');
 const mongoose = require('mongoose');
 const Comment = require('../models/comments');
 
@@ -9,7 +9,7 @@ const getPostById = async (req, res) => {
     try {
         console.log("now in try");
         const project = await Project.findById(postId);
-        const comments = await Comment.find({ p_id: postId}); // Fetch comments related to the post
+        const comments = await Comment.find({ post_id: postId}); // Fetch comments related to the post
         console.log("project:", project);
         console.log("comments:", comments);
         if (!project) {

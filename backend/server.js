@@ -7,13 +7,14 @@ const hp=require('./routes/hpage');
 const group_r=require('./routes/group_route');
 const create_r=require('./routes/cPost');
 const tag_r=require('./routes/tag_route');
+const comment_r=require('./routes/c_comment');
 const searchRouter = require('./routes/search'); // Import the route for handling post search
 const app = express();
 
 // Enable CORS
 app.use(cors());
 app.use(express.json());
-mongoose.connect('mongodb+srv://sumankumarpunshi:Z3xPUTBGUkGMtkNv@cluster0.etnafwn.mongodb.net/forum-db', {});
+mongoose.connect('mongodb+srv://hira:hira@nust-forum.r2zvg63.mongodb.net/database?retryWrites=true&w=majority&appName=NUST-forum', {});
 app.get('/favicon.ico', (req, res) => {
     res.status(204).end();
   });
@@ -36,7 +37,7 @@ db.once('open', () => {
     app.use('/tags', group_r);
     app.use('/tag', tag_r);
     app.use('/search', searchRouter); // Mount the route for handling post search
-   
+    app.use('/comment', comment_r);
    
     
    
