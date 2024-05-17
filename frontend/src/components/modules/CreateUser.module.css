@@ -59,7 +59,7 @@
   
   .alert {
     width: 100%;
-    background-color: #e74c3c; /* Red alert for errors */
+    background-color: #3c97e7; /* Red alert for errors */
     color: white;
     padding: 10px;
     border-radius: 4px;
