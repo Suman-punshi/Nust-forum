@@ -10,7 +10,7 @@ const Sidebar = (props) => {
   useEffect(() => {
     const fetchTags = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/tagS`);
+        const response = await axios.get(`http://localhost:4000/tags`);
         setTags(response.data);
       } catch (error) {
         console.error('Error fetching tags:', error);
@@ -43,7 +43,7 @@ const Sidebar = (props) => {
         ))}
       </ul>
     </div>
-  );
+  ); 
 };
 
 export default Sidebar;
