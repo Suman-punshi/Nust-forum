@@ -113,7 +113,6 @@ const IndividualPost = () => {
   const [comments, setComments] = useState(null);
   const [showCommentForm, setShowCommentForm] = useState(false);
   const [comment_text, setcomment_text] = useState("");
-  const [p_id, setp_id] = useState("");
 
   useEffect(() => {
     // Fetch post data using postId
@@ -186,6 +185,31 @@ const IndividualPost = () => {
                 >
                   {post.num_comments} comments
                 </span>
+
+                {showCommentForm ? (
+                  <div>
+                    <textarea
+                      value={comment_text}
+                      onChange={(e) => setcomment_text(e.target.value)}
+                      className="form-control mb-2"
+                      placeholder="Write your comment..."
+                    ></textarea>
+                    <button
+                      onClick={handleNewCommentSubmit}
+                      className="btn btn-primary"
+                    >
+                      Submit
+                    </button>
+                  </div>
+                  ) : (
+                  <button
+                    onClick={() => setShowCommentForm(true)}
+                    className="btn btn-primary mt-2"
+                    style = {{ backgroundColor: "#4D869C", color: "white", padding: 0}}
+                  >
+                    Add New Comment
+                  </button>
+                )}
                 <br />
                 {comments &&
                   comments.map((com) => (
@@ -208,29 +232,6 @@ const IndividualPost = () => {
                       </p>
                     </div>
                   ))}
-                {showCommentForm ? (
-                  <div>
-                    <textarea
-                      value={comment_text}
-                      onChange={(e) => setcomment_text(e.target.value)}
-                      className="form-control mb-2"
-                      placeholder="Write your comment..."
-                    ></textarea>
-                    <button
-                      onClick={handleNewCommentSubmit}
-                      className="btn btn-primary"
-                    >
-                      Submit
-                    </button>
-                  </div>
-                ) : (
-                  <button
-                    onClick={() => setShowCommentForm(true)}
-                    className="btn btn-primary mt-2"
-                  >
-                    Add New Comment
-                  </button>
-                )}
               </div>
             </div>
           </div>

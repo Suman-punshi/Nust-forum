@@ -2,9 +2,15 @@ import "../hover.css";
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+
+
+
 
 // Dialog component for creating a post
 const CreatePostDialog = () => {
+  const navigate = useNavigate();
   const { group } = useParams();
   const { userId } = useParams();
   const [Title, setTitle] = useState('');
@@ -42,6 +48,7 @@ const CreatePostDialog = () => {
     axios.post(`http://localhost:4000/create/${userId}/${group}`, post)
       .then(res => {
         setAlertMessage('Post created successfully!');
+        navigate(`/cards/${userId}`);
       })
       .catch(err => {
         console.error('Error creating post:', err);

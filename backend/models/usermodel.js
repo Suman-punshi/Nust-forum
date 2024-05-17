@@ -15,11 +15,19 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  groupsjoined: {
+  groups_joined: {
     type: Array,
     required: false
+  },
+  createdAt: {
+    type: mongoose.Schema.Types.Timestamp,
+    required: false
+  },
+  updatedAt: {
+    type: mongoose.Schema.Types.Timestamp,
+    required: false
   }
-}, { collection: 'accounts' });
+}, { collection: 'users' });
 
 const User = mongoose.model('accounts', userSchema);
 
