@@ -1,9 +1,7 @@
-import "../hover.css";
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useParams } from "react-router-dom";
 
-// Dialog component for creating a post
 const CreatePostDialog = () => {
   const { group } = useParams();
   const { userId } = useParams();
@@ -36,7 +34,7 @@ const CreatePostDialog = () => {
     formData.append('Title', Title);
     formData.append('text', text);
     formData.append('image', image);
-    formData.append('tags', tags);
+    formData.append('tags', tags); // Ensure tags is a single string
 
     try {
       const res = await axios.post(`http://localhost:4000/create/${userId}/${group}`, formData, {
@@ -75,11 +73,7 @@ const CreatePostDialog = () => {
               <input type="file" className="form-control" onChange={onChangeImage} required />
             </div>
             <div className="mb-3">
-              <select className="form-select" value={tags} onChange={onChangeTag}>
-                <option value="tag1">Tag 1</option>
-                <option value="nodejs">Node.js</option>
-                {/* Add more options as needed */}
-              </select>
+              <input type="text" className="form-control" placeholder="Tag" value={tags} onChange={onChangeTag} required />
             </div>
             <button type="submit" className="btn" style={{ backgroundColor: "#CDE8E5" }}>Create</button>
           </form>
@@ -90,3 +84,4 @@ const CreatePostDialog = () => {
 };
 
 export default CreatePostDialog;
+

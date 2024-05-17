@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "../hover.css";
 import Sidebar from "./Sidebar";
 import Sidebar2 from "./community";
@@ -10,7 +9,6 @@ export const Card = () => {
   const { userId } = useParams();
 
   const cardcolor = { backgroundColor: "#EEF7FF" };
-
   const text_decor = { textDecoration: "none" };
 
   const [posts, setPosts] = useState([]);
@@ -18,9 +16,7 @@ export const Card = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:4000/cards/${userId}`
-        );
+        const response = await axios.get(`http://localhost:4000/cards/${userId}`);
         setPosts(response.data);
       } catch (error) {
         console.error("Error fetching posts:", error);
@@ -28,7 +24,7 @@ export const Card = () => {
     };
 
     fetchPosts();
-  }, []);
+  }, [userId]);
 
   return (
     <div className="container-fluid">
@@ -43,13 +39,13 @@ export const Card = () => {
                 <div key={post._id} className="col-12 mb-3">
                   <div className="card rounded-4" style={cardcolor}>
                     <div className="card-header">
-                      <Link to={`/group/${userId}/${post.group_name}`} style={text_decor}>
-                        <p className="card-subtitle text-success">{post.group_name}</p>
+                      <Link to={`/group/${userId}/${post.group}`} style={text_decor}>
+                        <p className="card-subtitle text-success">{post.group}</p>
                       </Link>
                       <p className="card-subtitle text-muted">{post.username}</p>
                       <h5 className="card-title">{post.Title}</h5>
                     </div>
-                    <Link to={`/tags/${userId}/${post.tag}/${post.group_name}`} style={text_decor}>
+                    <Link to={`/tags/${userId}/${post.tags}/${post.group}`} style={text_decor}>
                       <div className="tags">
                         <span className="badge badge-dark ms-1" style={{ backgroundColor: "#4D869C", color: "white" }}>
                           {post.tags}
@@ -59,8 +55,9 @@ export const Card = () => {
                     <Link to={`/post/${userId}/${post._id}`} style={{ color: "inherit", textDecoration: "none" }}>
                       <div className="card-body">
                         <span>
-                          <p className="card-text">{post.post_text}</p>
+                          <p className="card-text">{post.text}</p>
                         </span>
+                        {post.images && <img src={`http://localhost:4000${post.images}`} className="card-img-top" alt="Post image" />}
                         <span className="badge badge-dark ms-1" style={{ backgroundColor: "#4D869C", color: "white" }}>
                           {post.num_comments} comments
                         </span>
@@ -79,7 +76,6 @@ export const Card = () => {
     </div>
   );
 };
-
 export default Card;
 
 // const handleJoinClick = async () => {

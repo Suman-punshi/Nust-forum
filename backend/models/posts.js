@@ -37,8 +37,8 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: true
   }
-}, { collection: 'post' });
+}, { collection: 'posts' });
 
-const User = mongoose.model('post', postSchema);
+const User = mongoose.model('posts', postSchema);
 
 module.exports = User;

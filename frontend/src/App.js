@@ -24,7 +24,7 @@ function App() {
         <nav className="navbar"></nav>
 
         <Routes>
-          <Route path="/" element={<CreateUser />} />
+          <Route path="/" element={<LoginUser />} />
           
           <Route path="/post/:userId/:postId" element={<IndividualPost />} />
           <Route path="/create-user" element={<CreateUser />} />
