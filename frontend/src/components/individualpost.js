@@ -112,7 +112,8 @@ const IndividualPost = () => {
   const [post, setPost] = useState(null);
   const [comments, setComments] = useState(null);
   const [showCommentForm, setShowCommentForm] = useState(false);
-  const [comment_text, setcomment_text] = useState("");
+  const [text, setText] = useState("");
+  
 
   useEffect(() => {
     // Fetch post data using postId
@@ -136,12 +137,12 @@ const IndividualPost = () => {
       const response = await axios.post(
         `http://localhost:4000/comment/${userId}/${postId}`,
         {
-          comment_text: comment_text
+          text: text
         }
       );
       // Assuming the server responds with the newly created comment
       setComments([...comments, response.data]);
-      setcomment_text("");
+      setText("");
       setShowCommentForm(false);
     } catch (error) {
       console.error("Error submitting comment:", error);
@@ -165,43 +166,72 @@ const IndividualPost = () => {
             >
               <div className="card-header">
                 <p className="card-subtitle text-muted">{post.username}</p>
-                <h5 className="card-title">{post.Title}</h5>
+                <h5 className="card-title">{post.post_title}</h5>
               </div>
               <div className="tags">
                 <span
                   className="badge ms-1"
                   style={{ backgroundColor: "#4D869C", color: "white" }}
                 >
-                  {post.tags}
+                  {post.tag}
                 </span>
               </div>
               <div className="card-body">
-                <p className="card-text">{post.text}</p>
+                <p className="card-text">{post.post_text}</p>
                 {post.images && (
                   <img src={post.images} className="card-img-top" alt="" />
                 )}
-                 <span className="badge badge-dark ms-1" style={{ backgroundColor: '#4D869C', color: 'white' }}>
-             {post.num_comments} comments {/* Add your logo here */}
-              </span>
-              <br></br>
-                {comments.map((com) => (
-                  <div
-                    key={com._id}
-                    className="card mb-2 p-3"
-                    style = {cardcolor}
-                  >
-                    <a
-                      className=""
-                      style={{  display: "inline-block", color: "#4D869C" }}
+                <span
+                  className="badge badge-dark ms-1"
+                  style={{ backgroundColor: "#4D869C", color: "white" }}
+                >
+                  {post.num_comments} comments
+                </span>
+                <br />
+                {comments &&
+                  comments.map((com) => (
+                    <div
+                      key={com._id}
+                      className="card mb-2 p-3"
+                      style={cardcolor}
                     >
-                      {com.username}
-                      {/* Add your logo here */}
-                    </a>
-                    <p className="card-subtitle text-muted text-primary">
-                      {com.text}
-                    </p>
+                      <a
+                        className=""
+                        style={{
+                          display: "inline-block",
+                          color: "#4D869C",
+                        }}
+                      >
+                        {com.username}
+                      </a>
+                      <p className="card-subtitle text-muted text-primary">
+                        {com.text}
+                      </p>
+                    </div>
+                  ))}
+                {showCommentForm ? (
+                  <div>
+                    <textarea
+                      value={text}
+                      onChange={(e) => setText(e.target.value)}
+                      className="form-control mb-2"
+                      placeholder="Write your comment..."
+                    ></textarea>
+                    <button
+                      onClick={handleNewCommentSubmit}
+                      className="btn btn-primary"
+                    >
+                      Submit
+                    </button>
                   </div>
-                ))}
+                ) : (
+                  <button
+                    onClick={() => setShowCommentForm(true)}
+                    className="btn btn-primary mt-2"
+                  >
+                    Add New Comment
+                  </button>
+                )}
               </div>
             </div>
           </div>

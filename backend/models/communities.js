@@ -14,11 +14,11 @@ const communitiesSchema = new mongoose.Schema({
     required: true,
   },
   createdAt:{
-    type: TimeStamp,
+    type: Date,
     required: true,
   },
   updatedAt:{
-    type: TimeStamp,
+    type: Date,
     required: true,
   }
 }, { collection: 'communities' });

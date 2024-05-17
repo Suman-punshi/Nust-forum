@@ -5,18 +5,18 @@ import Layout from "./Layout"; // Import the layout component
 
 const CreatePostDialog = () => {
     const { group, userId } = useParams();
-    const [Title, setTitle] = useState('');
-    const [text, setText] = useState('');
+    const [post_title, setPost_title] = useState('');
+    const [post_text, setPost_text] = useState('');
     const [image, setImage] = useState(null); // Change to single image state, initialized as null
-    const [tags, setTags] = useState('');
+    const [tag, setTag] = useState('');
     const [alertMessage, setAlertMessage] = useState('');
 
     const onChangeTitle = (e) => {
-        setTitle(e.target.value);
+        setPost_title(e.target.value);
     };
 
     const onChangeText = (e) => {
-        setText(e.target.value);
+        setPost_text(e.target.value);
     };
 
     const onChangeImage = (e) => {
@@ -25,17 +25,19 @@ const CreatePostDialog = () => {
     };
 
     const onChangeTag = (e) => {
-        setTags(e.target.value);
+        setTag(e.target.value);
     };
 
     const onSubmit = (e) => {
         e.preventDefault();
 
         const formData = new FormData();
-        formData.append('Title', Title);
-        formData.append('text', text);
+        formData.append('post_tile', post_title);
+        formData.append('post_text', post_text);
         formData.append('image', image); // Append the selected file to the form data
-        formData.append('tags', tags);
+        formData.append('tag', tag);
+
+        console.log(formData);
 
         axios.post(`http://localhost:4000/create/${userId}/${group}`, formData)
             .then(res => {
@@ -48,10 +50,10 @@ const CreatePostDialog = () => {
             });
 
         // Reset form fields
-        setTitle('');
-        setText('');
+        setPost_title('');
+        setPost_text('');
         setImage(null);
-        setTags('');
+        setTag('');
     };
 
     return (
@@ -61,16 +63,16 @@ const CreatePostDialog = () => {
 
                 <form onSubmit={onSubmit}>
                     <div className="form-group" style={{ marginTop: '20px' }}>
-                        <input className="form-control" type="text" placeholder="Title" value={Title} onChange={onChangeTitle} />
+                        <input className="form-control" type="text" placeholder="Title" value={post_title} onChange={onChangeTitle} />
                     </div>
                     <div className="form-group" style={{ marginTop: '20px' }}>
-                        <textarea className="form-control" placeholder="Text" value={text} onChange={onChangeText} />
+                        <textarea className="form-control" placeholder="Text" value={post_text} onChange={onChangeText} />
                     </div>
                     <div className="form-group" style={{ marginTop: '20px' }}>
                         <input className="form-control" type="file" onChange={onChangeImage} />
                     </div>
                     <div className="form-group" style={{ marginTop: '20px' }}>
-                        <select className="form-control" value={tags} onChange={onChangeTag}>
+                        <select className="form-control" value={tag} onChange={onChangeTag}>
                             <option value="tag1">Tag 1</option>
                             <option value="nodejs">Node.js</option>
                             {/* Add more options as needed */}

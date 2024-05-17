@@ -16,16 +16,16 @@ const userSchema = new mongoose.Schema({
     required: true
   },
   groups_joined: {
-    type: Int32,
+    type: Array,
     required: false
   },
   createdAt:{
-    type: TimeStamp,
-    required: true,
+    type: Date,
+    required: false,
   },
   updatedAt:{
-    type: TimeStamp,
-    required: true,
+    type: Date,
+    required: false,
   }
 }, { collection: 'users' });
 

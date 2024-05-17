@@ -6,11 +6,11 @@ const groupSchema = new mongoose.Schema({
     required: true,
   },
   community_id: {
-    type: Int32,
+    type: Number,
     required: true,
   },
   No_of_Members: {
-    type: Int32,
+    type: Number,
     required: true,
   }
 }, { collection: 'groups' });
