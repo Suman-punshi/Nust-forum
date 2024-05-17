@@ -1,4 +1,4 @@
-const posts = require('../models/Users');
+const posts = require('../models/posts');
 const users = require('../models/usermodel');
 
 
