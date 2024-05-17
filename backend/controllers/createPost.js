@@ -1,64 +1,76 @@
 const posts = require('../models/posts');
 const users = require('../models/usermodel');
 const multer = require('multer');
+const path = require('path');
+const { promisify } = require('util');
+
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, '../../uploads/'); // Specify the directory where images will be stored relative to the project directory
+        cb(null, path.join(__dirname, '../../uploads/')); // Use path.join for cross-platform compatibility
     },
     filename: function (req, file, cb) {
-        cb(null, file.originalname); // Keep the original file name
+        cb(null, Date.now() + path.extname(file.originalname)); // Use a timestamp for unique filenames
     }
 });
 
+const upload = multer({ 
+    storage: storage,
+    fileFilter: function (req, file, cb) {
+        const filetypes = /jpeg|jpg|png/;
+        const mimetype = filetypes.test(file.mimetype);
+        const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+        
+        if (mimetype && extname) {
+            return cb(null, true);
+        }
+        cb('Error: File upload only supports the following filetypes - ' + filetypes);
+    },
+    limits: { fileSize: 5 * 1024 * 1024 } // Limit file size to 5MB
+}).single('image');
 
-// Create multer instance with specified storage options
-const upload = multer({ storage: storage }).single('image'); // Allow single image upload
+const uploadAsync = promisify(upload);
 
 exports.addpost = async (req, res) => {
-    console.log("inside addpost");
-    const userId = req.params.userId;
-    const group = req.params.group;
-    const c_user = await users.findById(userId);
-    console.log('Received request to add user:', req.body); // Log the received request body
-    console.log(c_user.username);
-    console.log('Received request to add user:', req.body);
+    try {
+        console.log("Inside addpost");
+        const userId = req.params.userId;
+        const group = req.params.group;
 
-    // Check if an image file is uploaded
-    upload(req, res, function (err) {
-        if (err instanceof multer.MulterError) {
-            // A Multer error occurred when uploading
-            return res.status(500).json({ error: 'Image upload error' });
-        } else if (err) {
-            // An unknown error occurred when uploading
-            return res.status(500).json({ error: 'Unknown error occurred' });
+        const c_user = await users.findById(userId);
+        if (!c_user) {
+            return res.status(404).json({ error: 'User not found' });
         }
 
-        // No error occurred during upload
+        console.log(`Received request to add post by user: ${c_user.username}`);
+
+        // Upload image
+        await uploadAsync(req, res);
+
         if (!req.file) {
             return res.status(400).json({ error: 'No image uploaded' });
         }
 
         const { Title, text, tags } = req.body;
-        const image = req.file.path; // Get the path to the uploaded image
+        const image = req.file.path;
 
         const newPost = new posts({ 
             username: c_user.username, 
-            Title: Title, 
-            text: text, 
+            Title, 
+            text, 
             images: image, 
-            tags: tags, 
-            group: group 
+            tags, 
+            group 
         });
 
-        console.log(newPost);
-        newPost.save()
-            .then(() => {
-                console.log('Post created successfully');
-                res.json('Post added!');
-            })
-            .catch(err => {
-                console.error('Error creating post:', err);
-                res.status(400).json('Error: ' + err);
-            });
-    });
+        await newPost.save();
+        console.log('Post created successfully');
+        res.json('Post added!');
+    } catch (err) {
+        console.error('Error creating post:', err);
+        if (err.code === 'LIMIT_FILE_SIZE') {
+            res.status(400).json({ error: 'File size too large. Max limit is 5MB' });
+        } else {
+            res.status(500).json({ error: 'An error occurred while creating the post' });
+        }
+    }
 };
