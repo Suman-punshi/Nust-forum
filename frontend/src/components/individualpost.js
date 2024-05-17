@@ -86,7 +86,7 @@ const IndividualPost = () => {
                       {/* Add your logo here */}
                     </a>
                     <p className="card-subtitle text-muted text-primary">
-                      {com.comment_text}
+                      {com.text}
                     </p>
                   </div>
                 ))}

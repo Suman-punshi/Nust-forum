@@ -15,12 +15,20 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  groupsjoined: {
-    type: Array,
+  groups_joined: {
+    type: Int32,
     required: false
+  },
+  createdAt:{
+    type: TimeStamp,
+    required: true,
+  },
+  updatedAt:{
+    type: TimeStamp,
+    required: true,
   }
-}, { collection: 'accounts' });
+}, { collection: 'users' });
 
-const User = mongoose.model('accounts', userSchema);
+const User = mongoose.model('users', userSchema);
 
 module.exports = User
