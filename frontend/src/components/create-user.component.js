@@ -1,8 +1,11 @@
 import React, { useCallback, useContext, useState } from "react";
 import axios from "axios";
 import { authContext } from "../context/AuthContext";
+import styles from '../components/modules/CreateUser.module.css'; // Import the CSS module
+import { useNavigate } from "react-router-dom";
 
 const CreateUser = () => {
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -59,48 +62,31 @@ const CreateUser = () => {
   };
 
   return (
-    <div>
-      <h3>Create New User</h3>
-      {alertMessage && <div className="alert alert-info">{alertMessage}</div>}
-      <form onSubmit={onSubmit}>
-        <div className="form-group">
-          <label>Username: </label>
-          <input
-            type="text"
-            required
-            className="form-control"
-            value={username}
-            onChange={onChangeUsername}
-          />
+    <div className={styles.container}>
+      <div className={styles.card}>
+        <h3>Create New User</h3>
+        {alertMessage && <div className={styles.alert}>{alertMessage}</div>}
+        <form onSubmit={onSubmit}>
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Username:</label>
+            <input type="text" required className={styles.input} value={username} onChange={onChangeUsername} />
+          </div>
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Email:</label>
+            <input type="email" required className={styles.input} value={email} onChange={onChangeEmail} />
+          </div>
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Password:</label>
+            <input type="password" required className={styles.input} value={password} onChange={onChangePassword} />
+          </div>
+          <div className={styles.formGroup}>
+            <button type="submit" className={styles.button}>Create User</button>
+          </div>
+        </form>
+        <div className={styles.linkText}>
+          Already registered? <span className={styles.textDecorationUnderline} onClick={() => navigate('/')}>Login</span>
         </div>
-        <div className="form-group">
-          <label>Email: </label>
-          <input
-            type="email"
-            required
-            className="form-control"
-            value={email}
-            onChange={onChangeEmail}
-          />
-        </div>
-        <div className="form-group">
-          <label>Password: </label>
-          <input
-            type="password"
-            required
-            className="form-control"
-            value={password}
-            onChange={onChangePassword}
-          />
-        </div>
-        <div style={{ paddingTop: "20px" }} className="form-group">
-          <input
-            type="submit"
-            value="Create User"
-            className="btn btn-primary"
-          />
-        </div>
-      </form>
+      </div>
     </div>
   );
 };

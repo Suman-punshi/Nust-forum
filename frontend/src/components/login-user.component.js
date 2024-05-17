@@ -2,8 +2,9 @@ import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { authContext } from '../context/AuthContext';
-
-
+import 'bootstrap/dist/css/bootstrap.min.css'; // Ensure Bootstrap CSS is imported
+//import styles from '../components/modules/LoginUser.module.css';
+import '../components/css/LoginUser.css';
 
 const LoginUser = () => {
   const navigate = useNavigate();
@@ -77,39 +78,54 @@ const LoginUser = () => {
   };
   
   return (
-    
-    <div>
-      <h3>Login</h3>
-      {loginError && <p style={{ color: 'red' }}>{loginError}</p>}
-      {loginSuccess && <p style={{ color: 'green' }}>Login successful!</p>}
-      <form onSubmit={onSubmit}>
-        <div className="form-group">
-          <label>Username or Email: </label>
-          <input
-            type="text"
-            required
-            className="form-control"
-            placeholder="Enter your username or email"
-            value={loginIdentifier}
-            onChange={onChangeLoginIdentifier}
-          />
+    <div className="container">
+        <div className="typed-text-container">
+          <div className="typing-animation">Welcome to NUST Forums!</div>
         </div>
-        <div className="form-group">
-          <label>Password: </label>
-          <input
-            type="password"
-            required
-            className="form-control"
-            value={password}
-            onChange={onChangePassword}
-          />
+        <div className="login-container">
+            <div className="card">
+                <div className="card-body">
+                    <h3 className="card-title text-center">Sign In</h3>
+                    {loginError && <div className="alert alert-danger">{loginError}</div>}
+                    <form onSubmit={onSubmit}>
+                        <div className="form-group">
+                            <label htmlFor="usernameEmail">Username or Email</label>
+                            <input
+                                id="usernameEmail"
+                                type="text"
+                                className="form-control"
+                                placeholder="Enter your username or email"
+                                value={loginIdentifier}
+                                onChange={onChangeLoginIdentifier}
+                                required
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="password">Password</label>
+                            <input
+                                id="password"
+                                type="password"
+                                className="form-control"
+                                placeholder="Enter password"
+                                value={password}
+                                onChange={onChangePassword}
+                                required
+                            />
+                        </div>
+                        <button type="submit" className="btn btn-primary w-100">Login</button>
+                    </form>
+                    <div className="mt-3">
+                        <p className="text-muted text-center">
+                            New to the NUST Forums? <a href="/create-user" className="text-decoration-underline">Sign up</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div style={{ paddingTop: '20px' }} className="form-group">
-          <input type="submit" value="Login" className="btn btn-primary" />
-        </div>
-      </form>
     </div>
   );
 };
+
+
 
 export default LoginUser;
