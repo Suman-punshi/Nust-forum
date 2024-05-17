@@ -8,6 +8,9 @@ const group_r=require('./routes/group_route');
 const create_r=require('./routes/cPost');
 const tag_r=require('./routes/tag_route');
 const searchRouter = require('./routes/search'); // Import the route for handling post search
+const postsRouter = require('./routes/posts');
+
+
 const app = express();
 
 // Enable CORS
@@ -36,6 +39,8 @@ db.once('open', () => {
     app.use('/tags', group_r);
     app.use('/tag', tag_r);
     app.use('/search', searchRouter); // Mount the route for handling post search
+    app.use('/posts', postsRouter);
+
    
    
     
