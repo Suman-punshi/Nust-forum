@@ -7,6 +7,7 @@ const hp=require('./routes/hpage');
 const group_r=require('./routes/group_route');
 const create_r=require('./routes/cPost');
 const tag_r=require('./routes/tag_route');
+const comment_r=require('./routes/c_comment');
 const searchRouter = require('./routes/search'); // Import the route for handling post search
 const postsRouter = require('./routes/posts');
 
@@ -41,7 +42,7 @@ db.once('open', () => {
     app.use('/search', searchRouter); // Mount the route for handling post search
     app.use('/posts', postsRouter);
 
-   
+    app.use('/comment', comment_r);
    
     
    

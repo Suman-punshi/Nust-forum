@@ -1,4 +1,3 @@
-// Navbar.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from "react-router-dom";
@@ -31,12 +30,14 @@ const Navbar = () => {
     }
 
     return (
-        <nav className="navbar navbar-expand-lg fixed-top" style={{ backgroundColor: '#4D869C', color: 'white' }}>
-            <div className="container">
-                <form className="d-flex" onSubmit={handleSearch}>
-                    <input className="form-control me-2" type="search" placeholder="Search by group name" value={groupName} onChange={(e) => setGroupName(e.target.value)} />
-                    <button className="btn btn-light" type="submit">Search</button>
-                </form>
+        <nav className="navbar navbar-dark fixed-top" style={{ right:0,backgroundColor: '#4D869C' }}>
+            <div className="container-fluid">
+                <div className="d-flex justify-content-end flex-grow-1">
+                    <form className="d-flex" onSubmit={handleSearch}>
+                        <input className="form-control me-2" type="search" placeholder="Search by group name" value={groupName} onChange={(e) => setGroupName(e.target.value)} />
+                        <button className="btn btn-light" type="submit">Search</button>
+                    </form>
+                </div>
             </div>
             {user && (
             <div>

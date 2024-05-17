@@ -18,6 +18,14 @@ const userSchema = new mongoose.Schema({
   groupsjoined: {
     type: Array,
     required: false
+  },
+  createdAt: {
+    type: Date,
+    required: false
+  },
+  updateAt: {
+    type: Date,
+    required: false
   }
 }, { collection: 'accounts' });
 

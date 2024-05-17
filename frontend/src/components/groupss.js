@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import "../hover.css";
-
+import Layout from "./Layout"; // Import the layout component
 export const GroupPosts = () => {
     const { group } = useParams();
     const { userId } = useParams();
@@ -28,6 +28,7 @@ export const GroupPosts = () => {
     }, [group]);
   
     return (
+      <Layout>
       <div className="w-75 container d-flex justify-content-center mt-5">
         <Link to={`/create/${userId}/${group}`}>
           <p className="card-subtitle text-success">New Post</p>
@@ -54,6 +55,7 @@ export const GroupPosts = () => {
           </div>
         </div>
       </div>
+      </Layout>
     );
   };
   
