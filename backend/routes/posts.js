@@ -2,7 +2,8 @@
 
 const express = require('express');
 const router = express.Router();
-const User = require('../models/post.models');
+const User = require('../models/usermodel');
+
 
 // Route to insert data into the MongoDB database
 router.post('/posts', async (req, res) => {
@@ -22,6 +23,17 @@ router.get('/posts', async (req, res) => {
     res.send(posts);
   } catch (error) {
     res.status(500).send(error);
+  }
+});
+
+// New route to fetch posts by username
+router.get('/user/:username', async (req, res) => {
+  try {
+    const username = req.params.username;
+    const posts = await User.find({ username: username }); // Ensure your Post schema has a 'username' field
+    res.json(posts);
+  } catch (error) {
+    res.status(500).send({ message: "Error fetching posts by username", error: error });
   }
 });
 

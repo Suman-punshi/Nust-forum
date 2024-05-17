@@ -1,7 +1,7 @@
 // routes/projects.js
 const express = require('express');
 const router = express.Router();
-const projectsController = require('../controllers/projectsController');
+const projectsController = require('../controllers/PostController');
 const tagsController = require('../controllers/tagController')
 
 
