@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import { authContext } from '../context/AuthContext';
+
 
 
 const LoginUser = () => {
@@ -10,6 +12,8 @@ const LoginUser = () => {
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState(null); // State to handle login error
   const [loginSuccess, setLoginSuccess] = useState(false); // State to handle login success
+  const { dispatch } = useContext(authContext);
+
 
   const onChangeLoginIdentifier = (e) => {
     setLoginIdentifier(e.target.value);
@@ -56,6 +60,13 @@ const LoginUser = () => {
           setPassword('');
           // Redirect to home after successful login
           console.log(res.data.userdata._id);
+          dispatch({ // setting authContext state to user that just signed in
+            type: 'LOGIN',
+            payload: res.data.userdata 
+        });
+        // Save token and user data to local storage for persistence across sessions
+      localStorage.setItem('token', res.data.token); // Save the JWT token
+      localStorage.setItem('user', JSON.stringify(res.data.userdata)); // Save user data
           navigate(`/cards/${res.data.userdata.id}`);
         } })
       .catch(err => {
@@ -66,6 +77,7 @@ const LoginUser = () => {
   };
   
   return (
+    
     <div>
       <h3>Login</h3>
       {loginError && <p style={{ color: 'red' }}>{loginError}</p>}

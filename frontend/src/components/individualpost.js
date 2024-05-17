@@ -104,7 +104,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import "../hover.css";
-
+import Layout from "./Layout"; // Import the layout component
 const IndividualPost = () => {
   const cardcolor = { backgroundColor: "#EEF7FF" };
 
@@ -154,6 +154,7 @@ const IndividualPost = () => {
   }
 
   return (
+    <Layout>
     <div className="w-75 container d-flex justify-content-center mt-5">
       <div className="row">
         <div className="col">
@@ -237,6 +238,7 @@ const IndividualPost = () => {
         </div>
       </div>
     </div>
+    </Layout>
   );
 };
 
