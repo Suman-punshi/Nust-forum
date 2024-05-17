@@ -151,14 +151,14 @@ export const Card = () => {
   };
 
   return (
-    <div className="container-fluid">
+    <div className="flex-container">
       <div className="row">
         <div className="col-lg-3">
           <div className="d-none d-lg-block sidebar ml-0">
             <Sidebar2 id={userId} />
           </div>
         </div>
-        <div className="col-lg-7">
+        <div className="col-lg-6">
           <div className="container mt-5">
             <div className="row">
               {posts.map((post) => (
@@ -225,10 +225,15 @@ export const Card = () => {
             </div>
           </div>
         </div>
+<<<<<<< Updated upstream
         <div className="col-lg-2">
           <div className="d-none d-lg-block sidebar ml-0">
             <Sidebar id={userId} />
           </div>
+=======
+        <div className="col-lg-3">
+          <div className="d-none d-lg-block sidebar ml-0"><Sidebar id={userId} /></div>
+>>>>>>> Stashed changes
         </div>
       </div>
     </div>

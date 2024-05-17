@@ -19,7 +19,7 @@ const Sidebar2 = (props) => {
   }, []);
 
   return (
-    <div className="sidebar col-2 p-5 rounded-4 mt-5 ml-3" style={{ backgroundColor: "#CDE8E5", height: "87vh", position: "fixed", overflowY: "auto" }}>
+    <div className="sidebar col-2 p-1 rounded-4 mt-5 ml-1" style={{ backgroundColor: "#CDE8E5", height: "87vh", position: "fixed", overflowY: "auto" }}>
         {tags.map((tag) => (
           <Link to={`/tag/${props.id}/${tag.text}`} key={tag._id}>
             <li className="list-group-item">{tag.text}</li>
