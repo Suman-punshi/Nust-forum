@@ -4,15 +4,16 @@ const users = require('../models/usermodel');
 exports.addComment = async(req, res) => {
     console.log("inside addpost");
     const userId = req.params.userId;
-    const p_id = req.params.postId;
+    const post_id = req.params.postId;
     const c_user = await users.findById(userId);
     console.log('Received request to add user:', req.body); // Log the received request body
     console.log(c_user.username);
     console.log('Received request to add user:', req.body);
 
-    const {comment_text} = req.body;
+    const {text} = req.body;
 
-    const newcom = new Comment({ p_id: p_id, comment_text: comment_text, username: c_user.username});
+    const newcom = new Comment({ post_id: post_id, text: text, username: c_user.username});
+    console.log(newcom);
 
     console.log(newcom);
     newcom.save()

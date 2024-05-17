@@ -1,4 +1,5 @@
 const posts = require('../models/posts');
+const posts = require('../models/posts');
 const users = require('../models/usermodel');
 const multer = require('multer');
 const path = require('path');

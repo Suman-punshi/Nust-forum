@@ -18,13 +18,13 @@ function App() {
   return (
     <Router>
       <div className="container">
-        <Navbar />
+        {/* <Navbar /> */}
         {/* <Sidebar/> */}
         
         <nav className="navbar"></nav>
 
         <Routes>
-          <Route path="/" element={<LoginUser />} />
+          <Route path="/" element={<CreateUser />} />
           
           <Route path="/post/:userId/:postId" element={<IndividualPost />} />
           <Route path="/create-user" element={<CreateUser />} />
