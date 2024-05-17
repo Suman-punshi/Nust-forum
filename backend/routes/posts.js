@@ -2,7 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
-const User = require('../models/Users');
+const User = require('../models/usermodel');
 
 
 // Route to insert data into the MongoDB database
