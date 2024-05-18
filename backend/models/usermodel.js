@@ -19,13 +19,13 @@ const userSchema = new mongoose.Schema({
     type: Array,
     required: false
   },
-  createdAt: {
+  createdAt:{
     type: Date,
-    required: false
+    required: false,
   },
-  updatedAt: {
+  updatedAt:{
     type: Date,
-    required: false
+    required: false,
   }
 }, { collection: 'accounts' });
 

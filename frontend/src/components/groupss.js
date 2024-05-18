@@ -19,13 +19,20 @@ export const GroupPosts = () => {
           console.error('Error fetching group posts:', error);
         }
       };
-  
-  
-  
-  
-  
       fetchGroupPosts();
     }, [group]);
+
+
+
+    const handleJoinGroup = async () => {
+      try {
+        await axios.post(`http://localhost:4000/join-group`, { userId, group });
+        alert('Successfully joined the group!');
+      } catch (error) {
+        console.error('Error joining group:', error);
+        alert('Failed to join the group.');
+      }
+    };
   
     return (
       <Layout>
@@ -33,6 +40,9 @@ export const GroupPosts = () => {
         <Link to={`/create/${userId}/${group}`}>
           <p className="card-subtitle text-success">New Post</p>
         </Link>
+        <button onClick= {handleJoinGroup}>
+          <p className="btn">Join</p>
+        </button>
         <div className="row">
           <div className="col">
             <div className="">

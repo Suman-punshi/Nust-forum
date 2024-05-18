@@ -9,8 +9,10 @@ const create_r=require('./routes/cPost');
 const tag_r=require('./routes/tag_route');
 const comment_r=require('./routes/c_comment');
 const searchRouter = require('./routes/search'); // Import the route for handling post search
-const postsRouter = require('./routes/posts');
-
+const com = require('./routes/group_r_c');
+const jg = require('./routes/joinGroup');
+const path = require('path'); // Import the path module
+const delCommentRouter = require('./routes/del_comment');
 
 const app = express();
 const commentRoutes = require('./routes/comment');
@@ -18,13 +20,12 @@ const commentRoutes = require('./routes/comment');
 // Enable CORS
 app.use(cors());
 app.use(express.json());
-app.use('/api', commentRoutes);
 
 mongoose.connect('mongodb+srv://hira:hira@nust-forum.r2zvg63.mongodb.net/database?retryWrites=true&w=majority&appName=NUST-forum', {});
+
 app.get('/favicon.ico', (req, res) => {
     res.status(204).end();
-  });
-  
+});
 
 // Check if MongoDB is connected
 const db = mongoose.connection;
@@ -46,11 +47,19 @@ db.once('open', () => {
     app.use('/posts', postsRouter);
 
     app.use('/comment', comment_r);
+    app.use('/communities', com);
+    app.use('/join-group', jg);
+    app.use('/deleteComment', delCommentRouter);
    
     
    
     
+
+    // Serve static files from the 'uploads' directory in the frontend folder
+    app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
+
+    // Start the server
     app.listen(4000, () => {
         console.log('Server started on port 4000');
     });
-})
+});
