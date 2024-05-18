@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Layout from "./Layout"; // Import the layout component
 const GroupPosts = () => {
+  const { userId } = useParams();
   const { group } = useParams();
   const cardcolor = { backgroundColor: "#EEF7FF" };
   const [groupPosts, setGroupPosts] = useState([]);
@@ -11,7 +12,8 @@ const GroupPosts = () => {
   useEffect(() => {
     const fetchGroupPosts = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/cards/group/${group}`);
+        console.log(`In GroupPosts.js, Sending get request with userId: ${userId} and group: ${group}`);
+        const response = await axios.get(`http://localhost:4000/group/${userId}/${group}`);
         setGroupPosts(response.data);
       } catch (error) {
         console.error('Error fetching group posts:', error);

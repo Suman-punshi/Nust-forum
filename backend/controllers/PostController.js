@@ -10,7 +10,7 @@ const getProjects = async (req, res) => {
         console.log('a');
         const user = await User.findById(userId);
         // const projects = await Project.find();
-        const projects = await Project.find({ group: { $in: user.groupsjoined } });
+        const projects = await Project.find({ group_name: { $in: user.groups_joined } });
         console.log('Projects:', projects); // Log the projects to see if they are fetched correctly
         res.json(projects);
        
@@ -45,7 +45,7 @@ const getTagProjects = async (req, res) => {
   console.log("in get 1 group controller");
   try {
     console.log("in try 1 of group controller");
-    const projects = await Project.find({ group_name: group_name, tag: tag_name });
+    const projects = await Project.find({ group: group_name, tags: tag_name });
     res.json(projects);
     console.log("empty 2: ", projects);
   } catch (err) {

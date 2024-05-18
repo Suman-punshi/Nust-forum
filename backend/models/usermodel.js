@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  groupsjoined: {
+  groups_joined: {
     type: Array,
     required: false
   },
@@ -27,8 +27,9 @@ const userSchema = new mongoose.Schema({
     type: Date,
     required: false,
   }
-}, { collection: 'accounts' });
+},{timestamps:true},
+    { collection: 'users' });
 
-const User = mongoose.model('accounts', userSchema);
+const User = mongoose.model('users', userSchema);
 
 module.exports = User

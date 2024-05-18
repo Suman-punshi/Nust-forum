@@ -8,7 +8,14 @@ import CommunitySidebar from "./community";
 export const Card = () => {
   const { userId } = useParams();
 
-  const cardcolor = { backgroundColor: "#EEF7FF" };
+  const cardcolor = { 
+    backgroundColor: '#e0f7ff', // Light blue background
+    border: '1px solid #1e90ff', // Dodger blue border
+    borderRadius: '16px',
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+    transition: 'transform 0.2s, background-color 0.2s'
+  };
+
   const text_decor = { textDecoration: "none" };
 
   const [posts, setPosts] = useState([]);
@@ -24,41 +31,58 @@ export const Card = () => {
     };
 
     fetchPosts();
-  }, [userId]);
+  }, [userId]); // Ensure to keep this dependency on userId
 
   return (
     <div className="container-fluid">
       <div className="row">
         <div className="col-lg-3">
-          <div className="d-none d-lg-block sidebar ml-0"><CommunitySidebar id={userId} /></div>
+          {/* Sidebar on the left */}
+          <div className="d-none d-lg-block sidebar ml-0"><Sidebar id={userId} /></div>
         </div>
-        <div className="col-lg-7">
+        <div className="col-lg-6">
           <div className="container mt-5">
             <div className="row">
               {posts.map((post) => (
                 <div key={post._id} className="col-12 mb-3">
                   <div className="card rounded-4" style={cardcolor}>
-                    <div className="card-header">
+                    <div className="card-header" style={{
+                      backgroundColor: '#035b69', // Steel blue background
+                      borderTopLeftRadius: '16px',
+                      borderTopRightRadius: '16px',
+                      color: '#1e90ff', // Dodger blue text color
+                      fontWeight: 'bold'
+                    }}>
                       <Link to={`/group/${userId}/${post.group}`} style={text_decor}>
-                        <p className="card-subtitle text-success">{post.group}</p>
+                        <p className="card-subtitle">{post.group}</p>
                       </Link>
-                      <p className="card-subtitle text-muted">{post.username}</p>
+                      <p className="card-subtitle " style={{ color: "#e6e6e4" }}>{post.username}</p>
                       <h5 className="card-title">{post.Title}</h5>
                     </div>
                     <Link to={`/tags/${userId}/${post.tags}/${post.group}`} style={text_decor}>
                       <div className="tags">
-                        <span className="badge badge-dark ms-1" style={{ backgroundColor: "#4D869C", color: "white" }}>
+                        <span className="badge badge-dark ms-1" style={{
+                          background: 'linear-gradient(45deg, #1e90ff, #00bfff)', // Gradient of Dodger blue and Deep sky blue
+                          color: 'white',
+                          borderRadius: '12px',
+                          padding: '5px 15px'
+                        }}>
                           {post.tags}
                         </span>
                       </div>
                     </Link>
                     <Link to={`/post/${userId}/${post._id}`} style={{ color: "inherit", textDecoration: "none" }}>
-                      <div className="card-body">
+                      <div className="card-body" style={{ backgroundColor: '#b0e0e6', borderRadius: '0 0 16px 16px' }}> {/* Powder blue background */}
                         <span>
                           <p className="card-text">{post.text}</p>
                         </span>
                         {post.images && <img src={`http://localhost:4000${post.images}`} className="card-img-top" alt="Post image" />}
-                        <span className="badge badge-dark ms-1" style={{ backgroundColor: "#4D869C", color: "white" }}>
+                        <span className="badge badge-dark ms-1" style={{
+                          background: 'linear-gradient(45deg, #1e90ff, #00bfff)', // Gradient of Dodger blue and Deep sky blue
+                          color: 'white',
+                          borderRadius: '12px',
+                          padding: '5px 15px'
+                        }}>
                           {post.num_comments} comments
                         </span>
                       </div>
@@ -69,14 +93,17 @@ export const Card = () => {
             </div>
           </div>
         </div>
-        {/* <div className="col-lg-2">
-          <div className="d-none d-lg-block sidebar ml-0"><Sidebar id={userId} /></div>
-        </div> */}
+        <div className="col-lg-3">
+          {/* CommunitySidebar on the right */}
+          <div className="d-none d-lg-block sidebar mr-0"><CommunitySidebar id={userId} className="community-sidebar" /></div>
+        </div>
       </div>
     </div>
   );
 };
 export default Card;
+
+
 
 // const handleJoinClick = async () => {
 //   try {

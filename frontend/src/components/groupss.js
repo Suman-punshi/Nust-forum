@@ -13,6 +13,7 @@ export const GroupPosts = () => {
     useEffect(() => {
       const fetchGroupPosts = async () => {
         try {
+          console.log(`In groupss.js, Sending get request with userId: ${userId} and group: ${group}`);
           const response = await axios.get(`http://localhost:4000/group/${userId}/${group}`);
           setGroupPosts(response.data);
         } catch (error) {
