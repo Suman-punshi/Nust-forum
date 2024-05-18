@@ -5,7 +5,7 @@ const projectsController = require('../controllers/PostController');
 const tagsController = require('../controllers/tagController')
 
 
-
+router.get('/:group', projectsController.getGroupProjects);
 router.get('/:userId/:group', projectsController.getGroupProjects);
 router.get('/:userId/:tag_name/:group', projectsController.getTagProjects);
 router.get('/', tagsController.getAllTags);

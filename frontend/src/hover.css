@@ -22,3 +22,50 @@
   color: #4D869C;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
+
+.community-sidebar {
+  background-color: #f4f7fa; /* Light grey background */
+  padding: 20px;
+  border-radius: 10px;
+  height: 100%; /* Make sidebar extend full height of the container */
+}
+
+.community-sidebar h2 {
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.community-sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.community-sidebar li {
+  margin-bottom: 10px;
+}
+
+.community-sidebar button {
+  background-color: #4D869C; /* Stylish blue */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  width: 100%;
+  text-align: left;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.community-sidebar button:hover {
+  background-color: #35677d; /* Darker shade for hover */
+}
+
+.community-sidebar a {
+  color: #666;
+  display: block;
+  padding: 5px 20px;
+  text-decoration: none;
+}
+
+.community-sidebar a:hover {
+  background-color: #e9ecef; /* Light hover for links */
+}

@@ -21,7 +21,7 @@ const Sidebar = (props) => {
 
   return (
     <div className="sidebar-container">
-      <div className="sidebar" style={{ backgroundColor: '#4D869C', padding: '20px', position: 'fixed', left: '0', top: '0', bottom: '0', overflowY: 'auto', width: '250px' }}>
+      <div className="sidebar" style={{ backgroundColor: '#CDE8E5', padding: '20px', position: 'fixed', left: '0', top: '0', bottom: '0', overflowY: 'auto', width: '250px' }}>
         <h3 style={{ color: '#fff' }}>Tags</h3>
         <ul className="list-group" style={{ listStyle: 'none', padding: '0' }}>
           {tags.map((tag) => (

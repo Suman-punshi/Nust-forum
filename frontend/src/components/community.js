@@ -1,32 +1,73 @@
-// Sidebar Component
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
-const Sidebar2 = (props) => {
-  const [tags, setTags] = useState([]);
+const CommunitySidebar = (props) => {
+  const text_decor = { textDecoration: "none" };
+  const [communities, setCommunities] = useState([]);
+  const [groups, setGroups] = useState({});
+  const [selectedCommunity, setSelectedCommunity] = useState(null);
 
   useEffect(() => {
-    const fetchTags = async () => {
+    const fetchCommunities = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/tags`);
-        setTags(response.data);
+        const response = await axios.get('http://localhost:4000/communities');
+        setCommunities(response.data);
       } catch (error) {
-        console.error('Error fetching tags:', error);
+        console.error('Error fetching communities:', error);
       }
     };
-    fetchTags();
+
+    fetchCommunities();
   }, []);
 
+  const fetchGroups = async (communityId) => {
+    try {
+      const response = await axios.get(`http://localhost:4000/communities/${props.id}/${communityId}`);
+      setGroups((prevGroups) => ({
+        ...prevGroups,
+        [communityId]: response.data,
+      }));
+    } catch (error) {
+      console.error('Error fetching groups:', error);
+    }
+  };
+
+  const handleCommunityClick = (communityId) => {
+    setSelectedCommunity(communityId);
+    if (!groups[communityId]) {
+      fetchGroups(communityId);
+    }
+  };
+
   return (
-    <div className="sidebar col-2 p-5 rounded-4 mt-5 ml-3" style={{ backgroundColor: "#CDE8E5", height: "87vh", position: "fixed", overflowY: "auto" }}>
-        {tags.map((tag) => (
-          <Link to={`/tag/${props.id}/${tag.text}`} key={tag._id}>
-            <li className="list-group-item">{tag.text}</li>
-          </Link>
+    <div className="community-sidebar">
+      <h2>Communities</h2>
+      <ul>
+        {communities.map((community) => (
+          <li key={community._id}>
+            <button onClick={() => handleCommunityClick(community._id)}>
+              {community.community_name}
+            </button>
+            {selectedCommunity === community._id && (
+              <ul>
+                {groups[community._id] ? (
+                  groups[community._id].map((group) => (
+                    
+                    <Link to={`/group/${props.id}/${group.name}`} style={text_decor}>
+                       <li key={group._id}>{group.name}</li>
+                    </Link>
+                  ))
+                ) : (
+                  <li>Loading...</li>
+                )}
+              </ul>
+            )}
+          </li>
         ))}
+      </ul>
     </div>
   );
 };
 
-export default Sidebar2;
+export default CommunitySidebar;

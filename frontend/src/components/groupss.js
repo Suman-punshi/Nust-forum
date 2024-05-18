@@ -13,19 +13,27 @@ export const GroupPosts = () => {
     useEffect(() => {
       const fetchGroupPosts = async () => {
         try {
+          console.log(`In groupss.js, Sending get request with userId: ${userId} and group: ${group}`);
           const response = await axios.get(`http://localhost:4000/group/${userId}/${group}`);
           setGroupPosts(response.data);
         } catch (error) {
           console.error('Error fetching group posts:', error);
         }
       };
-  
-  
-  
-  
-  
       fetchGroupPosts();
     }, [group]);
+
+
+
+    const handleJoinGroup = async () => {
+      try {
+        await axios.post(`http://localhost:4000/join-group`, { userId, group });
+        alert('Successfully joined the group!');
+      } catch (error) {
+        console.error('Error joining group:', error);
+        alert('Failed to join the group.');
+      }
+    };
   
     return (
       <Layout>
@@ -33,6 +41,9 @@ export const GroupPosts = () => {
         <Link to={`/create/${userId}/${group}`}>
           <p className="card-subtitle text-success">New Post</p>
         </Link>
+        <button onClick= {handleJoinGroup}>
+          <p className="btn">Join</p>
+        </button>
         <div className="row">
           <div className="col">
             <div className="">

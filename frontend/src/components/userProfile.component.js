@@ -1,30 +1,39 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { Link } from 'react-router-dom';
 
 const UserProfileComponent = () => {
-    const { user } = useAuthContext();
+    const { username } = useParams(); // Get the username from the URL
+    const { user: loggedInUser } = useAuthContext(); // Get the logged-in user
+    const [user, setUser] = useState(null); // State to hold the user's profile
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        if (user) {
+        if (username) {
             setLoading(true);
-            axios.get(`http://localhost:4000/posts/user/${user.username}`)
+            // Fetch the user profile and posts based on the username in the URL
+            axios.get(`http://localhost:4000/users/${username}`)
                 .then(response => {
-                    setPosts(response.data);
+                    setUser(response.data.user);
+                    setPosts(response.data.posts);
                     setLoading(false);
                 })
                 .catch(error => {
-                    console.error('Error fetching posts:', error);
+                    console.error('Error fetching user profile and posts:', error);
                     setLoading(false);
                 });
         }
-    }, [user]);
+    }, [username]);
 
-    if (!user || loading) {
+    if (loading) {
         return <div>Loading user data...</div>;
+    }
+
+    if (!user) {
+        return <div>User not found</div>;
     }
 
     return (
@@ -40,20 +49,20 @@ const UserProfileComponent = () => {
                         <div key={post._id} className="col-12 mb-3">
                             <div className="card rounded-4" style={{ backgroundColor: "#EEF7FF" }}>
                                 <div className="card-header">
-                                    <Link to={`/group/${user.username}/${post.group}`} style={{ textDecoration: "none" }}>
+                                    <Link to={`/group/${post.group}`} style={{ textDecoration: "none" }}>
                                         <p className="card-subtitle text-success">{post.group}</p>
                                     </Link>
                                     <p className="card-subtitle text-muted">{post.username}</p>
                                     <h5 className="card-title">{post.title}</h5>
                                 </div>
-                                <Link to={`/tags/${user.username}/${post.tags}/${post.group}`} style={{ textDecoration: "none" }}>
+                                <Link to={`/tags/${post.tags}/${post.group}`} style={{ textDecoration: "none" }}>
                                     <div className="tags">
                                         <span className="badge badge-dark ms-1" style={{ backgroundColor: "#4D869C", color: "white" }}>
                                             {post.tags}
                                         </span>
                                     </div>
                                 </Link>
-                                <Link to={`/post/${user.username}/${post._id}`} style={{ color: "inherit", textDecoration: "none" }}>
+                                <Link to={`/post/${post._id}`} style={{ color: "inherit", textDecoration: "none" }}>
                                     <div className="card-body">
                                         <p className="card-text">{post.text}</p>
                                         <span className="badge badge-dark ms-1" style={{ backgroundColor: "#4D869C", color: "white" }}>
@@ -71,4 +80,3 @@ const UserProfileComponent = () => {
 };
 
 export default UserProfileComponent;
-
