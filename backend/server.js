@@ -12,6 +12,7 @@ const searchRouter = require('./routes/search'); // Import the route for handlin
 const com = require('./routes/group_r_c');
 const jg = require('./routes/joinGroup');
 const path = require('path'); // Import the path module
+const delCommentRouter = require('./routes/del_comment');
 
 const app = express();
 
@@ -45,6 +46,7 @@ db.once('open', () => {
     app.use('/comment', comment_r);
     app.use('/communities', com);
     app.use('/join-group', jg);
+    app.use('/deleteComment', delCommentRouter);
    
     
    
