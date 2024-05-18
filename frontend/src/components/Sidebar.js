@@ -1,4 +1,3 @@
-// Sidebar Component
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
@@ -20,29 +19,57 @@ const Sidebar = (props) => {
   }, []);
 
   return (
-    <div className="sidebar-container">
-      <div className="sidebar" style={{ backgroundColor: '#CDE8E5', padding: '20px', position: 'fixed', left: '0', top: '0', bottom: '0', overflowY: 'auto', width: '250px' }}>
-        <h3 style={{ color: '#fff' }}>Tags</h3>
+    <div className="sidebar-container" style={{marginTop: "80px"}}>
+      <div className="sidebar" style={{ 
+        background: 'linear-gradient(to bottom, #f0f8ff, #c0d9e1)', // Ice blue gradient background
+        padding: '20px', 
+        position: 'fixed', 
+        left: '0', 
+        top: '0', 
+        bottom: '0', 
+        overflowY: 'auto', 
+        width: '280px', 
+        marginTop: '50px', 
+        textAlign: 'center',
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Add shadow effect
+        transition: 'box-shadow 0.3s ease-in-out' // Smooth transition for shadow
+      }}>
+        <h3 style={{ color: '#034752', margin: '10px 0' }}>Tags</h3>
         <ul className="list-group" style={{ listStyle: 'none', padding: '0' }}>
           {tags.map((tag) => (
-            <Link to={`/tag/${props.id}/${tag.text}`} key={tag._id} style={{ textDecoration: 'none', color: '#fff' }}>
-              <li className="list-group-item tag-item" style={{ marginBottom: '5px', borderRadius: '5px', backgroundColor: 'transparent', transition: 'background-color 0.3s' }}>{tag.text}</li>
+            <Link to={`/tag/${props.id}/${tag.text}`} key={tag._id} style={{ textDecoration: 'none' }}>
+              <li className="list-group-item tag-item" style={{
+                marginBottom: '10px',
+                borderRadius: '10px',
+                backgroundColor: '#035b69', // Slightly darker background color
+                color: '#fff',
+                padding: '10px',
+                transition: 'all 0.3s ease-in-out',
+                cursor: 'pointer',
+                textAlign:'center'
+              }}
+              onMouseOver={({ target }) => {
+                target.style.backgroundColor = '#036b79'; // Darker on hover
+                target.style.transform = 'scale(1.05)'; // Grow in size on hover
+                target.style.boxShadow = '0 6px 12px rgba(0, 0, 0, 0.15)'; // Larger shadow on hover
+              }} 
+              onMouseOut={({ target }) => {
+                target.style.backgroundColor = '#035b69'; // Return to normal
+                target.style.transform = 'scale(1)'; // Return to normal size
+                target.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)'; // Return to normal shadow
+              }}
+              >
+                {tag.text}
+              </li>
             </Link>
           ))}
         </ul>
-      </div>
-      <div className="lines">
-        <div className="horizontal-line"></div>
-        <div className="vertical-line"></div>
       </div>
     </div>
   );
 };
 
 export default Sidebar;
-
-
-
 
 
 // import React, { useState, useEffect } from 'react';

@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import "../hover.css";
 import Sidebar from "./Sidebar";
 import CommunitySidebar from "./community";
+import { authContext } from "../context/AuthContext";
 
 export const Card = () => {
   const { userId } = useParams();
+  const { user } = useContext(authContext); // Get the logged-in user's information
+
 
   const cardcolor = { 
     backgroundColor: '#e0f7ff', // Light blue background
@@ -19,6 +22,7 @@ export const Card = () => {
   const text_decor = { textDecoration: "none" };
 
   const [posts, setPosts] = useState([]);
+  const [greeting, setGreeting] = useState("");
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -31,38 +35,60 @@ export const Card = () => {
     };
 
     fetchPosts();
-  }, [userId]); // Ensure to keep this dependency on userId
+  }, [userId]);
+
+  useEffect(() => {
+    const currentHour = new Date().getHours();
+    if (currentHour < 12) {
+      setGreeting("Good Morning");
+    } else if (currentHour < 18) {
+      setGreeting("Good Afternoon");
+    } else {
+      setGreeting("Good Evening");
+    }
+  }, []);
 
   return (
-    <div className="container-fluid">
+    <div className="container-fluid" style={{ marginTop: "80px" }}>
       <div className="row">
         <div className="col-lg-3">
-          {/* Sidebar on the left */}
-          <div className="d-none d-lg-block sidebar ml-0"><Sidebar id={userId} /></div>
+          <Sidebar id={userId} /> {/* Assume Sidebar contains tag elements */}
         </div>
         <div className="col-lg-6">
           <div className="container mt-5">
             <div className="row">
+              <div className="col-12 mb-3">
+                <h3 style={{ fontFamily: "'Lobster', cursive", fontStyle: "italic", color: "#035b69" }}>
+                {greeting}, {user ? user.username : 'User'}!
+                </h3>
+              </div>
               {posts.map((post) => (
                 <div key={post._id} className="col-12 mb-3">
                   <div className="card rounded-4" style={cardcolor}>
                     <div className="card-header" style={{
-                      backgroundColor: '#035b69', // Steel blue background
+                      backgroundColor: '#035b69',
                       borderTopLeftRadius: '16px',
                       borderTopRightRadius: '16px',
-                      color: '#1e90ff', // Dodger blue text color
+                      color: '#1e90ff',
                       fontWeight: 'bold'
                     }}>
                       <Link to={`/group/${userId}/${post.group}`} style={text_decor}>
-                        <p className="card-subtitle">{post.group}</p>
+                        <p className="card-subtitle" style={{ color: "#8ee5ee", fontSize: "large", fontFamily: "'Roboto', sans-serif" }}>
+                          {"r/" + post.group}
+                        </p>
                       </Link>
-                      <p className="card-subtitle " style={{ color: "#e6e6e4" }}>{post.username}</p>
-                      <h5 className="card-title">{post.Title}</h5>
+                      <p className="card-subtitle" style={{ color: "#e6e6e4", fontSize: "small", fontFamily: "'Roboto', sans-serif" }}>
+                        {"u/" + post.username}
+                      </p>
+                      <h5 className="card-title" style={{ color: "#e6e6e4", fontSize: "x-large", fontStyle: "italic", fontFamily: "'Lobster', cursive" }}>
+                        {post.Title}
+                      </h5>
                     </div>
+
                     <Link to={`/tags/${userId}/${post.tags}/${post.group}`} style={text_decor}>
                       <div className="tags">
                         <span className="badge badge-dark ms-1" style={{
-                          background: 'linear-gradient(45deg, #1e90ff, #00bfff)', // Gradient of Dodger blue and Deep sky blue
+                          background: 'linear-gradient(45deg, #1e90ff, #00bfff)',
                           color: 'white',
                           borderRadius: '12px',
                           padding: '5px 15px'
@@ -72,13 +98,13 @@ export const Card = () => {
                       </div>
                     </Link>
                     <Link to={`/post/${userId}/${post._id}`} style={{ color: "inherit", textDecoration: "none" }}>
-                      <div className="card-body" style={{ backgroundColor: '#b0e0e6', borderRadius: '0 0 16px 16px' }}> {/* Powder blue background */}
+                      <div className="card-body" style={{ backgroundColor: '#b0e0e6', borderRadius: '0 0 16px 16px' }}>
                         <span>
                           <p className="card-text">{post.text}</p>
                         </span>
                         {post.images && <img src={`http://localhost:4000${post.images}`} className="card-img-top" alt="Post image" />}
                         <span className="badge badge-dark ms-1" style={{
-                          background: 'linear-gradient(45deg, #1e90ff, #00bfff)', // Gradient of Dodger blue and Deep sky blue
+                          background: 'linear-gradient(45deg, #1e90ff, #00bfff)',
                           color: 'white',
                           borderRadius: '12px',
                           padding: '5px 15px'
@@ -94,13 +120,13 @@ export const Card = () => {
           </div>
         </div>
         <div className="col-lg-3">
-          {/* CommunitySidebar on the right */}
-          <div className="d-none d-lg-block sidebar mr-0"><CommunitySidebar id={userId} className="community-sidebar" /></div>
+          <CommunitySidebar id={userId} className="community-sidebar" /> {/* Assume CommunitySidebar contains tag elements */}
         </div>
       </div>
     </div>
   );
 };
+
 export default Card;
 
 

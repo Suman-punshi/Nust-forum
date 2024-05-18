@@ -12,7 +12,6 @@ const IndividualPost = () => {
   const [text, setText] = useState("");
 
   useEffect(() => {
-    // Fetch post data using postId
     const fetchPost = async () => {
       try {
         const response = await axios.get(`http://localhost:4000/post/${userId}/${postId}`);
@@ -32,7 +31,6 @@ const IndividualPost = () => {
         `http://localhost:4000/comment/${userId}/${postId}`,
         { text }
       );
-      // Assuming the server responds with the newly created comment
       setComments([...comments, response.data]);
       setText("");
       setShowCommentForm(false);
@@ -56,15 +54,26 @@ const IndividualPost = () => {
       <div className="container-fluid mt-5">
         <div className="row justify-content-center">
           <div className="col-lg-10">
-            <div key={post._id} className="card rounded-4 mb-3">
-              <div className={`${ss.cardHeader} card-header`} style={{ backgroundColor: "#035b69" }} >
-                <p className="card-subtitle text-muted">{post.username}</p>
-                <h5 className="card-title">{post.Title}</h5>
+            <div key={post._id} className="card rounded-4 mb-3" style={{
+              backgroundColor: '#e0f7ff', // Light blue background
+              border: '1px solid #1e90ff', // Dodger blue border
+              borderRadius: '16px',
+              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+              transition: 'transform 0.2s, background-color 0.2s'
+            }}>
+              <div className="card-header" style={{
+                backgroundColor: '#035b69',
+                color: '#e6e6e4',
+                borderTopLeftRadius: '16px',
+                borderTopRightRadius: '16px'
+              }}>
+                <p className="card-subtitle" style={{ fontSize: "medium" }}>{"u/" + post.username}</p>
+                <h5 className="card-title" style={{ fontSize: "x-large", fontStyle: "italic", fontFamily: "'Lobster', cursive" }}>{post.Title}</h5>
               </div>
               <div className="tags">
                 <span className={`badge ${ss.customBadge} ms-1`}>{post.tags}</span>
               </div>
-              <div className={`${ss.cardBody} card-body`}>
+              <div className="card-body">
                 <p className="card-text">{post.text}</p>
                 {post.images && <img src={post.images} className="card-img-top" alt="" />}
                 <div className="mt-2">
