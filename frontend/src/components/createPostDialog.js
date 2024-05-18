@@ -1,89 +1,89 @@
+import "../hover.css";
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useParams } from "react-router-dom";
-import Layout from "./Layout"; // Import the layout component
 
+// Dialog component for creating a post
 const CreatePostDialog = () => {
-    const { group, userId } = useParams();
-    const [post_title, setPost_title] = useState('');
-    const [post_text, setPost_text] = useState('');
-    const [image, setImage] = useState(null); // Change to single image state, initialized as null
-    const [tag, setTag] = useState('');
-    const [alertMessage, setAlertMessage] = useState('');
+  const { group } = useParams();
+  const { userId } = useParams();
+  const [Title, setTitle] = useState('');
+  const [text, setText] = useState('');
+  const [image, setImage] = useState('');
+  const [tags, setTags] = useState('');
+  const [alertMessage, setAlertMessage] = useState('');
 
-    const onChangeTitle = (e) => {
-        setPost_title(e.target.value);
+  const onChangeTitle = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const onChangeText = (e) => {
+    setText(e.target.value);
+  };
+
+  const onChangeImage = (e) => {
+    setImage(e.target.value);
+  };
+
+  const onChangeTag = (e) => {
+    setTags(e.target.value);
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    const post = {
+      Title: Title,
+      text: text,
+      images: image,
+      tags: tags
     };
 
-    const onChangeText = (e) => {
-        setPost_text(e.target.value);
-    };
+    axios.post(`http://localhost:4000/create/${userId}/${group}`, post)
+      .then(res => {
+        setAlertMessage('Post created successfully!');
+      })
+      .catch(err => {
+        console.error('Error creating post:', err);
+        setAlertMessage('Error creating post. Please try again later.');
+      });
 
-    const onChangeImage = (e) => {
-        const file = e.target.files[0]; // Get the selected file
-        setImage(file); // Set the file in the state
-    };
+    setTitle('');
+    setText('');
+    setImage('');
+    setTags('');
+  };
 
-    const onChangeTag = (e) => {
-        setTag(e.target.value);
-    };
-
-    const onSubmit = (e) => {
-        e.preventDefault();
-
-        const formData = new FormData();
-        formData.append('post_tile', post_title);
-        formData.append('post_text', post_text);
-        formData.append('image', image); // Append the selected file to the form data
-        formData.append('tag', tag);
-
-        console.log(formData);
-
-        axios.post(`http://localhost:4000/create/${userId}/${group}`, formData)
-            .then(res => {
-                console.log('Response from server:', res.data);
-                setAlertMessage('Post created successfully!');
-            })
-            .catch(err => {
-                console.error('Error sending request:', err);
-                setAlertMessage('Error creating post. Please try again later.');
-            });
-
-        // Reset form fields
-        setPost_title('');
-        setPost_text('');
-        setImage(null);
-        setTag('');
-    };
-
-    return (
-        <Layout>
-            <div className="dialog-container">
-            <h2 style={{ marginTop: '70px', textAlign: 'center' }}>Add Post</h2>
-
-                <form onSubmit={onSubmit}>
-                    <div className="form-group" style={{ marginTop: '20px' }}>
-                        <input className="form-control" type="text" placeholder="Title" value={post_title} onChange={onChangeTitle} />
-                    </div>
-                    <div className="form-group" style={{ marginTop: '20px' }}>
-                        <textarea className="form-control" placeholder="Text" value={post_text} onChange={onChangeText} />
-                    </div>
-                    <div className="form-group" style={{ marginTop: '20px' }}>
-                        <input className="form-control" type="file" onChange={onChangeImage} />
-                    </div>
-                    <div className="form-group" style={{ marginTop: '20px' }}>
-                        <select className="form-control" value={tag} onChange={onChangeTag}>
-                            <option value="tag1">Tag 1</option>
-                            <option value="nodejs">Node.js</option>
-                            {/* Add more options as needed */}
-                        </select>
-                    </div>
-                    <button  style={{ marginTop: '20px' }} className="btn btn-primary" type="submit">Create</button>
-                </form>
-                {alertMessage && <div className="alert alert-success">{alertMessage}</div>}
+  return (
+    <div className="container mt-5">
+      <div className="card">
+        <div className="card-header text-dark" style={{ backgroundColor: "#CDE8E5"}}>
+          <h5 className="card-title mb-0">Create Post</h5>
+        </div>
+        <div className="card-body">
+          <form onSubmit={onSubmit}>
+            <div className="mb-3">
+              <input type="text" className="form-control" placeholder="Title" value={Title} onChange={onChangeTitle} required />
             </div>
-        </Layout>
-    );
+            <div className="mb-3">
+              <textarea className="form-control" rows="10" cols="50" placeholder="Text" value={text} onChange={onChangeText} required />
+            </div>
+            <div className="mb-3">
+              <input type="text" className="form-control" placeholder="Image URL" value={image} onChange={onChangeImage} />
+            </div>
+            <div className="mb-3">
+              <select className="form-select" value={tags} onChange={onChangeTag}>
+                <option value="tag1">Tag 1</option>
+                <option value="nodejs">Node.js</option>
+                {/* Add more options as needed */}
+              </select>
+            </div>
+            <button type="submit" className="btn" style={{ backgroundColor: "#CDE8E5"}}>Create</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default CreatePostDialog;

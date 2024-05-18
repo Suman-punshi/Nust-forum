@@ -5,11 +5,11 @@ const groupSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  community_id: {
+  communityId: {
     type: Number,
     required: true,
   },
-  No_of_Members: {
+  noOfMembers: {
     type: Number,
     required: true,
   }

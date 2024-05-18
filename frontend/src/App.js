@@ -12,13 +12,14 @@ import JustTagPosts from "./components/justTags";
 import DisplaySearchResults from "./components/DisplaySearchResults";
 import Sidebar from "./components/Sidebar";
 import "bootstrap/dist/css/bootstrap.min.css";
+import UserProfileComponent from "./components/userProfile.component";
 
 function App() {
 
   return (
     <Router>
       <div className="container">
-        {/* <Navbar /> */}
+        <Navbar />
         {/* <Sidebar/> */}
         
         <nav className="navbar"></nav>
@@ -35,6 +36,7 @@ function App() {
           <Route path="/tag/:userID/:tag_name" element={<JustTagPosts />} />
           {/* Pass searchResults as a prop to DisplaySearchResults */}
           <Route path="/search/:groupName" element={<DisplaySearchResults />} />
+          <Route path = "/profile/:username" element={< UserProfileComponent />} />
         </Routes>
       </div>
     </Router>
