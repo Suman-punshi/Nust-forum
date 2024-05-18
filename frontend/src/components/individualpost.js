@@ -149,9 +149,33 @@ const IndividualPost = () => {
     }
   };
 
+  // useEffect(()=>{
+  //   getdata();
+  // }, [])
+
+  const deleteComment =async (id) => {
+    const res2 = await fetch(`/deleteComment/${id}`,{
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+
+    const deletedata = await res2.json();
+    console.log(deletedata);
+
+    if(res2.status === 422 || !deletedata){
+      console.log("error");
+    }else{
+      console.log("comment deleted");
+      //getdata();
+    }
+  }
+
   if (!post) {
     return <div>Loading...</div>;
   }
+
 
   return (
     <Layout>
@@ -207,6 +231,8 @@ const IndividualPost = () => {
                       <p className="card-subtitle text-muted text-primary">
                         {com.text}
                       </p>
+                      <button className="btn btn-danger" onClick={()=>deleteComment(com._id)}><i class="fa-solid fa-trash"></i></button>
+                      
                     </div>
                   ))}
                 {showCommentForm ? (

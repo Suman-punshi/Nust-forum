@@ -10,10 +10,13 @@ const tag_r=require('./routes/tag_route');
 const comment_r=require('./routes/c_comment');
 const searchRouter = require('./routes/search'); // Import the route for handling post search
 const app = express();
+const delCommentRouter = require('./routes/del_comment');
 
 // Enable CORS
 app.use(cors());
 app.use(express.json());
+app.use('/api', delCommentRouter); // Prefix routes with /api or adjust according to your setup
+
 mongoose.connect('mongodb+srv://hira:hira@nust-forum.r2zvg63.mongodb.net/database?retryWrites=true&w=majority&appName=NUST-forum', {});
 app.get('/favicon.ico', (req, res) => {
     res.status(204).end();
