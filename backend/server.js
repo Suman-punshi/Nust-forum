@@ -47,7 +47,7 @@ db.once('open', () => {
     app.use('/comment', comment_r);
     app.use('/communities', com);
     app.use('/join-group', jg);
-   app.use('/posts', postsRouter);
+    app.use('/posts', postsRouter);
     
    
     

@@ -30,9 +30,10 @@ export const Card = () => {
     <div className="container-fluid">
       <div className="row">
         <div className="col-lg-3">
-          <div className="d-none d-lg-block sidebar ml-0"><CommunitySidebar id={userId} /></div>
+          {/* Sidebar on the left */}
+          <div className="d-none d-lg-block sidebar ml-0"><Sidebar id={userId} /></div>
         </div>
-        <div className="col-lg-7">
+        <div className="col-lg-6">
           <div className="container mt-5">
             <div className="row">
               {posts.map((post) => (
@@ -69,14 +70,16 @@ export const Card = () => {
             </div>
           </div>
         </div>
-        {/* <div className="col-lg-2">
-          <div className="d-none d-lg-block sidebar ml-0"><Sidebar id={userId} /></div>
-        </div> */}
+        <div className="col-lg-3">
+          {/* CommunitySidebar on the right */}
+          <div className="d-none d-lg-block sidebar mr-0"><CommunitySidebar id={userId} className="community-sidebar" /></div>
+        </div>
       </div>
     </div>
   );
 };
 export default Card;
+
 
 // const handleJoinClick = async () => {
 //   try {
