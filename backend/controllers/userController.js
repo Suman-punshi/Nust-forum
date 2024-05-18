@@ -96,6 +96,7 @@ exports.loginUser = (req, res) => {
       ]
   })
   .then(user => {
+    console.log("Inside .then(user =>) part");
       if (!user) {
           console.log('User not found');
           return res.status(404).json({ message: 'User not found' });

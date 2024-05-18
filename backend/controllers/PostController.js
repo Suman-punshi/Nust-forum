@@ -1,6 +1,7 @@
 // projectsController.js
 const Project = require('../models/posts');
 const User = require('../models/usermodel');
+const Tag= require ('../models/Tag');
 
 console.log('a');
 const getProjects = async (req, res) => {
@@ -9,7 +10,7 @@ const getProjects = async (req, res) => {
         console.log('a');
         const user = await User.findById(userId);
         // const projects = await Project.find();
-        const projects = await Project.find({ group: { $in: user.groupsjoined } });
+        const projects = await Project.find({ group_name: { $in: user.groups_joined } });
         console.log('Projects:', projects); // Log the projects to see if they are fetched correctly
         res.json(projects);
        
@@ -78,7 +79,7 @@ const getPostsByTag = async (req, res) => {
   console.log("get post by tags:", tag);
 
   try {
-    const projects = await Project.find({ tag: tag });
+    const projects = await Project.find({ tags: tag });
     res.json(projects);
   } catch (err) {
     console.error(err);

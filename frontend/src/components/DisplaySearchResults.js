@@ -10,7 +10,7 @@ const DisplaySearchResults = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/search/${groupName}`);
+                const response = await axios.get(`http://localhost:4000/search/group/${groupName}`);
                 setSearchResults(response.data);
             } catch (error) {
                 console.error('Error fetching search results:', error);
