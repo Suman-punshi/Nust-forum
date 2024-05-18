@@ -17,7 +17,7 @@ const upload = multer({ storage: storage }).single('image'); // Allow single ima
 exports.addpost = async (req, res) => {
     console.log("inside addpost");
     const userId = req.params.userId;
-    const group_name = req.params.group;
+    const group = req.params.group;
     const c_user = await users.findById(userId);
     console.log('Received request to add user:', req.body); // Log the received request body
     console.log(c_user.username);
@@ -43,11 +43,11 @@ exports.addpost = async (req, res) => {
 
         const newPost = new posts({ 
             username: c_user.username, 
-            post_title: post_title, 
-            post_text: post_text, 
+            Title: Title, 
+            text: text, 
             images: image, 
-            tag: tag, 
-            group_name: group_name
+            tags: tags, 
+            group: group 
         });
 
         console.log(newPost);

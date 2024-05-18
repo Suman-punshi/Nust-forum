@@ -7,8 +7,8 @@ const tagSchema = new mongoose.Schema({
     required: true,
     unique: true // Ensures each tag is unique
   }
-}, { collection: 'tags' });
+}, { collection: 'Tags' });
 
-const Tag = mongoose.model('tags', tagSchema);
+const Tag = mongoose.model('Tag', tagSchema);
 
 module.exports = Tag;

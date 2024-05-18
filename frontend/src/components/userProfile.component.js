@@ -6,20 +6,24 @@ import { Link } from 'react-router-dom';
 const UserProfileComponent = () => {
     const { user } = useAuthContext();
     const [posts, setPosts] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        if (user && user.username) { 
+        if (user) {
+            setLoading(true);
             axios.get(`http://localhost:4000/posts/user/${user.username}`)
                 .then(response => {
                     setPosts(response.data);
+                    setLoading(false);
                 })
                 .catch(error => {
                     console.error('Error fetching posts:', error);
+                    setLoading(false);
                 });
         }
-    }, [user]); // Re-fetch when user changes
+    }, [user]);
 
-    if (!user) {
+    if (!user || loading) {
         return <div>Loading user data...</div>;
     }
 
@@ -32,7 +36,7 @@ const UserProfileComponent = () => {
             </div>
             <div className="container mt-5">
                 <div className="row">
-                    {posts.map((post) => (
+                    {posts.length > 0 ? posts.map((post) => (
                         <div key={post._id} className="col-12 mb-3">
                             <div className="card rounded-4" style={{ backgroundColor: "#EEF7FF" }}>
                                 <div className="card-header">
@@ -59,7 +63,7 @@ const UserProfileComponent = () => {
                                 </Link>
                             </div>
                         </div>
-                    ))}
+                    )) : <p>No posts found.</p>}
                 </div>
             </div>
         </div>
@@ -67,3 +71,4 @@ const UserProfileComponent = () => {
 };
 
 export default UserProfileComponent;
+

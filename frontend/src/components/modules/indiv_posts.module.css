@@ -1,0 +1,100 @@
+/* indiv_posts.module.css */
+
+.commentCard {
+  background-color: #e0f7ff;
+  border: 1px solid #1e90ff;
+  border-radius: 16px;
+  margin-bottom: 15px;
+  padding: 20px;
+  max-width: 900px; /* Adjust the max-width to make the container wider */
+  margin: 0 auto; /* Center the container horizontally */
+  max-width: 800px; /* Set a max-width to keep it manageable on larger screens */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.commentCard:hover {
+  transform: scale(1.02);
+  background-color: #b0e0e6;
+}
+
+.commentUsername {
+  color: #1e90ff;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.commentText {
+  color: #333;
+  margin-top: 10px;
+  font-size: 1em;
+}
+
+.customBadge {
+  background: linear-gradient(45deg, #1e90ff, #00bfff);
+  color: white;
+  border-radius: 12px;
+  padding: 5px 15px;
+}
+
+.cardHeader .card-subtitle {
+  font-size: 0.9em;
+  color: #063778;
+}
+
+.cardBody img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin-top: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.formControl {
+  border-radius: 12px;
+  padding: 12px;
+  background-color: #e6f7ff;
+  border: 1px solid #b0e0e6;
+}
+
+.btnPrimary {
+  background: linear-gradient(45deg, #1e90ff, #4682b4);
+  border: none;
+  border-radius: 12px;
+  padding: 10px 20px;
+  color: white;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.btnPrimary:hover {
+  background: linear-gradient(45deg, #1c86ee, #4169e1);
+}
+
+.loadingSpinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.loadingSpinner .spinner-border {
+  width: 3rem;
+  height: 3rem;
+}
+
+.cardContainer {
+  background-color: #f0f8ff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.cardTitle {
+  color: #4682b4;
+  font-weight: bold;
+}
+
+.cardSubtitle {
+  color: #1e90ff;
+}
