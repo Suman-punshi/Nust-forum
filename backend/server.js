@@ -10,6 +10,7 @@ const tag_r=require('./routes/tag_route');
 const comment_r=require('./routes/c_comment');
 const searchRouter = require('./routes/search'); // Import the route for handling post search
 const path = require('path'); // Import the path module
+const postsRouter = require('./routes/posts');
 
 const app = express();
 
@@ -40,6 +41,8 @@ db.once('open', () => {
     app.use('/tags', group_r);
     app.use('/tag', tag_r);
     app.use('/search', searchRouter); // Mount the route for handling post search
+    app.use('/posts', postsRouter);
+
     app.use('/comment', comment_r);
 
     // Serve static files from the 'uploads' directory in the frontend folder

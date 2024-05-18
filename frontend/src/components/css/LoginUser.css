@@ -1,0 +1,113 @@
+/* LoginUser.css */
+/* Resets any margin, padding, and box sizing across all elements */
+
+.container {
+    display: flex;
+    width: 100vw; /* Ensure the container covers the full viewport width */
+    height: 100vh; /* Ensure the container covers the full viewport height */
+}
+
+.typed-text-container {
+    flex: 2; /* Takes exactly half of the flex container */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-size: 2em;
+    background-color: #3a7bd5; /* Starting color: light blue */
+    background-image: linear-gradient(147deg, #3a7bd5 0%, #000000 74%);
+    background-size: 200% 200%;
+    background-repeat: no-repeat;
+    white-space: nowrap;
+    overflow: hidden;
+    letter-spacing: .15em;
+    animation: Gradient 15s ease infinite;
+}
+
+.login-container {
+    flex: 2; /* Takes exactly half of the flex container */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9); /* Example to differentiate this side visually if needed */
+}
+
+.card {
+    width: 100%; /* Large but not full width to keep it visually contained */
+    max-width: 600px;
+    padding: 2rem;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 10px;
+}
+
+.card-body {
+    width: 100%;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.alert-danger {
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    text-align: center;
+}
+
+@keyframes Gradient {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+
+.typing-animation {
+    display: inline-block;
+    border-right: .15em solid orange; /* Typing cursor */
+    white-space: nowrap;
+    overflow: hidden;
+    animation: typing 20.5s steps(30, end) infinite, blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+    0%, 100% {
+        width: 0;
+        border-right: .15em solid orange;
+    }
+    10%, 45% { /* Reduce the hold time for appearing text */
+        width: 82%;
+        border-right: .15em solid orange;
+    }
+    55%, 75% { /* Start deletion sooner and finish it faster */
+        width: 82%;
+    }
+    85% { /* Deletion phase begins */
+        width: 0;
+    }
+}
+
+@keyframes blink-caret {
+    0%, 100% { border-color: orange; }
+    50% { border-color: transparent; }
+}
+
+
+@keyframes Gradient {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
