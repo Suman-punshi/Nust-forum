@@ -10,6 +10,7 @@ const IndividualPost = () => {
   const [comments, setComments] = useState(null);
   const [showCommentForm, setShowCommentForm] = useState(false);
   const [text, setText] = useState("");
+  const [p_id, setp_id] = useState("");
 
   useEffect(() => {
     // Fetch post data using postId
@@ -64,7 +65,12 @@ const IndividualPost = () => {
                 <h5 className="card-title">{post.Title}</h5>
               </div>
               <div className="tags">
-                <span className={`badge ${ss.customBadge} ms-1`}>{post.tags}</span>
+                <span
+                  className="badge ms-1"
+                  style={{ backgroundColor: "#4D869C", color: "white" }}
+                >
+                  {post.tags}
+                </span>
               </div>
               <div className={`${ss.cardBody} card-body`}>
                 <p className="card-text">{post.text}</p>

@@ -9,6 +9,8 @@ const create_r=require('./routes/cPost');
 const tag_r=require('./routes/tag_route');
 const comment_r=require('./routes/c_comment');
 const searchRouter = require('./routes/search'); // Import the route for handling post search
+const com = require('./routes/group_r_c');
+const jg = require('./routes/joinGroup');
 const path = require('path'); // Import the path module
 const postsRouter = require('./routes/posts');
 
@@ -44,6 +46,12 @@ db.once('open', () => {
     app.use('/search', searchRouter); // Mount the route for handling post search
     app.use('/comment', comment_r);
     app.use('/posts', postsRouter);
+    app.use('/communities', com);
+    app.use('/join-group', jg);
+   
+    
+   
+    
 
     // Serve static files from the 'uploads' directory in the frontend folder
     app.use('/uploads', express.static(path.join(__dirname, '../uploads')));

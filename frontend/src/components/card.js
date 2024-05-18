@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import "../hover.css";
 import Sidebar from "./Sidebar";
-import Sidebar2 from "./community";
+import CommunitySidebar from "./community";
 
 export const Card = () => {
   const { userId } = useParams();
@@ -30,7 +30,7 @@ export const Card = () => {
     <div className="container-fluid">
       <div className="row">
         <div className="col-lg-3">
-          <div className="d-none d-lg-block sidebar ml-0"><Sidebar2 id={userId} /></div>
+          <div className="d-none d-lg-block sidebar ml-0"><CommunitySidebar id={userId} /></div>
         </div>
         <div className="col-lg-7">
           <div className="container mt-5">
@@ -69,9 +69,9 @@ export const Card = () => {
             </div>
           </div>
         </div>
-        <div className="col-lg-2">
+        {/* <div className="col-lg-2">
           <div className="d-none d-lg-block sidebar ml-0"><Sidebar id={userId} /></div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
