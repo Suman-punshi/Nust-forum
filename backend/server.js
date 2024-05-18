@@ -11,16 +11,19 @@ const comment_r=require('./routes/c_comment');
 const searchRouter = require('./routes/search'); // Import the route for handling post search
 const com = require('./routes/group_r_c');
 const jg = require('./routes/joinGroup');
+const path = require('path'); // Import the path module
+
 const app = express();
 
 // Enable CORS
 app.use(cors());
 app.use(express.json());
+
 mongoose.connect('mongodb+srv://hira:hira@nust-forum.r2zvg63.mongodb.net/database?retryWrites=true&w=majority&appName=NUST-forum', {});
+
 app.get('/favicon.ico', (req, res) => {
     res.status(204).end();
-  });
-  
+});
 
 // Check if MongoDB is connected
 const db = mongoose.connection;
@@ -46,7 +49,12 @@ db.once('open', () => {
     
    
     
+
+    // Serve static files from the 'uploads' directory in the frontend folder
+    app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
+
+    // Start the server
     app.listen(4000, () => {
         console.log('Server started on port 4000');
     });
-})
+});

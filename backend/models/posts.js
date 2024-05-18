@@ -1,53 +1,44 @@
 const mongoose = require('mongoose');
 
 const postSchema = new mongoose.Schema({
-  
+  username: {
+    type: String,
+    required: true
+  },
+  Title: {
+    type: String,
+    required: true,
+  },
   text: {
     type: String,
     required: true,
+    unique: false
   },
-  username:{
+  images: {
     type: String,
-    required: true,
+    required: false,
+    unique: false
   },
-  votes:{
+  num_comments: {
     type: Number,
-    required: true,
+    required: false,
+    default: 0
   },
-  group_name:{
+  tags: {
     type: String,
-    required: true,
+    required: false
   },
-  post_title:{
-    type: String,
-    required: true,
-  },
-  post_text:{
-    type: String,
-    required: true,
-  },
-  tag:{
-    type: String,
-    required: true,
-  },
-  num_comments:{
-    type: Number,
-    required: true,
-  },
-  attachment:{
-    type: String,
-    required: true,
-  },
-  createdAt:{
+  createdAt: {
     type: Date,
-    required: true,
+    default: Date.now
   },
-  updatedAt:{
-    type: Date,
-    required: true,
+  
+  group:{
+    type: String,
+    required: true
   }
 }, { collection: 'posts' });
 
-const post = mongoose.model('posts', postSchema);
+const User = mongoose.model('posts', postSchema);
 
-module.exports = post;
+module.exports = User;

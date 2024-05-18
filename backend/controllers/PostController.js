@@ -1,6 +1,7 @@
 // projectsController.js
 const Project = require('../models/posts');
 const User = require('../models/usermodel');
+const Tag= require ('../models/Tag');
 
 console.log('a');
 const getProjects = async (req, res) => {
@@ -78,7 +79,7 @@ const getPostsByTag = async (req, res) => {
   console.log("get post by tags:", tag);
 
   try {
-    const projects = await Project.find({ tag: tag });
+    const projects = await Project.find({ tags: tag });
     res.json(projects);
   } catch (err) {
     console.error(err);
