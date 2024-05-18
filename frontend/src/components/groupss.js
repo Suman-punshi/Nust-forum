@@ -13,6 +13,7 @@ export const GroupPosts = () => {
     useEffect(() => {
       const fetchGroupPosts = async () => {
         try {
+          console.log(`In groupss.js, Sending get request with userId: ${userId} and group: ${group}`);
           const response = await axios.get(`http://localhost:4000/group/${userId}/${group}`);
           setGroupPosts(response.data);
         } catch (error) {
@@ -43,7 +44,7 @@ export const GroupPosts = () => {
                     <h5 className="card-title">{post.Title}</h5>
                   </div>
                   <div className="card-body">
-                    <p className="card-text">{post.text}</p>
+                    <p className="card-text">{post.post_text}</p>
                     {post.images && <img src={post.images} className="card-img-top" alt="" />}
                     <span className="badge badge-dark ms-1" style={{ backgroundColor: '#4D869C', color: 'white' }}>
                       {post.num_comments} comments
