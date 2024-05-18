@@ -6,11 +6,19 @@ const groupSchema = new mongoose.Schema({
     required: true,
   },
   community_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+  },
+  No_of_members: {
     type: Number,
     required: true,
   },
-  No_of_Members: {
-    type: Number,
+  createdAt:{
+    type: Date,
+    required: true
+  },
+  updatedAt:{
+    type: Date,
     required: true,
   }
 }, { collection: 'groups' });

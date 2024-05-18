@@ -25,7 +25,7 @@ const getGroupProjects = async (req, res) => {
   console.log("in getttt group controller");
   try {
     console.log("in try of group controller");
-    const projects = await Project.find({ group_name: group_name });
+    const projects = await Project.find({ group: group_name });
     res.json(projects);
     console.log("empty1: ", projects);
   } catch (err) {

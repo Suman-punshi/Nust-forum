@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import "../hover.css";
 import Sidebar from "./Sidebar";
-import Sidebar2 from "./community";
+import CommunitySidebar from "./community";
 
 export const Card = () => {
   const { userId } = useParams();
@@ -34,7 +34,7 @@ export const Card = () => {
     <div className="container-fluid">
       <div className="row">
         <div className="col-lg-3">
-          <div className="d-none d-lg-block sidebar ml-0"><Sidebar2 id={userId} /></div>
+          <div className="d-none d-lg-block sidebar ml-0"><CommunitySidebar id={userId} /></div>
         </div>
         <div className="col-lg-7">
           <div className="container mt-5">
@@ -43,13 +43,13 @@ export const Card = () => {
                 <div key={post._id} className="col-12 mb-3">
                   <div className="card rounded-4" style={cardcolor}>
                     <div className="card-header">
-                      <Link to={`/group/${userId}/${post.group_name}`} style={text_decor}>
-                        <p className="card-subtitle text-success">{post.group_name}</p>
+                      <Link to={`/group/${userId}/${post.group}`} style={text_decor}>
+                        <p className="card-subtitle text-success">{post.group}</p>
                       </Link>
                       <p className="card-subtitle text-muted">{post.username}</p>
                       <h5 className="card-title">{post.Title}</h5>
                     </div>
-                    <Link to={`/tags/${userId}/${post.tag}/${post.group_name}`} style={text_decor}>
+                    <Link to={`/tags/${userId}/${post.tag}/${post.group}`} style={text_decor}>
                       <div className="tags">
                         <span className="badge badge-dark ms-1" style={{ backgroundColor: "#4D869C", color: "white" }}>
                           {post.tags}
@@ -59,7 +59,7 @@ export const Card = () => {
                     <Link to={`/post/${userId}/${post._id}`} style={{ color: "inherit", textDecoration: "none" }}>
                       <div className="card-body">
                         <span>
-                          <p className="card-text">{post.post_text}</p>
+                          <p className="card-text">{post.text}</p>
                         </span>
                         <span className="badge badge-dark ms-1" style={{ backgroundColor: "#4D869C", color: "white" }}>
                           {post.num_comments} comments
@@ -72,9 +72,9 @@ export const Card = () => {
             </div>
           </div>
         </div>
-        <div className="col-lg-2">
+        {/* <div className="col-lg-2">
           <div className="d-none d-lg-block sidebar ml-0"><Sidebar id={userId} /></div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

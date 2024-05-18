@@ -6,7 +6,7 @@ const communitiesSchema = new mongoose.Schema({
     required: true,
   },
   no_of_groups: {
-    type: Int32,
+    type: Number,
     required: true,
   },
   username:{
