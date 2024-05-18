@@ -123,16 +123,16 @@ const UserProfileComponent = () => {
 
     return (
         <div className="container mt-5">
-            <div className = "overflow-hidden mr-3 w-50 h-100">
-            <div className="profile-header bg-light rounded mb-4 mt-3 w-100 h-100 text-center overflow-hidden" style = {{backgroundColor: "#EEF7FF"}}>
+            <div className = "overflow-hidden ml-0 w-25 h-100">
+            <div className="profile-header rounded mb-4 mt-3 w-25 h-100 text-center overflow-hidden" style = {{backgroundColor: "#EEF7FF", position: 'fixed'}}>
                 <img src={user.avatarUrl || "default-avatar.png"} alt="user avatar" className="rounded-circle mb-3" width="150" height="150" />
                 <h1 className="display-4">{user.username}</h1>
                 <p className="text-muted">Joined on: {new Date(user.createdAt).toLocaleDateString()}</p>
             </div>
             </div>
-            <div className="row">
+            <div className="row w-50 ml-3" style = {{left: '60'}}>
                 {posts.length > 0 ? posts.map((post) => (
-                    <div key={post._id} className="col-12 mb-3 mt-3">
+                    <div key={post._id} className="col-12 mb-3 mt-3 ml-5">
                         <div className="card shadow-sm" style = {{backgroundColor: "#EEF7FF"}}>
                             <div className="card-header">
                                 <div className="d-flex justify-content-between align-items-center">
