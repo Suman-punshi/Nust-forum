@@ -12,6 +12,7 @@ const searchRouter = require('./routes/search'); // Import the route for handlin
 const path = require('path'); // Import the path module
 const postsRouter = require('./routes/posts');
 
+
 const app = express();
 
 // Enable CORS
@@ -41,9 +42,8 @@ db.once('open', () => {
     app.use('/tags', group_r);
     app.use('/tag', tag_r);
     app.use('/search', searchRouter); // Mount the route for handling post search
-    app.use('/posts', postsRouter);
-
     app.use('/comment', comment_r);
+    app.use('/posts', postsRouter);
 
     // Serve static files from the 'uploads' directory in the frontend folder
     app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
