@@ -22,7 +22,9 @@ function App() {
         <Navbar />
         {/* <Sidebar/> */}
         
-        <nav className="navbar"></nav>
+        <nav className="navbar">
+          <div></div>
+        </nav>
 
         <Routes>
           <Route path="/" element={<LoginUser />} />
