@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import "../hover.css";
 import Sidebar from "./Sidebar";
 import Sidebar2 from "./community";
+import ss from '../components/modules/indiv_posts.module.css'; // Import custom styles
 
 export const Card = () => {
   const { userId } = useParams();
@@ -41,28 +42,28 @@ export const Card = () => {
           <div className="container mt-5">
             <div className="row">
               {posts.map((post) => (
-                <div key={post._id} className="col-12 mb-3">
-                  <div className="card rounded-4" style={cardcolor}>
+                <div key={post._id} className={`col-12 mb-3 ${ss.commentCard}`}>
+                  <div className="card rounded-4">
                     <div className="card-header">
-                      <Link to={`/group/${userId}/${post.group}`} style={text_decor}>
+                      <Link to={`/group/${userId}/${post.group}`} className={ss.commentUsername}>
                         <p className="card-subtitle text-success">{post.group}</p>
                       </Link>
-                      <p className="card-subtitle text-muted">{post.username}</p>
-                      <h5 className="card-title">{post.Title}</h5>
+                      <p className={`card-subtitle text-muted ${ss.cardSubtitle}`}>{post.username}</p>
+                      <h5 className={`card-title ${ss.cardTitle}`}>{post.Title}</h5>
                     </div>
-                    <Link to={`/tags/${userId}/${post.tags}/${post.group}`} style={text_decor}>
+                    <Link to={`/tags/${userId}/${post.tags}/${post.group}`} className={ss.cardSubtitle}>
                       <div className="tags">
-                        <span className="badge badge-dark ms-1" style={{ backgroundColor: "#4D869C", color: "white" }}>
+                        <span className={`badge badge-dark ms-1 ${ss.customBadge}`}>
                           {post.tags}
                         </span>
                       </div>
                     </Link>
-                    <Link to={`/post/${userId}/${post._id}`} style={{ color: "inherit", textDecoration: "none" }}>
+                    <Link to={`/post/${userId}/${post._id}`} className={ss.commentText}>
                       <div className="card-body">
                         <span>
                           <p className="card-text">{post.text}</p>
                         </span>
-                        <span className="badge badge-dark ms-1" style={{ backgroundColor: "#4D869C", color: "white" }}>
+                        <span className={`badge badge-dark ms-1 ${ss.customBadge}`}>
                           {post.num_comments} comments
                         </span>
                       </div>

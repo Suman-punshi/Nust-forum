@@ -37,8 +37,9 @@ const Navbar = () => {
     }
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark fixed-top" style={{ backgroundColor: '#4D869C' }}>
+        <nav className="navbar navbar-expand-lg navbar-dark fixed-top" style={{ backgroundColor: 'linear-gradient(45deg, #1c86ee, #4169e1)' }}>
             <div className="container-fluid">
+                
                 <Link className="navbar-brand" to = {homePath} >NUST Forums</Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
@@ -67,3 +68,8 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
+
+
+
