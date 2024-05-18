@@ -7,7 +7,7 @@ import ss from '../components/modules/indiv_posts.module.css'; // Import custom 
 const IndividualPost = () => {
   const { postId, userId } = useParams();
   const [post, setPost] = useState(null);
-  const [comments, setComments] = useState(null);
+  const [comments, setComments] = useState([]);
   const [showCommentForm, setShowCommentForm] = useState(false);
   const [text, setText] = useState("");
 
@@ -15,9 +15,7 @@ const IndividualPost = () => {
     // Fetch post data using postId
     const fetchPost = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:4000/post/${userId}/${postId}`
-        );
+        const response = await axios.get(`http://localhost:4000/post/${userId}/${postId}`);
         setPost(response.data.project);
         setComments(response.data.comments);
       } catch (error) {
@@ -55,10 +53,10 @@ const IndividualPost = () => {
 
   return (
     <Layout>
-      <div className="container mt-5" width="100%">
+      <div className="container-fluid mt-5">
         <div className="row justify-content-center">
-          <div className="col-md-8">
-            <div key={post._id} className="card rounded-4 mb-3" style={{ backgroundColor: "#EEF7FF" }}>
+          <div className="col-lg-10">
+            <div key={post._id} className="card rounded-4 mb-3">
               <div className={`${ss.cardHeader} card-header`} style={{ backgroundColor: "#035b69" }} >
                 <p className="card-subtitle text-muted">{post.username}</p>
                 <h5 className="card-title">{post.Title}</h5>
@@ -73,7 +71,7 @@ const IndividualPost = () => {
                   <span className={`badge ${ss.customBadge}`}>{post.num_comments} comments</span>
                 </div>
                 <div className="mt-3">
-                  {comments && comments.map((com) => (
+                  {comments.map((com) => (
                     <div key={com._id} className={ss.commentCard}>
                       <span className={ss.commentUsername}>{com.username}</span>
                       <p className={ss.commentText}>{com.text}</p>

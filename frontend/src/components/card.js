@@ -56,7 +56,7 @@ export const Card = () => {
                       <Link to={`/group/${userId}/${post.group}`} style={text_decor}>
                         <p className="card-subtitle">{post.group}</p>
                       </Link>
-                      <p className="card-subtitle text-muted">{post.username}</p>
+                      <p className="card-subtitle " style={{ color: "#e6e6e4" }}>{post.username}</p>
                       <h5 className="card-title">{post.Title}</h5>
                     </div>
                     <Link to={`/tags/${userId}/${post.tags}/${post.group}`} style={text_decor}>
