@@ -73,7 +73,7 @@ export const Card = () => {
                       {"r/" + post.group}
                     </p>
                   </Link>
-                  <Link to={`/users/${"u/"+post.username}`}>
+                  <Link to={`/profile/${post.username}`} style={{ color: '#e6e6e4', textDecoration: 'none' }}>
                   <p className="card-subtitle" style={{ color: "#e6e6e4", fontSize: "small", fontFamily: "'Roboto', sans-serif" }}>
                     {"u/" + post.username}
                   </p>
@@ -118,6 +118,7 @@ export const Card = () => {
 };
 
 export default Card;
+
 
 
 // const handleJoinClick = async () => {
