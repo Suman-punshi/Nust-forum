@@ -146,16 +146,16 @@ const CreatePostDialog = () => {
   return (
     <div
       className={`container mt-5 ${ss.cardContainer}`}
-      style={{ backgroundColor: "#b0e0e6" }}
+      style={{ backgroundColor: "#b02c54 " }}
     >
-      <div className={`card ${ss.card}`} style={{ backgroundColor: "#d3eaf4" }}>
+      <div className={`card ${ss.card}`} style={{ backgroundColor: "black" }}>
         <div
           className={`card-header text-dark ${ss.cardHeader}`}
-          style={{ backgroundColor: "#cde8e5" }}
+          style={{ backgroundColor: "grey" }}
         >
           <h5
             className="card-title mb-0"
-            style={{ backgroundColor: "#035b69" }}
+            style={{ backgroundColor: "#f25e84" }}
           >
             Create Post
           </h5>

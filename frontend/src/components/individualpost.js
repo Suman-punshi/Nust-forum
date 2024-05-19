@@ -51,65 +51,66 @@ const IndividualPost = () => {
 
   return (
     <Layout>
-      <div className="container-fluid mt-5">
-        <div className="row justify-content-center">
-          <div className="col-lg-10">
-            <div key={post._id} className="card rounded-4 mb-3" style={{
-              backgroundColor: '#e0f7ff', // Light blue background
-              border: '1px solid #1e90ff', // Dodger blue border
-              borderRadius: '16px',
-              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-              transition: 'transform 0.2s, background-color 0.2s'
-            }}>
-              <div className="card-header" style={{
-                backgroundColor: '#035b69',
-                color: '#e6e6e4',
-                borderTopLeftRadius: '16px',
-                borderTopRightRadius: '16px'
-              }}>
-                <p className="card-subtitle" style={{ fontSize: "medium" }}>{"u/" + post.username}</p>
-                <h5 className="card-title" style={{ fontSize: "x-large", fontStyle: "italic", fontFamily: "'Lobster', cursive" }}>{post.Title}</h5>
-              </div>
-              <div className="tags">
-                <span className={`badge ${ss.customBadge} ms-1`}>{post.tags}</span>
-              </div>
-              <div className="card-body">
-                <p className="card-text">{post.text}</p>
-                {post.images && <img src={post.images} className="card-img-top" alt="" />}
-                <div className="mt-2">
-                  <span className={`badge ${ss.customBadge}`}>{post.num_comments} comments</span>
-                </div>
-                <div className="mt-3">
-                  {comments.map((com) => (
-                    <div key={com._id} className={ss.commentCard}>
-                      <span className={ss.commentUsername}>{com.username}</span>
-                      <p className={ss.commentText}>{com.text}</p>
-                    </div>
-                  ))}
-                </div>
-                {showCommentForm ? (
-                  <div className="mt-3">
-                    <textarea
-                      value={text}
-                      onChange={(e) => setText(e.target.value)}
-                      className={`form-control ${ss.formControl} mb-2`}
-                      placeholder="Write your comment..."
-                    ></textarea>
-                    <button onClick={handleNewCommentSubmit} className={`btn ${ss.btnPrimary}`}>
-                      Submit
-                    </button>
-                  </div>
-                ) : (
-                  <button onClick={() => setShowCommentForm(true)} className={`btn ${ss.btnPrimary} mt-2`}>
-                    Add New Comment
-                  </button>
-                )}
-              </div>
+  <div className="container-fluid mt-5">
+    <div className="row justify-content-center">
+      <div className="col-lg-10">
+        <div key={post._id} className="card rounded-4 mb-3" style={{
+          backgroundColor: '#b02c54', // Black background
+          border: '1px solid #b02c54', // Coral border
+          borderRadius: '16px',
+          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+          transition: 'transform 0.2s, background-color 0.2s'
+        }}>
+          <div className="card-header" style={{
+            backgroundColor: 'black',
+            color: '#e6e6e4',
+            borderTopLeftRadius: '16px',
+            borderTopRightRadius: '16px'
+          }}>
+            <p className="card-subtitle" style={{ fontSize: "medium" }}>{"u/" + post.username}</p>
+            <h5 className="card-title" style={{ fontSize: "large" }}>{post.Title}</h5>
+          </div>
+          <div className="tags">
+            <span className={`badge ${ss.customBadge} ms-1`}>{post.tags}</span>
+          </div>
+          <div className="card-body">
+            <p className="card-text">{post.text}</p>
+            {post.images && <img src={post.images} className="card-img-top" alt="" />}
+            <div className="mt-2">
+              <span className={`badge ${ss.customBadge}`}>{post.num_comments} comments</span>
             </div>
+            <div className="mt-3">
+              {comments.map((com) => (
+                <div key={com._id} className={ss.commentCard}>
+                  <span className={ss.commentUsername}>{com.username}</span>
+                  <p className={ss.commentText}>{com.text}</p>
+                </div>
+              ))}
+            </div>
+            {showCommentForm ? (
+              <div className="mt-3">
+                <textarea
+                  value={text}
+                  onChange={(e) => setText(e.target.value)}
+                  className={`form-control ${ss.formControl} mb-2`}
+                  placeholder="Write your comment..."
+                ></textarea>
+                <button onClick={handleNewCommentSubmit} className={`btn ${ss.btnPrimary}`}>
+                  Submit
+                </button>
+              </div>
+            ) : (
+              <button onClick={() => setShowCommentForm(true)} className={`btn ${ss.btnPrimary} mt-2`}>
+                Add New Comment
+              </button>
+            )}
           </div>
         </div>
       </div>
-    </Layout>
+    </div>
+  </div>
+</Layout>
+
   );
 };
 

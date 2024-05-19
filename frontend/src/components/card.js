@@ -50,80 +50,82 @@ export const Card = () => {
 
   return (
     <div className="container-fluid" style={{ marginTop: "80px" }}>
-      <div className="row">
-        <div className="col-lg-3">
-          <Sidebar id={userId} /> {/* Assume Sidebar contains tag elements */}
-        </div>
-        <div className="col-lg-6">
-          <div className="container mt-5">
-            <div className="row">
-              <div className="col-12 mb-3">
-                <h3 style={{ fontFamily: "'Lobster', cursive", fontStyle: "italic", color: "#035b69" }}>
-                {greeting}, {user ? user.username : 'User'}!
-                </h3>
-              </div>
-              {posts.map((post) => (
-                <div key={post._id} className="col-12 mb-3">
-                  <div className="card rounded-4" style={cardcolor}>
-                    <div className="card-header" style={{
-                      backgroundColor: '#035b69',
-                      borderTopLeftRadius: '16px',
-                      borderTopRightRadius: '16px',
-                      color: '#1e90ff',
-                      fontWeight: 'bold'
-                    }}>
-                      <Link to={`/group/${userId}/${post.group}`} style={text_decor}>
-                        <p className="card-subtitle" style={{ color: "#8ee5ee", fontSize: "large", fontFamily: "'Roboto', sans-serif" }}>
-                          {"r/" + post.group}
-                        </p>
-                      </Link>
-                      <p className="card-subtitle" style={{ color: "#e6e6e4", fontSize: "small", fontFamily: "'Roboto', sans-serif" }}>
-                        {"u/" + post.username}
-                      </p>
-                      <h5 className="card-title" style={{ color: "#e6e6e4", fontSize: "x-large", fontStyle: "italic", fontFamily: "'Lobster', cursive" }}>
-                        {post.Title}
-                      </h5>
-                    </div>
-
-                    <Link to={`/tags/${userId}/${post.tags}/${post.group}`} style={text_decor}>
-                      <div className="tags">
-                        <span className="badge badge-dark ms-1" style={{
-                          background: 'linear-gradient(45deg, #1e90ff, #00bfff)',
-                          color: 'white',
-                          borderRadius: '12px',
-                          padding: '5px 15px'
-                        }}>
-                          {post.tags}
-                        </span>
-                      </div>
-                    </Link>
-                    <Link to={`/post/${userId}/${post._id}`} style={{ color: "inherit", textDecoration: "none" }}>
-                      <div className="card-body" style={{ backgroundColor: '#b0e0e6', borderRadius: '0 0 16px 16px' }}>
-                        <span>
-                          <p className="card-text">{post.text}</p>
-                        </span>
-                        {post.images && <img src={`http://localhost:4000${post.images}`} className="card-img-top" alt="Post image" />}
-                        <span className="badge badge-dark ms-1" style={{
-                          background: 'linear-gradient(45deg, #1e90ff, #00bfff)',
-                          color: 'white',
-                          borderRadius: '12px',
-                          padding: '5px 15px'
-                        }}>
-                          {post.num_comments} comments
-                        </span>
-                      </div>
-                    </Link>
-                  </div>
-                </div>
-              ))}
-            </div>
+  <div className="row">
+    <div className="col-lg-3">
+      <Sidebar id={userId} /> {/* Assume Sidebar contains tag elements */}
+    </div>
+    <div className="col-lg-6">
+      <div className="container mt-5">
+        <div className="row">
+          <div className="col-12 mb-3">
+            <h3 style={{  color: "#b02c54" }}>
+              {greeting}, {user ? user.username : 'User'}!
+            </h3>
           </div>
-        </div>
-        <div className="col-lg-3">
-          <CommunitySidebar id={userId} className="community-sidebar" /> {/* Assume CommunitySidebar contains tag elements */}
+          {posts.map((post) => (
+            <div key={post._id} className="col-12 mb-3">
+              <div className="card rounded-4" style={{ backgroundColor: "#333" }}>
+                <div className="card-header" style={{
+                  backgroundColor: '#b02c54',
+                  borderTopLeftRadius: '16px',
+                  borderTopRightRadius: '16px',
+                  color: '#fff',
+                  fontWeight: 'bold'
+                }}>
+                  <Link to={`/group/${userId}/${post.group}`} style={{ color: 'inherit', textDecoration: 'none' }}>
+                    <p className="card-subtitle" style={{ color: "#fff", fontSize: "large", fontFamily: "'Roboto', sans-serif" }}>
+                      {"r/" + post.group}
+                    </p>
+                  </Link>
+                  <p className="card-subtitle" style={{ color: "#ddd", fontSize: "small", fontFamily: "'Roboto', sans-serif" }}>
+                    {"u/" + post.username}
+                  </p>
+                  <h5 className="card-title" style={{ color: "#fff", fontSize: "large", fontFamily: "'Roboto'" }}>
+                    {post.Title}
+                  </h5>
+                </div>
+
+                <Link to={`/tags/${userId}/${post.tags}/${post.group}`} style={{ color: 'inherit', textDecoration: 'none' }}>
+                  <div className="tags">
+                    <span className="badge badge-dark ms-1" style={{
+                      background: '#b02c54',
+                      color: 'white',
+                      borderRadius: '12px',
+                      padding: '5px 15px'
+                    }}>
+                      {post.tags}
+                    </span>
+                  </div>
+                </Link>
+                <Link to={`/post/${userId}/${post._id}`} style={{ color: "inherit", textDecoration: "none" }}>
+                  <div className="card-body" style={{ backgroundColor: '#444', borderRadius: '0 0 16px 16px' }}>
+                    <span>
+                      <p className="card-text" style={{ color: "#fff" }}>{post.text}</p>
+                    </span>
+                    {post.images && <img src={`http://localhost:4000${post.images}`} className="card-img-top" alt="Post image" />}
+                    <span className="badge badge-dark ms-1" style={{
+                      background: '#b02c54',
+                      color: 'white',
+                      borderRadius: '12px',
+                      padding: '5px 15px'
+                    }}>
+                      {post.num_comments} comments
+                    </span>
+                  </div>
+                </Link>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
+    <div className="col-lg-3">
+      <CommunitySidebar id={userId} className="community-sidebar" /> {/* Assume CommunitySidebar contains tag elements */}
+    </div>
+  </div>
+</div>
+
+
   );
 };
 
@@ -389,3 +391,83 @@ export default Card;
 // // };
 
 // // export default Card;
+
+
+/////
+      //  hamza wala
+
+/*<div className="container-fluid" style={{ marginTop: "80px" }}>
+      <div className="row">
+        <div className="col-lg-3">
+          <Sidebar id={userId} /> {/* Assume Sidebar contains tag elements }
+          </div>
+          <div className="col-lg-6">
+            <div className="container mt-5">
+              <div className="row">
+                <div className="col-12 mb-3">
+                  <h3 style={{ fontFamily: "'Lobster', cursive", fontStyle: "italic", color: "#035b69" }}>
+                  {greeting}, {user ? user.username : 'User'}!
+                  </h3>
+                </div>
+                {posts.map((post) => (
+                  <div key={post._id} className="col-12 mb-3">
+                    <div className="card rounded-4" style={cardcolor}>
+                      <div className="card-header" style={{
+                        backgroundColor: '#035b69',
+                        borderTopLeftRadius: '16px',
+                        borderTopRightRadius: '16px',
+                        color: '#1e90ff',
+                        fontWeight: 'bold'
+                      }}>
+                        <Link to={`/group/${userId}/${post.group}`} style={text_decor}>
+                          <p className="card-subtitle" style={{ color: "#8ee5ee", fontSize: "large", fontFamily: "'Roboto', sans-serif" }}>
+                            {"r/" + post.group}
+                          </p>
+                        </Link>
+                        <p className="card-subtitle" style={{ color: "#e6e6e4", fontSize: "small", fontFamily: "'Roboto', sans-serif" }}>
+                          {"u/" + post.username}
+                        </p>
+                        <h5 className="card-title" style={{ color: "#e6e6e4", fontSize: "x-large", fontStyle: "italic", fontFamily: "'Lobster', cursive" }}>
+                          {post.Title}
+                        </h5>
+                      </div>
+  
+                      <Link to={`/tags/${userId}/${post.tags}/${post.group}`} style={text_decor}>
+                        <div className="tags">
+                          <span className="badge badge-dark ms-1" style={{
+                            background: 'linear-gradient(45deg, #1e90ff, #00bfff)',
+                            color: 'white',
+                            borderRadius: '12px',
+                            padding: '5px 15px'
+                          }}>
+                            {post.tags}
+                          </span>
+                        </div>
+                      </Link>
+                      <Link to={`/post/${userId}/${post._id}`} style={{ color: "inherit", textDecoration: "none" }}>
+                        <div className="card-body" style={{ backgroundColor: '#b0e0e6', borderRadius: '0 0 16px 16px' }}>
+                          <span>
+                            <p className="card-text">{post.text}</p>
+                          </span>
+                          {post.images && <img src={`http://localhost:4000${post.images}`} className="card-img-top" alt="Post image" />}
+                          <span className="badge badge-dark ms-1" style={{
+                            background: 'linear-gradient(45deg, #1e90ff, #00bfff)',
+                            color: 'white',
+                            borderRadius: '12px',
+                            padding: '5px 15px'
+                          }}>
+                            {post.num_comments} comments
+                          </span>
+                        </div>
+                      </Link>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div className="col-lg-3">
+            <CommunitySidebar id={userId} className="community-sidebar" /> {/* Assume CommunitySidebar contains tag elements }
+          </div>
+        </div>
+      </div>*/

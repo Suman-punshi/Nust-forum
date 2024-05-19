@@ -1,46 +1,33 @@
 .commentCard {
-  background-color: #e0f7ff;
-  border: 1px solid #1e90ff;
+  background-color: #ffe0f0; /* Light pink background */
+  border: 1px solid #333; /* Black border */
   border-radius: 16px;
   margin-bottom: 15px;
   padding: 20px;
-  max-width: 800px; /* Set a max-width to keep it manageable on larger screens */
+  max-width: 800px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s, background-color 0.2s;
 }
 
-.commentCard1 {
-  background-color: #e0f7ff;
-  border: 1px solid #1e90ff;
-  border-radius: 16px;
-  margin-bottom: 15px;
-  padding: 20px;
-  max-width: 800px; /* Set a max-width to keep it manageable on larger screens */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s, background-color 0.2s;
-}
-
-.commentCard:hover, .commentCard1:hover {
+.commentCard:hover {
   transform: scale(1.02);
-  background-color: #b0e0e6;
-  position: relative; /* Make sure the element doesn't affect others */
-  z-index: 1; /* Raise above other content */
+  background-color: #fcd3e3; /* Lighter pink on hover */
 }
 
 .commentUsername {
-  color: #1e90ff;
+  color: #333; /* Black username */
   font-weight: bold;
   font-size: 1.2em;
 }
 
 .commentText {
-  color: #333;
+  color: #666; /* Dark grey text color */
   margin-top: 10px;
   font-size: 1em;
 }
 
 .customBadge {
-  background: linear-gradient(45deg, #1e90ff, #00bfff);
+  background: linear-gradient(45deg, #ff69b4, #ff1493); /* Pink gradient for badge */
   color: white;
   border-radius: 12px;
   padding: 5px 15px;
@@ -48,7 +35,7 @@
 
 .cardHeader .card-subtitle {
   font-size: 0.9em;
-  color: #063778;
+  color: #333; /* Black subtitle */
 }
 
 .cardBody img {
@@ -62,22 +49,19 @@
 .formControl {
   border-radius: 12px;
   padding: 12px;
-  background-color: #e6f7ff;
-  border: 1px solid #b0e0e6;
+  background-color: #fff; /* White background for form control */
+  border: 1px solid #333; /* Black border */
 }
 
-/* Ensure buttons are accessible in terms of color contrast */
 .btnPrimary {
-  background: linear-gradient(45deg, #1e90ff, #4682b4);
-  color: white; /* Check contrast ratio */
+  background: linear-gradient(45deg, #ff69b4, #ff1493); /* Pink gradient for button */
+  color: white;
   transition: background-color 0.2s, box-shadow 0.2s;
 }
 
-
-
 .btnPrimary:hover {
-  background: linear-gradient(45deg, #1c86ee, #4169e1);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Add subtle shadow on hover */
+  background: linear-gradient(45deg, #ff1493, #ff69b4); /* Lighter pink gradient on hover */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .loadingSpinner {
@@ -93,7 +77,7 @@
 }
 
 .cardContainer {
-  background-color: #f0f8ff;
+  background-color: #f0f8ff; /* Light blue background */
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -109,21 +93,15 @@
 }
 
 .card {
-  padding: 30px; /* Increased padding */
-  
+  padding: 30px;
 }
 
 .card-header, .card-body {
-  margin-bottom: 20px; /* Adjust spacing between elements */
+  margin-bottom: 20px;
 }
 
-/* Use media queries for responsive font sizes */
 @media (max-width: 768px) {
   .commentUsername {
-    font-size: 1em; /* Smaller font size on smaller screens */
+    font-size: 1em;
   }
 }
-
-
-
-
