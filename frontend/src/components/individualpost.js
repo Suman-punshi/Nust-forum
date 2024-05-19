@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import Layout from "./Layout";
 import ss from '../components/modules/indiv_posts.module.css';
 import { authContext } from "../context/AuthContext";
 import { Dropdown } from 'react-bootstrap';
+import CommunitySidebar from "./community";
 
 const IndividualPost = () => {
   const { postId, userId } = useParams();
@@ -35,27 +36,23 @@ const IndividualPost = () => {
 
   const handleNewCommentSubmit = async () => {
     try {
-      let response;
-      if (editingCommentId) {
-        response = await axios.put(
-          `http://localhost:4000/api/comment/${postId}/${editingCommentId}`,
-          { text }
-        );
-        setComments(comments.map((com) => (com._id === editingCommentId ? response.data : com)));
-      } else {
-        response = await axios.post(
-          `http://localhost:4000/comment/${userId}/${postId}`,
-          { text }
-        );
-        setComments([...comments, response.data]);
+      if (text.trim() === "") {
+        return; // Prevent submitting empty comments
       }
+      const response = await axios.post(
+        `http://localhost:4000/comment/${userId}/${postId}`,
+        { text, username: user.username } // Include username if it's not automatically added by the backend
+      );
       setText("");
       setShowCommentForm(false);
-      setEditingCommentId(null);
+      // Refresh the page to reflect the new comment
+      window.location.reload();
     } catch (error) {
       console.error("Error submitting comment:", error);
     }
   };
+  
+  
 
   const handleEditComment = (comment) => {
     setText(comment.text);
@@ -95,14 +92,12 @@ const IndividualPost = () => {
       const response = await axios.delete(`http://localhost:4000/posts/${userId}/${postId}`);
       console.log(response.data); // This will log the successful deletion message
       setAlertMessage("Post deleted successfully!");
-     
       window.location.href = `/cards/${userId}`; 
     } catch (error) {
       console.error("Error deleting post:", error);
       setAlertMessage("Failed to delete post.");
     }
   };
-  
 
   const handleEditSubmit = async () => {
     try {
@@ -121,19 +116,6 @@ const IndividualPost = () => {
     }
   };
 
- /* useEffect(() => {
-    if (alertMessage) {
-      // Automatically hide the alert after 3 seconds
-      const timer = setTimeout(() => {
-        setAlertMessage(null);
-        window.location.reload(); // Reload the page
-      }, 3000);
-
-      // Cleanup the timer if the component unmounts before the timer ends
-      return () => clearTimeout(timer);
-    }
-  }, [alertMessage]);*/
-
   if (!post) {
     return (
       <div className={ss.loadingSpinner}>
@@ -147,7 +129,7 @@ const IndividualPost = () => {
   return (
     <Layout>
       <div className="container-fluid mt-5">
-        <div className="row justify-content-center">
+        <div className="row justify-content-center" style={{marginTop: '80px'}}>
           <div className="col-lg-10">
             {alertMessage && (
               <div className={`alert ${alertMessage.includes("successfully") ? "alert-success" : "alert-danger"}`} role="alert">
@@ -168,7 +150,12 @@ const IndividualPost = () => {
                 borderTopRightRadius: '16px'
               }}>
                 <div>
-                  <p className="card-subtitle" style={{ fontSize: "medium" }}>{"u/" + post.username}</p>
+                <Link to={`/group/${userId}/${post.group}`} style={{ color: '#FFFFFF', textDecoration: 'none' }}>
+                    <p className="card-subtitle" style={{ color: "#8ee5ee", fontSize: "large", fontFamily: "'Roboto', sans-serif" }}>
+                      {"r/" + post.group}
+                    </p>
+                  </Link>
+                  <Link to = {`/profile/${post.username}`} className="card-subtitle" style={{ fontSize: "medium", textDecoration: 'none' }}>{"u/" + post.username}</Link>
                   <h5 className="card-title" style={{ fontSize: "x-large", fontStyle: "italic", fontFamily: "'Lobster', cursive" }}>{post.Title}</h5>
                 </div>
                 {user && user.username === post.username && (
@@ -223,7 +210,7 @@ const IndividualPost = () => {
                     <div className="mt-3">
                       {comments.map((com) => (
                         <div key={com._id} className={ss.commentCard}>
-                          <span className={ss.commentUsername}>{com.username}</span>
+                          <Link to={`/profile/${com.username}`} className={ss.commentUsername}>{com.username}</Link>
                           <p className={ss.commentText}>{com.text}</p>
                           {user && user.username === com.username && (
                           <span className="d-flex justify-content-end" style={{ gap: "5px" }}>
@@ -259,8 +246,12 @@ const IndividualPost = () => {
                 )}
               </div>
             </div>
+            <div className="col-lg-3">
+            <CommunitySidebar id={userId} />
+          </div>
           </div>
         </div>
+      ``
       </div>
     </Layout>
   );

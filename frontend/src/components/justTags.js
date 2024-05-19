@@ -10,7 +10,7 @@ import CommunitySidebar from './community';
 
 const JustTagPosts = () => {
   const { userId, tag_name } = useParams(); // Destructure all parameters
-  const cardcolor = { backgroundColor: "#EEF7FF" };
+  const cardcolor = { backgroundColor: "#8aa7bf" };
   const [tagPosts, setTagPosts] = useState([]);
 
   useEffect(() => {
@@ -36,10 +36,11 @@ const JustTagPosts = () => {
             <div className="w-100">
               {tagPosts.map(post => (
                 <div key={post._id} className="card w-100 rounded-4 mb-3" style={cardcolor}>
-                  <div className="card-header">
+                  <div className="card-header" style={{ background: 'linear-gradient(to bottom, #1a1a2e, #16213e)', borderTopLeftRadius: '16px', borderTopRightRadius: '16px', color: '#FFFFFF', fontWeight: 'bold' }}>
                     <p className="card-subtitle text-muted">{post.username}</p>
                     <h5 className="card-title">{post.Title}</h5>
                   </div>
+                  <Link to={`/post/${userId}/${post._id}`} style={{ color: "inherit", textDecoration: "none" }}>
                   <div className="card-body">
                     <p className="card-text">{post.text}</p>
                     {post.images && <img src={post.images} className="card-img-top" alt="" />}
@@ -47,6 +48,7 @@ const JustTagPosts = () => {
                       {post.num_comments} comments
                     </span>
                   </div>
+                  </Link>
                 </div>
               ))}
             </div>
