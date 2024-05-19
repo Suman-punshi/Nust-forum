@@ -1,6 +1,6 @@
 .commentCard {
-  background-color: #e0f7ff;
-  border: 1px solid #1e90ff;
+  background-color: #b0c4de; /* Darker shade of blue */
+  border: 1px solid #4169e1; /* Darker shade of blue */
   border-radius: 16px;
   margin-bottom: 15px;
   padding: 20px;
@@ -10,8 +10,8 @@
 }
 
 .commentCard1 {
-  background-color: #e0f7ff;
-  border: 1px solid #1e90ff;
+  background-color: #b0c4de; /* Darker shade of blue */
+  border: 1px solid #4169e1; /* Darker shade of blue */
   border-radius: 16px;
   margin-bottom: 15px;
   padding: 20px;
@@ -22,10 +22,13 @@
 
 .commentCard:hover, .commentCard1:hover {
   transform: scale(1.02);
-  background-color: #b0e0e6;
+  background-color: #6495ed; /* Darker shade of blue on hover */
   position: relative; /* Make sure the element doesn't affect others */
   z-index: 1; /* Raise above other content */
 }
+
+/* Other styles remain the same */
+
 
 .commentUsername {
   color: #1e90ff;
