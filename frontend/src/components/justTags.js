@@ -27,8 +27,8 @@ const JustTagPosts = () => {
 
   return (
     <Layout>
-      <div className="w-75 container d-flex justify-content-left mt-5">
-        <div className="row">
+      <div className="d-flex justify-content-center mt-5" style = {{overflowX : 'hidden', left : '0'}}>
+        <div className="row" style = {{overflowX : 'hidden'}}>
         <div className="col-lg-3">
             <Sidebar id={userId} />
         </div>

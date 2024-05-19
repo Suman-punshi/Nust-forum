@@ -16,9 +16,6 @@ const storage = multer.diskStorage({
     }
 });
 
-// Rest of the code remains the same...
-
-
 const upload = multer({ 
     storage: storage,
     fileFilter: function (req, file, cb) {
@@ -36,7 +33,6 @@ const upload = multer({
 
 const uploadAsync = promisify(upload);
 
-// createPost.js
 exports.addpost = async (req, res) => {
     try {
       console.log("Inside addpost");
@@ -50,25 +46,24 @@ exports.addpost = async (req, res) => {
   
       console.log(`Received request to add post by user: ${c_user.username}`);
   
-      // Upload image
+      // Attempt to upload image
       await uploadAsync(req, res);
-  
-      if (!req.file) {
-        return res.status(400).json({ error: 'No image uploaded' });
-      }
-  
+
       const { Title, text, tags } = req.body;
-      const image = `/uploads/${req.file.filename}`; // Save relative path
-  
-      const newPost = new posts({
+      const newPostData = {
         username: c_user.username,
         Title,
         text,
-        images: image, // Save relative path
         tags,
         group
-      });
+      };
+
+      // Add image path if image was uploaded
+      if (req.file) {
+        newPostData.images = `/uploads/${req.file.filename}`;
+      }
   
+      const newPost = new posts(newPostData);
       await newPost.save();
       console.log('Post created successfully');
       res.json('Post added!');
@@ -80,5 +75,4 @@ exports.addpost = async (req, res) => {
         res.status(500).json({ error: 'An error occurred while creating the post' });
       }
     }
-  };
-  
+};
