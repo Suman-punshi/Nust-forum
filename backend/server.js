@@ -13,7 +13,7 @@ const com = require('./routes/group_r_c');
 const jg = require('./routes/joinGroup');
 const path = require('path'); // Import the path module
 const postsRouter = require('./routes/posts');
-
+const commentRoutes = require('./routes/comment');
 
 const app = express();
 
@@ -48,7 +48,7 @@ db.once('open', () => {
     app.use('/communities', com);
     app.use('/join-group', jg);
     app.use('/posts', postsRouter);
-    
+    app.use('/api', commentRoutes);
    
     
 
