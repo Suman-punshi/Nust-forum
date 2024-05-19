@@ -21,7 +21,7 @@ const Sidebar = (props) => {
   return (
     <div className="sidebar-container" style={{marginTop: "80px"}}>
       <div className="sidebar" style={{ 
-        background: 'linear-gradient(to bottom, #f0f8ff, #c0d9e1)', // Ice blue gradient background
+        background: '#7AB2B2', 
         padding: '20px', 
         position: 'fixed', 
         left: '0', 

@@ -66,7 +66,7 @@ export const Card = () => {
                 <div key={post._id} className="col-12 mb-3">
                   <div className="card rounded-4" style={cardcolor}>
                     <div className="card-header" style={{
-                      backgroundColor: '#e0f7ff',
+                      backgroundColor: '#CDE8E5',
                       borderTopLeftRadius: '16px',
                       borderTopRightRadius: '16px',
                       color: '#1e90ff',

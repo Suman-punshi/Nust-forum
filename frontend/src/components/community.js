@@ -42,22 +42,22 @@ const CommunitySidebar = (props) => {
 
   return (
     <div className="community-sidebar" style={{
-      background: 'linear-gradient(114.9deg, rgb(34, 34, 34) 8.3%, rgb(0, 40, 60) 41.6%, rgb(0, 143, 213) 93.4%)',
-      color: '#FFFFFF',
+      background: '#7AB2B2',
+      color: '#034752',
       width: '300px',
-      marginRight: '20px',
+      marginRight: '0',
       padding: '20px',
       fontSize: '1.2rem',
       fontFamily: 'Arial, sans-serif',
       position: 'fixed',
       right: '0',
-      top: '80px',
+      top: '50px',
       bottom: '0',
       overflowY: 'auto',
       boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Add shadow effect
       transition: 'box-shadow 0.3s ease-in-out' // Smooth transition for shadow
     }}>
-      <h2 style={{ borderBottom: '2px solid white', paddingBottom: '10px', color: 'white' }}>Communities</h2>
+      <h2 style={{ borderBottom: '2px solid white', paddingBottom: '10px', color: '#034752' }}>Communities</h2>
       <ul style={{ listStyleType: 'none', padding: '0' }}>
         {communities.map((community) => (
           <li key={community._id} style={{ marginBottom: '10px' }}>
@@ -80,19 +80,21 @@ const CommunitySidebar = (props) => {
                       <li style={{
                         padding: '5px',
                         fontSize: '0.9rem', // Smaller font size for dropdown items
-                        backgroundColor: 'rgba(255, 255, 255, 0.1)', // Subtle background
-                        transition: 'background-color 0.2s, color 0.2s, box-shadow 0.2s ease-in-out',
+                        backgroundColor: '#034752', // Subtle background
+                        borderRadius: '10px',
+                        textAlign: 'center',
+                        // transition: 'background-color 0.2s, color 0.2s, box-shadow 0.2s ease-in-out',
                         cursor: 'pointer',
                       }}
                       onMouseOver={({ target }) => {
-                        target.style.backgroundColor = 'rgba(255, 255, 255, 0.3)'; // More visible background on hover
-                        target.style.color = 'black'; // Change font color to black on hover
-                        target.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)'; // Add shadow on hover
+                        target.style.backgroundColor = '#036b79'; // Darker on hover
+                target.style.transform = 'scale(1.05)'; // Grow in size on hover
+                target.style.boxShadow = '0 6px 12px rgba(0, 0, 0, 0.15)'; // Larger shadow on hover
                       }}
                       onMouseOut={({ target }) => {
-                        target.style.backgroundColor = 'rgba(255, 255, 255, 0.1)'; // Return to normal background
-                        target.style.color = 'white'; // Return to normal text color
-                        target.style.boxShadow = 'none'; // Remove shadow on hover out
+                        target.style.backgroundColor = '#035b69'; // Return to normal
+                target.style.transform = 'scale(1)'; // Return to normal size
+                target.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)'; // Return to normal shadow
                       }}
                       >
                         {group.name}
