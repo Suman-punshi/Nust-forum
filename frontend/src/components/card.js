@@ -64,31 +64,31 @@ export const Card = () => {
           </div>
           {posts.map((post) => (
             <div key={post._id} className="col-12 mb-3">
-              <div className="card rounded-4" style={{ backgroundColor: "#333" }}>
+              <div className="card rounded-4" style={{ backgroundColor: "#DBE2EF" }}>
                 <div className="card-header" style={{
-                  backgroundColor: '#b02c54',
+                  backgroundColor: '#DBE2EF',
                   borderTopLeftRadius: '16px',
                   borderTopRightRadius: '16px',
-                  color: '#fff',
+                  color: '#112D4E',
                   fontWeight: 'bold'
                 }}>
                   <Link to={`/group/${userId}/${post.group}`} style={{ color: 'inherit', textDecoration: 'none' }}>
-                    <p className="card-subtitle" style={{ color: "#fff", fontSize: "large", fontFamily: "'Roboto', sans-serif" }}>
+                    <p className="card-subtitle" style={{ color: "#112D4E", fontSize: "large", fontFamily: "'Roboto', sans-serif" }}>
                       {"r/" + post.group}
                     </p>
                   </Link>
-                  <p className="card-subtitle" style={{ color: "#ddd", fontSize: "small", fontFamily: "'Roboto', sans-serif" }}>
+                  <p className="card-subtitle" style={{ color: "#112D4E", fontSize: "small", fontFamily: "'Roboto', sans-serif" }}>
                     {"u/" + post.username}
                   </p>
-                  <h5 className="card-title" style={{ color: "#fff", fontSize: "large", fontFamily: "'Roboto'" }}>
+                  <h5 className="card-title" style={{ color: "#112D4E", fontSize: "large", fontFamily: "'Roboto'" }}>
                     {post.Title}
                   </h5>
                 </div>
 
                 <Link to={`/tags/${userId}/${post.tags}/${post.group}`} style={{ color: 'inherit', textDecoration: 'none' }}>
-                  <div className="tags">
+                  <div className="tags" style = {{background: "#DBE2EF"}}>
                     <span className="badge badge-dark ms-1" style={{
-                      background: '#b02c54',
+                      background: '#112D4E',
                       color: 'white',
                       borderRadius: '12px',
                       padding: '5px 15px'
@@ -98,9 +98,9 @@ export const Card = () => {
                   </div>
                 </Link>
                 <Link to={`/post/${userId}/${post._id}`} style={{ color: "inherit", textDecoration: "none" }}>
-                  <div className="card-body" style={{ backgroundColor: '#444', borderRadius: '0 0 16px 16px' }}>
+                  <div className="card-body" style={{ backgroundColor: '#DBE2EF', borderRadius: '0 0 16px 16px' }}>
                     <span>
-                      <p className="card-text" style={{ color: "#fff" }}>{post.text}</p>
+                      <p className="card-text" style={{ color: "#112D4E" }}>{post.text}</p>
                     </span>
                     {post.images && <img src={`http://localhost:4000${post.images}`} className="card-img-top" alt="Post image" />}
                     <span className="badge badge-dark ms-1" style={{

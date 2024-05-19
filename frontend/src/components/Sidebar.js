@@ -21,7 +21,7 @@ const Sidebar = (props) => {
   return (
     <div className="sidebar-container" style={{ marginTop: "80px" }}>
   <div className="sidebar" style={{ 
-    background: '#b02c54', // Ice blue gradient background
+    background: '#3F72AF', // Ice blue gradient background
     padding: '20px', 
     position: 'fixed', 
     left: '0', 
@@ -41,8 +41,8 @@ const Sidebar = (props) => {
           <li className="list-group-item tag-item" style={{
             marginBottom: '10px',
             borderRadius: '10px',
-            background: '#333', // Black background color
-            color: '#fff',
+            background: '#DBE2EF', // Black background color
+            color: '#3F72AF',
             padding: '10px',
             transition: 'all 0.3s ease-in-out',
             cursor: 'pointer',

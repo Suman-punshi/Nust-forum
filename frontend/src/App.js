@@ -18,7 +18,7 @@ function App() {
 
   return (
     <Router>
-  <div className="container" style={{ backgroundColor: 'black' }}>
+  <div className="container">
     <Navbar />
     {/* <Sidebar/> */}
     
