@@ -1,0 +1,38 @@
+/* Responsive.css */
+
+/* Media query for tablet */
+@media (max-width: 992px) {
+    .navbar-sidebar-dropdown {
+      display: none;
+    }
+  }
+  
+  /* Media query for mobile */
+  @media (max-width: 768px) {
+    .navbar-nav {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .navbar-nav li {
+      margin-bottom: 10px;
+    }
+  
+    .dropdown-menu.sidebar-dropdown {
+      position: absolute;
+      background-color: #343a40;
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  
+    .dropdown-menu.sidebar-dropdown button {
+      width: 100%;
+      text-align: left;
+      color: #ffffff;
+      border: none;
+      background-color: transparent;
+      padding: 5px 0;
+    }
+  }
+  
