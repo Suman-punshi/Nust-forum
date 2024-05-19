@@ -64,7 +64,7 @@ export const Card = () => {
           </div>
           {posts.map((post) => (
             <div key={post._id} className="col-12 mb-3">
-              <div className="card rounded-4" style={{ backgroundColor: 'white', boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)' }}>
+              <div className="card rounded-4" style={{ backgroundColor: '#8aa7bf', boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)' }}>
                 <div className="card-header" style={{ background: 'linear-gradient(to bottom, #1a1a2e, #16213e)', borderTopLeftRadius: '16px', borderTopRightRadius: '16px', color: '#FFFFFF', fontWeight: 'bold' }}>
                   <Link to={`/group/${userId}/${post.group}`} style={{ color: '#FFFFFF', textDecoration: 'none' }}>
                     <p className="card-subtitle" style={{ color: "#8ee5ee", fontSize: "large", fontFamily: "'Roboto', sans-serif" }}>
@@ -87,7 +87,7 @@ export const Card = () => {
                   </div>
                 </Link>
                 <Link to={`/post/${userId}/${post._id}`} style={{ color: "inherit", textDecoration: "none" }}>
-                  <div className="card-body" style={{ backgroundColor: '#8aa7bf', borderRadius: '0 0 16px 16px' }}>
+                  <div className="card-body" style={{ backgroundColor: 'white', borderRadius: '0 0 16px 16px' }}>
                     <span>
                       <p className="card-text">{post.text}</p>
                     </span>
