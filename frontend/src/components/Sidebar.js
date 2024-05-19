@@ -26,7 +26,7 @@ const Sidebar = (props) => {
   <div
     className="sidebar"
     style={{
-      backgroundColor: "#a5b8cf", // White background for the sidebar
+      backgroundColor: "white", // White background for the sidebar
       padding: "20px",
       position: "fixed",
       left: "0",
