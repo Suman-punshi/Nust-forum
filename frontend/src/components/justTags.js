@@ -31,7 +31,7 @@ const JustTagPosts = () => {
         <div className="row">
         <div className="col-lg-3">
             <Sidebar id={userId} />
-          </div>
+        </div>
           <div className="col-12">
             <div className="w-100">
               {tagPosts.map(post => (
