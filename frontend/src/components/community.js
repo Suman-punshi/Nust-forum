@@ -7,7 +7,6 @@ const CommunitySidebar = (props) => {
   const [communities, setCommunities] = useState([]);
   const [groups, setGroups] = useState({});
   const [selectedCommunity, setSelectedCommunity] = useState(null);
-  const [showSidebar, setShowSidebar] = useState(false);
 
   useEffect(() => {
     const fetchCommunities = async () => {
@@ -41,81 +40,77 @@ const CommunitySidebar = (props) => {
     }
   };
 
-  const toggleSidebar = () => setShowSidebar(!showSidebar);
-
   return (
-    <div className="community-sidebar-container" style={{ marginTop: "80px" }}>
-      <div className={`community-sidebar ${showSidebar ? 'show' : ''}`} style={{
-        background: 'linear-gradient(to bottom, #1a1a2e, #16213e)',
-        color: '#034752',
-        width: '300px',
-        marginRight: '0',
-        padding: '20px',
-        fontSize: '1.2rem',
-        fontFamily: 'Arial, sans-serif',
-        position: 'fixed',
-        right: '0',
-        top: '50px',
-        bottom: '0',
-        overflowY: 'auto',
-        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Add shadow effect
-        transition: 'box-shadow 0.3s ease-in-out' // Smooth transition for shadow
-      }}>
-        <h2 style={{ borderBottom: '2px solid white', paddingBottom: '10px', color: '#034752' }}>Communities</h2>
-        <ul style={{ listStyleType: 'none', padding: '0' }}>
-          {communities.map((community) => (
-            <li key={community._id} style={{ marginBottom: '10px' }}>
-              <button style={{
-                backgroundColor: 'transparent',
-                border: 'none',
-                color: 'inherit',
-                fontSize: '1.1rem',
-                cursor: 'pointer',
-                width: '100%',
-                textAlign: 'left'
-              }} onClick={() => handleCommunityClick(community._id)}>
-                {community.community_name}
-              </button>
-              {selectedCommunity === community._id && (
-                <ul style={{ marginTop: '10px' }}>
-                  {groups[community._id] ? (
-                    groups[community._id].map((group) => (
-                      <Link to={`/group/${props.id}/${group.name}`} style={text_decor} key={group._id}>
-                        <li style={{
-                          padding: '5px',
-                          fontSize: '0.9rem', // Smaller font size for dropdown items
-                          backgroundColor: '#034752', // Subtle background
-                          borderRadius: '10px',
-                          textAlign: 'center',
-                          cursor: 'pointer',
-                          transition: 'all 0.3s ease-in-out'
-                        }}
-                          onMouseOver={({ target }) => {
-                            target.style.backgroundColor = '#036b79'; // Darker on hover
-                            target.style.transform = 'scale(1.05)'; // Grow in size on hover
-                            target.style.boxShadow = '0 6px 12px rgba(0, 0, 0, 0.15)'; // Larger shadow on hover
-                          }}
-                          onMouseOut={({ target }) => {
-                            target.style.backgroundColor = '#035b69'; // Return to normal
-                            target.style.transform = 'scale(1)'; // Return to normal size
-                            target.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)'; // Return to normal shadow
-                          }}
-                        >
-                          {group.name}
-                        </li>
-                      </Link>
-                    ))
-                  ) : (
-                    <li>Loading...</li>
-                  )}
-                </ul>
-              )}
-            </li>
-          ))}
-        </ul>
-      </div>
-      <button className="community-sidebar-toggle-btn" onClick={toggleSidebar}>Toggle Community Sidebar</button>
+    <div className="community-sidebar" style={{
+      background: 'linear-gradient(114.9deg, rgb(34, 34, 34) 8.3%, rgb(0, 40, 60) 41.6%, rgb(0, 143, 213) 93.4%)', // Darker gradient
+      color: '#FFFFFF',
+      width: '300px',
+      marginRight: '20px',
+      padding: '20px',
+      fontSize: '1.2rem',
+      fontFamily: 'Arial, sans-serif',
+      position: 'fixed',
+      right: '0',
+      top: '80px',
+      bottom: '0',
+      overflowY: 'auto',
+      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.4)', // Stronger shadow
+      transition: 'box-shadow 0.3s ease-in-out' // Smooth transition for shadow
+    }}>
+      <h2 style={{ borderBottom: '2px solid #FFFFFF', paddingBottom: '10px', color: '#FFFFFF' }}>Communities</h2> {/* Lighter border color */}
+      <ul style={{ listStyleType: 'none', padding: '0', marginTop: '10px' }}>
+        {communities.map((community) => (
+          <li key={community._id} style={{ marginBottom: '20px' }}>
+            <button style={{
+              backgroundColor: 'transparent',
+              border: 'none',
+              color: 'inherit',
+              fontSize: '1.1rem',
+              cursor: 'pointer',
+              width: '100%',
+              textAlign: 'left',
+              marginBottom: '5px', // Add space between buttons
+            }} onClick={() => handleCommunityClick(community._id)}>
+              {community.community_name}
+            </button>
+            {selectedCommunity === community._id && (
+              <ul style={{ marginTop: '5px' }}>
+                {groups[community._id] ? (
+                  groups[community._id].map((group) => (
+                    <Link to={`/group/${props.id}/${group.name}`} style={{ textDecoration: 'none', color: 'inherit' }} key={group._id}>
+                      <li style={{
+                        padding: '5px',
+                        fontSize: '0.9rem', // Smaller font size for dropdown items
+                        backgroundColor: 'rgba(255, 255, 255, 0.2)', // Slightly lighter background
+                        transition: 'background-color 0.2s, color 0.2s, box-shadow 0.2s ease-in-out',
+                        cursor: 'pointer',
+                        borderRadius: '5px', // Rounded corners
+                      }}
+                      onMouseOver={({ target }) => {
+                        target.style.backgroundColor = 'rgba(255, 255, 255, 0.4)'; // Lighter background on hover
+                        target.style.color = 'black'; // Change font color to white on hover
+                        target.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.3)'; // Add shadow on hover
+                      }}
+                      onMouseOut={({ target }) => {
+                        target.style.backgroundColor = 'rgba(255, 255, 255, 0.2)'; // Return to normal background
+                        target.style.color = 'white'; // Return to normal text color
+                        target.style.boxShadow = 'none'; // Remove shadow on hover out
+                      }}
+                      >
+                        {group.name}
+                      </li>
+                    </Link>
+                  ))
+                ) : (
+                  <li>Loading...</li>
+                )}
+              </ul>
+            )}
+          </li>
+        ))}
+      </ul>
     </div>
+    
   );
 };
 

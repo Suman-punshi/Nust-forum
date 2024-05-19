@@ -148,7 +148,7 @@ const CreatePostDialog = () => {
       className={`container mt-5 ${ss.cardContainer}`}
       style={{ backgroundColor: "#b0e0e6" }}
     >
-      <div className={`card ${ss.card}`} style={{ backgroundColor: "#d3eaf4" }}>
+      <div className={`card ${ss.card}`} style={{ backgroundColor: "#488694" }}>
         <div
           className={`card-header text-dark ${ss.cardHeader}`}
           style={{ backgroundColor: "#cde8e5" }}
