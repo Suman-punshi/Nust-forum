@@ -52,7 +52,7 @@ export const GroupPosts = () => {
               Join
             </button>
           </div>
-          <div className="col">
+          <div className="col-lg-3">
             <Sidebar id={userId} />
           </div>
           <div className="col-12 overflow-hidden" style = {{overflowX : 'hidden'}}>
@@ -91,7 +91,7 @@ export const GroupPosts = () => {
               </div>
             ))}
           </div>
-          <div className="col">
+          <div className="col-lg-3">
             <CommunitySidebar id={userId} />
           </div>
         </div>

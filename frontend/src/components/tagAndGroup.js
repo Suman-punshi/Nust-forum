@@ -1,12 +1,10 @@
-
-
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from "react-router-dom";
 import { Link } from 'react-router-dom';
-import { useNavigate } from "react-router-dom";
-import Card from './card';
+import Sidebar from "./Sidebar";
+import CommunitySidebar from './community';
+
 
 
 const TagPosts = () => {
@@ -32,11 +30,11 @@ const TagPosts = () => {
 
   return (
     <div className="w-75 container d-flex justify-content-center mt-5">
-      <Link to={`/create/${userId}/${group}`}>
-        <p className="card-subtitle text-success">New Post</p>
-      </Link>
       <div className="row">
-        <div className="col">
+        <div className="col-lg-3">
+          <Sidebar id={userId} /> {/* Assume Sidebar contains tag elements */}
+        </div>
+        <div className="col-12">
           <div className="">
             {tagPosts.map(post => (
               <div key={post._id} className="card rounded-4 mb-3" style={cardcolor}>
@@ -54,6 +52,9 @@ const TagPosts = () => {
               </div>
             ))}
           </div>
+        </div>
+        <div className="col-lg-3">
+          <CommunitySidebar id={userId} /> {/* Assume Sidebar contains tag elements */}
         </div>
       </div>
     </div>
