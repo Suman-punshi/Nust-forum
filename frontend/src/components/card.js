@@ -5,11 +5,11 @@ import "../hover.css";
 import Sidebar from "./Sidebar";
 import CommunitySidebar from "./community";
 import { authContext } from "../context/AuthContext";
+import "./css/Card.css"; // Import custom CSS
 
 export const Card = () => {
   const { userId } = useParams();
   const { user } = useContext(authContext); // Get the logged-in user's information
-
 
   const cardcolor = { 
     backgroundColor: '#e0f7ff', // Light blue background
@@ -49,12 +49,12 @@ export const Card = () => {
   }, []);
 
   return (
-    <div className="container-fluid" style={{ marginTop: "80px" }}>
+    <div className="container-fluid card-container">
       <div className="row">
-        <div className="col-lg-3">
+        <div className="col-lg-3 col-md-4 sidebar-column">
           <Sidebar id={userId} /> {/* Assume Sidebar contains tag elements */}
         </div>
-        <div className="col-lg-6">
+        <div className="col-lg-6 col-md-8 post-column">
           <div className="container mt-5">
             <div className="row">
               <div className="col-12 mb-3">
@@ -119,7 +119,7 @@ export const Card = () => {
             </div>
           </div>
         </div>
-        <div className="col-lg-3">
+        <div className="col-lg-3 col-md-4 sidebar-column">
           <CommunitySidebar id={userId} className="community-sidebar" /> {/* Assume CommunitySidebar contains tag elements */}
         </div>
       </div>
@@ -128,7 +128,6 @@ export const Card = () => {
 };
 
 export default Card;
-
 
 
 // const handleJoinClick = async () => {

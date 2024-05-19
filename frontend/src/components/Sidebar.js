@@ -5,6 +5,7 @@ import "./style.css"; // Importing style.css from the src folder
 
 const Sidebar = (props) => {
   const [tags, setTags] = useState([]);
+  const [showSidebar, setShowSidebar] = useState(false);
 
   useEffect(() => {
     const fetchTags = async () => {
@@ -18,18 +19,20 @@ const Sidebar = (props) => {
     fetchTags();
   }, []);
 
+  const toggleSidebar = () => setShowSidebar(!showSidebar);
+
   return (
-    <div className="sidebar-container" style={{marginTop: "80px"}}>
-      <div className="sidebar" style={{ 
-        background: '#7AB2B2', 
-        padding: '20px', 
-        position: 'fixed', 
-        left: '0', 
-        top: '0', 
-        bottom: '0', 
-        overflowY: 'auto', 
-        width: '280px', 
-        marginTop: '50px', 
+    <div className="sidebar-container" style={{ marginTop: "80px" }}>
+      <div className={`sidebar ${showSidebar ? 'show' : ''}`} style={{
+        background: '#7AB2B2',
+        padding: '20px',
+        position: 'fixed',
+        left: '0',
+        top: '0',
+        bottom: '0',
+        overflowY: 'auto',
+        width: '280px',
+        marginTop: '50px',
         textAlign: 'center',
         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Add shadow effect
         transition: 'box-shadow 0.3s ease-in-out' // Smooth transition for shadow
@@ -46,18 +49,18 @@ const Sidebar = (props) => {
                 padding: '10px',
                 transition: 'all 0.3s ease-in-out',
                 cursor: 'pointer',
-                textAlign:'center'
+                textAlign: 'center'
               }}
-              onMouseOver={({ target }) => {
-                target.style.backgroundColor = '#036b79'; // Darker on hover
-                target.style.transform = 'scale(1.05)'; // Grow in size on hover
-                target.style.boxShadow = '0 6px 12px rgba(0, 0, 0, 0.15)'; // Larger shadow on hover
-              }} 
-              onMouseOut={({ target }) => {
-                target.style.backgroundColor = '#035b69'; // Return to normal
-                target.style.transform = 'scale(1)'; // Return to normal size
-                target.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)'; // Return to normal shadow
-              }}
+                onMouseOver={({ target }) => {
+                  target.style.backgroundColor = '#036b79'; // Darker on hover
+                  target.style.transform = 'scale(1.05)'; // Grow in size on hover
+                  target.style.boxShadow = '0 6px 12px rgba(0, 0, 0, 0.15)'; // Larger shadow on hover
+                }}
+                onMouseOut={({ target }) => {
+                  target.style.backgroundColor = '#035b69'; // Return to normal
+                  target.style.transform = 'scale(1)'; // Return to normal size
+                  target.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)'; // Return to normal shadow
+                }}
               >
                 {tag.text}
               </li>
@@ -65,6 +68,7 @@ const Sidebar = (props) => {
           ))}
         </ul>
       </div>
+      <button className="sidebar-toggle-btn" onClick={toggleSidebar}>Toggle Sidebar</button>
     </div>
   );
 };
