@@ -46,7 +46,7 @@ const CommunitySidebar = (props) => {
   return (
     <div className="community-sidebar-container" style={{ marginTop: "80px" }}>
       <div className={`community-sidebar ${showSidebar ? 'show' : ''}`} style={{
-        background: '#7AB2B2',
+        background: 'linear-gradient(to bottom, #1a1a2e, #16213e)',
         color: '#034752',
         width: '300px',
         marginRight: '0',
