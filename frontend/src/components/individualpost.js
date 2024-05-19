@@ -39,14 +39,33 @@ const IndividualPost = () => {
       if (text.trim() === "") {
         return; // Prevent submitting empty comments
       }
-      const response = await axios.post(
-        `http://localhost:4000/comment/${userId}/${postId}`,
-        { text, username: user.username } // Include username if it's not automatically added by the backend
-      );
-      setText("");
-      setShowCommentForm(false);
-      // Refresh the page to reflect the new comment
-      window.location.reload();
+      // const response = await axios.post(
+      //   `http://localhost:4000/comment/${userId}/${postId}`,
+      //   { text, username: user.username } // Include username if it's not automatically added by the backend
+      // );
+      let response;
+      if (editingCommentId) {
+        response = await axios.put(
+          `http://localhost:4000/api/comment/${postId}/${editingCommentId}`,
+          { text, username: user.username }
+        );
+        setComments(comments.map((com) => (com._id === editingCommentId ? response.data : com)));
+        setText("");
+        setShowCommentForm(false);
+        setEditingCommentId(null);
+      } else {
+        response = await axios.post(
+          `http://localhost:4000/comment/${userId}/${postId}`,
+          { text, username: user.username }
+        );
+        setComments([...comments, response.data]);
+        setText("");
+        setShowCommentForm(false);
+        setEditingCommentId(null);
+        // Refresh the page to reflect the new comment
+        window.location.reload();
+      }
+
     } catch (error) {
       console.error("Error submitting comment:", error);
     }
