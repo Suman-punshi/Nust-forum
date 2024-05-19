@@ -18,6 +18,7 @@ const IndividualPost = () => {
   const [editTitle, setEditTitle] = useState("");
   const [editContent, setEditContent] = useState("");
   const [alertMessage, setAlertMessage] = useState(null);
+  const [editingCommentId, setEditingCommentId] = useState(null);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -38,20 +39,66 @@ const IndividualPost = () => {
       if (text.trim() === "") {
         return; // Prevent submitting empty comments
       }
-      const response = await axios.post(
-        `http://localhost:4000/comment/${userId}/${postId}`,
-        { text, username: user.username } // Include username if it's not automatically added by the backend
-      );
-      setText("");
-      setShowCommentForm(false);
-      // Refresh the page to reflect the new comment
-      window.location.reload();
+      // const response = await axios.post(
+      //   `http://localhost:4000/comment/${userId}/${postId}`,
+      //   { text, username: user.username } // Include username if it's not automatically added by the backend
+      // );
+      let response;
+      if (editingCommentId) {
+        response = await axios.put(
+          `http://localhost:4000/api/comment/${postId}/${editingCommentId}`,
+          { text, username: user.username }
+        );
+        setComments(comments.map((com) => (com._id === editingCommentId ? response.data : com)));
+        setText("");
+        setShowCommentForm(false);
+        setEditingCommentId(null);
+      } else {
+        response = await axios.post(
+          `http://localhost:4000/comment/${userId}/${postId}`,
+          { text, username: user.username }
+        );
+        setComments([...comments, response.data]);
+        setText("");
+        setShowCommentForm(false);
+        setEditingCommentId(null);
+        // Refresh the page to reflect the new comment
+        window.location.reload();
+      }
+
     } catch (error) {
       console.error("Error submitting comment:", error);
     }
   };
   
   
+
+  const handleEditComment = (comment) => {
+    setText(comment.text);
+    setEditingCommentId(comment._id);
+    setShowCommentForm(true);
+  };
+
+  const deleteComment = async (id) => {
+    try {
+      const res2 = await fetch(`/api/deleteComment/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+
+      if (res2.status === 200 || res2.status === 201) {
+        setComments(comments.filter(comment => comment._id !== id));
+        console.log("Comment deleted");
+      } else {
+        console.log("Error deleting comment");
+      }
+    } catch (error) {
+      console.error("Error deleting comment:", error);
+    }
+  };
+
 
   const handleEditPost = () => {
     setEditTitle(post.Title);
@@ -184,6 +231,16 @@ const IndividualPost = () => {
                         <div key={com._id} className={ss.commentCard}>
                           <Link to={`/profile/${com.username}`} className={ss.commentUsername}>{com.username}</Link>
                           <p className={ss.commentText}>{com.text}</p>
+                          {user && user.username === com.username && (
+                          <span className="d-flex justify-content-end" style={{ gap: "5px" }}>
+                            <button className="btn btn-success" onClick={() => handleEditComment(com)} style={{ width: "30px", height: "30px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                              <i className="fa-solid fa-pen" style={{ fontSize: "16px" }}></i>
+                            </button>
+                            <button className="btn btn-danger" onClick={() => deleteComment(com._id)} style={{ width: "30px", height: "30px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                              <i className="fa-solid fa-trash" style={{ fontSize: "16px" }}></i>
+                            </button>
+                          </span>
+                          )}
                         </div>
                       ))}
                     </div>
@@ -196,7 +253,7 @@ const IndividualPost = () => {
                           placeholder="Write your comment..."
                         ></textarea>
                         <button onClick={handleNewCommentSubmit} className={`btn ${ss.btnPrimary}`}>
-                          Submit
+                        {editingCommentId ? 'Update' : 'Submit'}
                         </button>
                       </div>
                     ) : (
