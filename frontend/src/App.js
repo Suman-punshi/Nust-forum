@@ -18,30 +18,31 @@ function App() {
 
   return (
     <Router>
-      <div className="container">
-        <Navbar />
-        {/* <Sidebar/> */}
-        
-        <nav className="navbar">
-          <div></div>
-        </nav>
+  <div className="container" style={{ backgroundColor: 'black' }}>
+    <Navbar />
+    {/* <Sidebar/> */}
+    
+    <nav className="navbar">
+      <div></div>
+    </nav>
 
-        <Routes>
-          <Route path="/" element={<LoginUser />} />
-          
-          <Route path="/post/:userId/:postId" element={<IndividualPost />} />
-          <Route path="/create-user" element={<CreateUser />} />
-          <Route path="/cards/:userId" element={<Card />} />
-          <Route path="/group/:userId/:group" element={<GroupPosts />} />
-          <Route path="/tags/:userId/:tag_name/:group" element={<TagPosts />} />
-          <Route path="/create/:userId/:group" element={<CreatePostDialog />} />
-          <Route path="/tag/:userID/:tag_name" element={<JustTagPosts />} />
-          {/* Pass searchResults as a prop to DisplaySearchResults */}
-          <Route path="/search/:groupName" element={<DisplaySearchResults />} />
-          <Route path = "/profile/:username" element={< UserProfileComponent />} />
-        </Routes>
-      </div>
-    </Router>
+    <Routes>
+      <Route path="/" element={<LoginUser />} />
+      
+      <Route path="/post/:userId/:postId" element={<IndividualPost />} />
+      <Route path="/create-user" element={<CreateUser />} />
+      <Route path="/cards/:userId" element={<Card />} />
+      <Route path="/group/:userId/:group" element={<GroupPosts />} />
+      <Route path="/tags/:userId/:tag_name/:group" element={<TagPosts />} />
+      <Route path="/create/:userId/:group" element={<CreatePostDialog />} />
+      <Route path="/tag/:userID/:tag_name" element={<JustTagPosts />} />
+      {/* Pass searchResults as a prop to DisplaySearchResults */}
+      <Route path="/search/:groupName" element={<DisplaySearchResults />} />
+      <Route path="/profile/:username" element={<UserProfileComponent />} />
+    </Routes>
+  </div>
+</Router>
+
   );
 }
 

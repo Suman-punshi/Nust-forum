@@ -41,7 +41,7 @@ const DisplaySearchResults = () => {
                                     <div className="card-body">
                                         <p className="card-text">{post.text}</p>
                                         {post.images && <img src={post.images} className="card-img-top" alt="" />}
-                                        <span className="badge badge-dark ms-1" style={{ backgroundColor: '#4D869C', color: 'white' }}>
+                                        <span className="badge badge-dark ms-1" style={{ backgroundColor: '#b02c54', color: 'white' }}>
                                             {post.num_comments} comments
                                         </span>
                                     </div>

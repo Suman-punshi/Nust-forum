@@ -87,19 +87,19 @@ const CreatePostDialog = () => {
 };
 
 export default CreatePostDialog;*/
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
 import { useParams } from "react-router-dom";
-import ss from '../components/modules/indiv_posts.module.css'; // Import custom styles
+import ss from "../components/modules/indiv_posts.module.css"; // Import custom styles
 
 const CreatePostDialog = () => {
   const { group } = useParams();
   const { userId } = useParams();
-  const [Title, setTitle] = useState('');
-  const [text, setText] = useState('');
-  const [image, setImage] = useState('');
-  const [tags, setTags] = useState('');
-  const [alertMessage, setAlertMessage] = useState('');
+  const [Title, setTitle] = useState("");
+  const [text, setText] = useState("");
+  const [image, setImage] = useState("");
+  const [tags, setTags] = useState("");
+  const [alertMessage, setAlertMessage] = useState("");
 
   const onChangeTitle = (e) => {
     setTitle(e.target.value);
@@ -124,49 +124,92 @@ const CreatePostDialog = () => {
       Title: Title,
       text: text,
       images: image,
-      tags: tags
+      tags: tags,
     };
 
-    axios.post(`http://localhost:4000/create/${userId}/${group}`, post)
-      .then(res => {
-        setAlertMessage('Post created successfully!');
+    axios
+      .post(`http://localhost:4000/create/${userId}/${group}`, post)
+      .then((res) => {
+        setAlertMessage("Post created successfully!");
       })
-      .catch(err => {
-        console.error('Error creating post:', err);
-        setAlertMessage('Error creating post. Please try again later.');
+      .catch((err) => {
+        console.error("Error creating post:", err);
+        setAlertMessage("Error creating post. Please try again later.");
       });
 
-    setTitle('');
-    setText('');
-    setImage('');
-    setTags('');
+    setTitle("");
+    setText("");
+    setImage("");
+    setTags("");
   };
 
   return (
-    <div className={`container mt-5 ${ss.cardContainer}`} style={{ backgroundColor: '#b0e0e6' }}>
-      <div className={`card ${ss.card}`} style={{ backgroundColor: '#d3eaf4' }}>
-        <div className={`card-header text-dark ${ss.cardHeader}`} style={{ backgroundColor: '#cde8e5' }}>
-          <h5 className="card-title mb-0" style={{backgroundColor:'#035b69'}}>Create Post</h5>
+    <div
+      className={`container mt-5 ${ss.cardContainer}`}
+      style={{ backgroundColor: "#b02c54 " }}
+    >
+      <div className={`card ${ss.card}`} style={{ backgroundColor: "black" }}>
+        <div
+          className={`card-header text-dark ${ss.cardHeader}`}
+          style={{ backgroundColor: "grey" }}
+        >
+          <h5
+            className="card-title mb-0"
+            style={{ backgroundColor: "#f25e84" }}
+          >
+            Create Post
+          </h5>
         </div>
         <div className="card-body">
           <form onSubmit={onSubmit}>
             <div className="mb-3">
-              <input type="text" className={`form-control ${ss.formControl}`} placeholder="Title" value={Title} onChange={onChangeTitle} required />
+              <input
+                type="text"
+                className={`form-control ${ss.formControl}`}
+                placeholder="Title"
+                value={Title}
+                onChange={onChangeTitle}
+                required
+              />
             </div>
             <div className="mb-3">
-              <textarea className={`form-control ${ss.formControl}`} rows="10" cols="50" placeholder="Text" value={text} onChange={onChangeText} required />
+              <textarea
+                className={`form-control ${ss.formControl}`}
+                rows="10"
+                cols="50"
+                placeholder="Text"
+                value={text}
+                onChange={onChangeText}
+                required
+              />
             </div>
             <div className="mb-3">
-              <input type="text" className={`form-control ${ss.formControl}`} placeholder="Image URL" value={image} onChange={onChangeImage} />
+              <input
+                type="text"
+                className={`form-control ${ss.formControl}`}
+                placeholder="Image URL"
+                value={image}
+                onChange={onChangeImage}
+              />
             </div>
             <div className="mb-3">
-              <select className={`form-select ${ss.formControl}`} value={tags} onChange={onChangeTag}>
+              <select
+                className={`form-select ${ss.formControl}`}
+                value={tags}
+                onChange={onChangeTag}
+              >
                 <option value="tag1">Tag 1</option>
                 <option value="nodejs">Node.js</option>
                 {/* Add more options as needed */}
               </select>
             </div>
-            <button type="submit" className={`btn ${ss.btnPrimary}`} style={{ backgroundColor: '#1e90ff' }}>Create</button>
+            <button
+              type="submit"
+              className={`btn ${ss.btnPrimary}`}
+              style={{ backgroundColor: "#1e90ff" }}
+            >
+              Create
+            </button>
           </form>
         </div>
       </div>
