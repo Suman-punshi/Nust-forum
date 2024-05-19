@@ -21,7 +21,7 @@ const groupSchema = new mongoose.Schema({
     type: Date,
     required: true,
   }
-}, { collection: 'groups' });
+}, {timestamps:true}, { collection: 'groups' });
 
 const Group = mongoose.model('Group', groupSchema);
 
