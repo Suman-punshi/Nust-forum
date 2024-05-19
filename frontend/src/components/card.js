@@ -66,21 +66,21 @@ export const Card = () => {
                 <div key={post._id} className="col-12 mb-3">
                   <div className="card rounded-4" style={cardcolor}>
                     <div className="card-header" style={{
-                      backgroundColor: '#035b69',
+                      backgroundColor: '#e0f7ff',
                       borderTopLeftRadius: '16px',
                       borderTopRightRadius: '16px',
                       color: '#1e90ff',
                       fontWeight: 'bold'
                     }}>
                       <Link to={`/group/${userId}/${post.group}`} style={text_decor}>
-                        <p className="card-subtitle" style={{ color: "#8ee5ee", fontSize: "large", fontFamily: "'Roboto', sans-serif" }}>
+                        <p className="card-subtitle" style={{ color: "#112D4E", fontSize: "large", fontFamily: "'Roboto', sans-serif" }}>
                           {"r/" + post.group}
                         </p>
                       </Link>
-                      <p className="card-subtitle" style={{ color: "#e6e6e4", fontSize: "small", fontFamily: "'Roboto', sans-serif" }}>
+                      <p className="card-subtitle" style={{ color: "#112D4E", fontSize: "small", fontFamily: "'Roboto', sans-serif" }}>
                         {"u/" + post.username}
                       </p>
-                      <h5 className="card-title" style={{ color: "#e6e6e4", fontSize: "x-large", fontStyle: "italic", fontFamily: "'Lobster', cursive" }}>
+                      <h5 className="card-title" style={{ color: "#112D4E", fontSize: "x-large", fontStyle: "italic", fontFamily: "'Lobster', cursive" }}>
                         {post.Title}
                       </h5>
                     </div>
@@ -98,7 +98,7 @@ export const Card = () => {
                       </div>
                     </Link>
                     <Link to={`/post/${userId}/${post._id}`} style={{ color: "inherit", textDecoration: "none" }}>
-                      <div className="card-body" style={{ backgroundColor: '#b0e0e6', borderRadius: '0 0 16px 16px' }}>
+                      <div className="card-body" style={{ backgroundColor: '#e0f7ff', borderRadius: '0 0 16px 16px' }}>
                         <span>
                           <p className="card-text">{post.text}</p>
                         </span>
