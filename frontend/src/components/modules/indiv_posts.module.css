@@ -23,6 +23,8 @@
 .commentCard:hover, .commentCard1:hover {
   transform: scale(1.02);
   background-color: #b0e0e6;
+  position: relative; /* Make sure the element doesn't affect others */
+  z-index: 1; /* Raise above other content */
 }
 
 .commentUsername {
@@ -64,18 +66,18 @@
   border: 1px solid #b0e0e6;
 }
 
+/* Ensure buttons are accessible in terms of color contrast */
 .btnPrimary {
   background: linear-gradient(45deg, #1e90ff, #4682b4);
-  border: none;
-  border-radius: 12px;
-  padding: 10px 20px;
-  color: white;
-  font-weight: bold;
-  transition: background-color 0.2s;
+  color: white; /* Check contrast ratio */
+  transition: background-color 0.2s, box-shadow 0.2s;
 }
+
+
 
 .btnPrimary:hover {
   background: linear-gradient(45deg, #1c86ee, #4169e1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Add subtle shadow on hover */
 }
 
 .loadingSpinner {
@@ -114,3 +116,14 @@
 .card-header, .card-body {
   margin-bottom: 20px; /* Adjust spacing between elements */
 }
+
+/* Use media queries for responsive font sizes */
+@media (max-width: 768px) {
+  .commentUsername {
+    font-size: 1em; /* Smaller font size on smaller screens */
+  }
+}
+
+
+
+
