@@ -90,7 +90,7 @@ import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const UserProfileComponent = () => {
-    const cardcolor = { backgroundColor: "#EEF7FF" };
+    const cardcolor = { backgroundColor: "#8aa7bfF" };
     const { username } = useParams();
     const { user: loggedInUser } = useAuthContext();
     const [user, setUser] = useState(null);
@@ -123,41 +123,42 @@ const UserProfileComponent = () => {
 
     return (
         <div className="container mt-5">
-            <div className = "overflow-hidden ml-0 w-25 h-100">
-            <div className="profile-header rounded mb-4 mt-3 w-25 h-100 text-center overflow-hidden" style = {{backgroundColor: "#EEF7FF", position: 'fixed'}}>
-                <img src={user.avatarUrl || "default-avatar.png"} alt="user avatar" className="rounded-circle mb-3" width="150" height="150" />
-                <h1 className="display-4">{user.username}</h1>
-                <p className="text-muted">Joined on: {new Date(user.createdAt).toLocaleDateString()}</p>
+  <div className="overflow-hidden ml-0 w-25 h-100">
+    <div className="profile-header rounded mb-4 mt-3 w-25 h-100 text-center overflow-hidden" style={{ backgroundColor: "#16213e", color: "#FFFFFF", position: 'fixed', padding: '20px', boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)' }}>
+      <img src={user.avatarUrl || "default-avatar.png"} alt="user avatar" className="rounded-circle mb-3" width="150" height="150" style={{ border: '4px solid #1a1a2e' }} />
+      <h1 className="display-4" ><b>{user.username}</b></h1>
+      <p className="text-muted">Joined on: {new Date(user.createdAt).toLocaleDateString()}</p>
+    </div>
+  </div>
+  <div className="row w-50 ml-3" style={{ marginLeft: '300px' }}>
+    {posts.length > 0 ? posts.map((post) => (
+      <div key={post._id} className="col-12 mb-3 mt-3 ml-5">
+        <div className="card shadow-sm" style={{ backgroundColor: "#FFFFFF", color: "#000000", borderRadius: '16px' }}>
+          <div className="card-header" style={{ background: 'linear-gradient(to bottom, #1a1a2e, #16213e)', borderTopLeftRadius: '16px', borderTopRightRadius: '16px', padding: '10px', color: '#FFFFFF' }}>
+            <div className="d-flex justify-content-between align-items-center">
+              <Link to={`/group/${post.group}`} className="text-decoration-none" style={{ color: '#8ee5ee' }}>
+                <span className="badge" style={{ backgroundColor: '#1e90ff', color: '#FFFFFF' }}>{post.group}</span>
+              </Link>
+              <span className="text-muted" style={{ color: '#8ee5ee' }}>{post.username}</span>
             </div>
-            </div>
-            <div className="row w-50 ml-3" style = {{left: '60'}}>
-                {posts.length > 0 ? posts.map((post) => (
-                    <div key={post._id} className="col-12 mb-3 mt-3 ml-5">
-                        <div className="card shadow-sm" style = {{backgroundColor: "#EEF7FF"}}>
-                            <div className="card-header">
-                                <div className="d-flex justify-content-between align-items-center">
-                                    <Link to={`/group/${post.group}`} className="text-decoration-none">
-                                        <span className="badge bg-success">{post.group}</span>
-                                    </Link>
-                                    <span className="text-muted">{post.username}</span>
-                                </div>
-                                <h5 className="mt-2 mb-0">{post.title}</h5>
-                            </div>
-                            <div className="card-body">
-                                <Link to={`/tags/${post.tags}/${post.group}`} className="text-decoration-none">
-                                    <span className="badge bg-dark me-1">{post.tags}</span>
-                                </Link>
-                                <p className="card-text mt-2">{post.text}</p>
-                                <Link to={`/post/${post._id}`} className="stretched-link"></Link>
-                            </div>
-                            <div className="card-footer">
-                                <span className="badge bg-primary">{post.num_comments} comments</span>
-                            </div>
-                        </div>
-                    </div>
-                )) : <p className="text-center">No posts found.</p>}
-            </div>
+            <h5 className="mt-2 mb-0" style={{ color: '#FFFFFF' }}>{post.title}</h5>
+          </div>
+          <div className="card-body" style={{ backgroundColor: '#e0f7ff', borderBottomLeftRadius: '16px', borderBottomRightRadius: '16px', padding: '20px' }}>
+            <Link to={`/tags/${post.tags}/${post.group}`} className="text-decoration-none">
+              <span className="badge bg-dark me-1" style={{ backgroundColor: '#1e90ff', color: '#FFFFFF' }}>{post.tags}</span>
+            </Link>
+            <p className="card-text mt-2" style={{ color: '#000000' }}>{post.text}</p>
+            <Link to={`/post/${post._id}`} className="stretched-link"></Link>
+          </div>
+          <div className="card-footer" style={{ backgroundColor: '#16213e', borderBottomLeftRadius: '16px', borderBottomRightRadius: '16px', padding: '10px' }}>
+            <span className="badge bg-primary" style={{ backgroundColor: '#1e90ff', color: '#FFFFFF' }}>{post.num_comments} comments</span>
+          </div>
         </div>
+      </div>
+    )) : <p className="text-center" style={{ color: '#FFFFFF' }}>No posts found.</p>}
+  </div>
+</div>
+
     );
 };
 
