@@ -45,13 +45,13 @@ const CommunitySidebar = (props) => {
       background: 'linear-gradient(114.9deg, rgb(34, 34, 34) 8.3%, rgb(0, 40, 60) 41.6%, rgb(0, 143, 213) 93.4%)', // Darker gradient
       color: '#FFFFFF',
       width: '300px',
-      marginRight: '20px',
+      marginRight: '0',
       padding: '20px',
       fontSize: '1.2rem',
       fontFamily: 'Arial, sans-serif',
       position: 'fixed',
       right: '0',
-      top: '80px',
+      top: '50px',
       bottom: '0',
       overflowY: 'auto',
       boxShadow: '0 4px 8px rgba(0, 0, 0, 0.4)', // Stronger shadow
