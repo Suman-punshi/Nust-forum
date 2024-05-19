@@ -6,6 +6,7 @@ import Sidebar from "./Sidebar";
 import CommunitySidebar from "./community";
 import { authContext } from "../context/AuthContext";
 import "./css/Card.css"; // Import custom CSS
+import { Navbar } from "react-bootstrap";
 
 export const Card = () => {
   const { userId } = useParams();
@@ -49,7 +50,7 @@ export const Card = () => {
   }, []);
 
   return (
-    <div className="container-fluid" style={{ marginTop: "80px" }}>
+    <div className="d-flex justify-content-center mt-5" style={{ marginTop: "80px", overflowX : 'hidden'}}>
   <div className="row">
     <div className="col-lg-3">
       <Sidebar id={userId} /> {/* Assume Sidebar contains tag elements */}
@@ -71,16 +72,19 @@ export const Card = () => {
                       {"r/" + post.group}
                     </p>
                   </Link>
+                  <Link to={`/users/${"u/"+post.username}`}>
                   <p className="card-subtitle" style={{ color: "#e6e6e4", fontSize: "small", fontFamily: "'Roboto', sans-serif" }}>
                     {"u/" + post.username}
                   </p>
+                  </Link>
+                  
                   <h5 className="card-title" style={{ color: "#e6e6e4", fontSize: "large" }}>
                     {post.Title}
                   </h5>
                 </div>
 
                 <Link to={`/tags/${userId}/${post.tags}/${post.group}`} style={{ color: "inherit", textDecoration: "none" }}>
-                  <div className="tags">
+                  <div className="tags" style = {{backgroundColor: 'white'}}>
                     <span className="badge badge-dark ms-1" style={{ background: 'linear-gradient(45deg, #1e90ff, #00bfff)', color: 'white', borderRadius: '12px', padding: '5px 15px' }}>
                       {post.tags}
                     </span>
@@ -93,7 +97,7 @@ export const Card = () => {
                     </span>
                     {post.images && <img src={`http://localhost:4000${post.images}`} className="card-img-top" alt="Post image" />}
                     <span className="badge badge-dark ms-1" style={{ background: 'linear-gradient(45deg, #1e90ff, #00bfff)', color: 'white', borderRadius: '12px', padding: '5px 15px' }}>
-                      {post.num_comments} comments
+                      comments
                     </span>
                   </div>
                 </Link>

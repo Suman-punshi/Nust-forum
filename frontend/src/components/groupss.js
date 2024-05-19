@@ -42,7 +42,7 @@ export const GroupPosts = () => {
 
   return (
     <Layout>
-      <div className="d-flex container justify-content-center mt-5" style = {{overflowX : 'hidden', left : '0'}}>
+      <div className="d-flex justify-content-center mt-5" style = {{overflowX : 'hidden', left : '0'}}>
         <div className="row" style = {{overflowX : 'hidden'}}>
           <div className="mt-4 w-75 d-flex justify-content-center" style = {{overflowX : 'hidden'}}>
             <Link to={`/create/${userId}/${group}`} className="btn btn-success col">
@@ -63,7 +63,8 @@ export const GroupPosts = () => {
                 style={cardcolor}
               >
                 <div className="card-header">
-                  <p className="card-subtitle text-muted">{post.username}</p>
+                  <Link to={`/users/${post.username}`}><p className="card-subtitle text-muted">{post.username}</p></Link>
+                  
                   <h5 className="card-title">{post.Title}</h5>
 
                   <Link to={`/tags/${userId}/${post.tags}/${group}`} style={{ color: "inherit", textDecoration: "none" }}>

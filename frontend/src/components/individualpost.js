@@ -2,9 +2,11 @@ import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Layout from "./Layout";
+import { Link } from "react-router-dom";
 import ss from '../components/modules/indiv_posts.module.css';
 import { authContext } from "../context/AuthContext";
 import { Dropdown } from 'react-bootstrap';
+import CommunitySidebar from "./community";
 
 const IndividualPost = () => {
   const { postId, userId } = useParams();
@@ -83,19 +85,6 @@ const IndividualPost = () => {
     }
   };
 
- /* useEffect(() => {
-    if (alertMessage) {
-      // Automatically hide the alert after 3 seconds
-      const timer = setTimeout(() => {
-        setAlertMessage(null);
-        window.location.reload(); // Reload the page
-      }, 3000);
-
-      // Cleanup the timer if the component unmounts before the timer ends
-      return () => clearTimeout(timer);
-    }
-  }, [alertMessage]);*/
-
   if (!post) {
     return (
       <div className={ss.loadingSpinner}>
@@ -130,6 +119,11 @@ const IndividualPost = () => {
                 borderTopRightRadius: '16px'
               }}>
                 <div>
+                <Link to={`/group/${userId}/${post.group}`} style={{ color: '#FFFFFF', textDecoration: 'none' }}>
+                    <p className="card-subtitle" style={{ color: "#8ee5ee", fontSize: "large", fontFamily: "'Roboto', sans-serif" }}>
+                      {"r/" + post.group}
+                    </p>
+                  </Link>
                   <p className="card-subtitle" style={{ fontSize: "medium" }}>{"u/" + post.username}</p>
                   <h5 className="card-title" style={{ fontSize: "x-large", fontStyle: "italic", fontFamily: "'Lobster', cursive" }}>{post.Title}</h5>
                 </div>
@@ -211,6 +205,9 @@ const IndividualPost = () => {
                 )}
               </div>
             </div>
+            <div className="col-lg-3">
+            <CommunitySidebar id={userId} />
+          </div>
           </div>
         </div>
       </div>
