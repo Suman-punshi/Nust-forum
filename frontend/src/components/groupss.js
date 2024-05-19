@@ -42,13 +42,13 @@ export const GroupPosts = () => {
 
   return (
     <Layout>
-      <div className="d-flex justify-content-center mt-5" style = {{overflowX : 'hidden', left : '0'}}>
+      <div className="d-flex container justify-content-center mt-5" style = {{overflowX : 'hidden', left : '0'}}>
         <div className="row" style = {{overflowX : 'hidden'}}>
           <div className="mt-4 w-75 d-flex justify-content-center" style = {{overflowX : 'hidden'}}>
-            <Link to={`/create/${userId}/${group}`} className="btn btn-success">
+            <Link to={`/create/${userId}/${group}`} className="btn btn-success col">
               New Post
             </Link>
-            <button onClick={handleJoinGroup} className="btn btn-primary">
+            <button onClick={handleJoinGroup} className="btn btn-primary col">
               Join
             </button>
           </div>
