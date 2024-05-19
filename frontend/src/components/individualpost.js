@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import Layout from "./Layout";
-import { Link } from "react-router-dom";
 import ss from '../components/modules/indiv_posts.module.css';
 import { authContext } from "../context/AuthContext";
 import { Dropdown } from 'react-bootstrap';
@@ -36,17 +35,23 @@ const IndividualPost = () => {
 
   const handleNewCommentSubmit = async () => {
     try {
+      if (text.trim() === "") {
+        return; // Prevent submitting empty comments
+      }
       const response = await axios.post(
         `http://localhost:4000/comment/${userId}/${postId}`,
-        { text }
+        { text, username: user.username } // Include username if it's not automatically added by the backend
       );
-      setComments([...comments, response.data]);
       setText("");
       setShowCommentForm(false);
+      // Refresh the page to reflect the new comment
+      window.location.reload();
     } catch (error) {
       console.error("Error submitting comment:", error);
     }
   };
+  
+  
 
   const handleEditPost = () => {
     setEditTitle(post.Title);
@@ -59,14 +64,12 @@ const IndividualPost = () => {
       const response = await axios.delete(`http://localhost:4000/posts/${userId}/${postId}`);
       console.log(response.data); // This will log the successful deletion message
       setAlertMessage("Post deleted successfully!");
-     
       window.location.href = `/cards/${userId}`; 
     } catch (error) {
       console.error("Error deleting post:", error);
       setAlertMessage("Failed to delete post.");
     }
   };
-  
 
   const handleEditSubmit = async () => {
     try {
@@ -98,7 +101,7 @@ const IndividualPost = () => {
   return (
     <Layout>
       <div className="container-fluid mt-5">
-        <div className="row justify-content-center">
+        <div className="row justify-content-center" style={{marginTop: '80px'}}>
           <div className="col-lg-10">
             {alertMessage && (
               <div className={`alert ${alertMessage.includes("successfully") ? "alert-success" : "alert-danger"}`} role="alert">
@@ -124,7 +127,7 @@ const IndividualPost = () => {
                       {"r/" + post.group}
                     </p>
                   </Link>
-                  <p className="card-subtitle" style={{ fontSize: "medium" }}>{"u/" + post.username}</p>
+                  <Link to = {`/profile/${post.username}`} className="card-subtitle" style={{ fontSize: "medium", textDecoration: 'none' }}>{"u/" + post.username}</Link>
                   <h5 className="card-title" style={{ fontSize: "x-large", fontStyle: "italic", fontFamily: "'Lobster', cursive" }}>{post.Title}</h5>
                 </div>
                 {user && user.username === post.username && (
@@ -179,7 +182,7 @@ const IndividualPost = () => {
                     <div className="mt-3">
                       {comments.map((com) => (
                         <div key={com._id} className={ss.commentCard}>
-                          <span className={ss.commentUsername}>{com.username}</span>
+                          <Link to={`/profile/${com.username}`} className={ss.commentUsername}>{com.username}</Link>
                           <p className={ss.commentText}>{com.text}</p>
                         </div>
                       ))}
@@ -210,6 +213,7 @@ const IndividualPost = () => {
           </div>
           </div>
         </div>
+      ``
       </div>
     </Layout>
   );
