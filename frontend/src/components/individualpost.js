@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Layout from "./Layout"; // Import the layout component
+import "../hover.css";
 import ss from '../components/modules/indiv_posts.module.css'; // Import custom styles
 
 const IndividualPost = () => {
@@ -10,6 +11,7 @@ const IndividualPost = () => {
   const [comments, setComments] = useState([]);
   const [showCommentForm, setShowCommentForm] = useState(false);
   const [text, setText] = useState("");
+  const [editingCommentId, setEditingCommentId] = useState(null);
 
   useEffect(() => {
     // Fetch post data using postId
@@ -28,18 +30,54 @@ const IndividualPost = () => {
 
   const handleNewCommentSubmit = async () => {
     try {
-      const response = await axios.post(
-        `http://localhost:4000/comment/${userId}/${postId}`,
-        { text }
-      );
-      // Assuming the server responds with the newly created comment
-      setComments([...comments, response.data]);
+      let response;
+      if (editingCommentId) {
+        response = await axios.put(
+          `http://localhost:4000/api/comment/${postId}/${editingCommentId}`,
+          { text }
+        );
+        setComments(comments.map((com) => (com._id === editingCommentId ? response.data : com)));
+      } else {
+        response = await axios.post(
+          `http://localhost:4000/comment/${userId}/${postId}`,
+          { text }
+        );
+        setComments([...comments, response.data]);
+      }
       setText("");
       setShowCommentForm(false);
+      setEditingCommentId(null);
     } catch (error) {
       console.error("Error submitting comment:", error);
     }
   };
+
+  const handleEditComment = (comment) => {
+    setText(comment.text);
+    setEditingCommentId(comment._id);
+    setShowCommentForm(true);
+  };
+
+  const deleteComment = async (id) => {
+    try {
+      const res2 = await fetch(`/api/deleteComment/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+
+      if (res2.status === 200 || res2.status === 201) {
+        setComments(comments.filter(comment => comment._id !== id));
+        console.log("Comment deleted");
+      } else {
+        console.log("Error deleting comment");
+      }
+    } catch (error) {
+      console.error("Error deleting comment:", error);
+    }
+  };
+
 
   if (!post) {
     return (
@@ -75,26 +113,51 @@ const IndividualPost = () => {
                     <div key={com._id} className={ss.commentCard}>
                       <span className={ss.commentUsername}>{com.username}</span>
                       <p className={ss.commentText}>{com.text}</p>
+                      <span className="d-flex justify-content-end" style={{ gap: "5px" }}>
+                        <button className="btn btn-success" onClick={() => handleEditComment(com)} style={{ width: "30px", height: "30px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                          <i className="fa-solid fa-pen" style={{ fontSize: "16px" }}></i>
+                        </button>
+                        <button className="btn btn-danger" onClick={() => deleteComment(com._id)} style={{ width: "30px", height: "30px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                          <i className="fa-solid fa-trash" style={{ fontSize: "16px" }}></i>
+                        </button>
+                      </span>
                     </div>
                   ))}
+                  {/* {comments.map((com) => (
+                    <div key={com._id} className="card mb-2 p-3" style={cardcolor}>
+                      <a style={{ display: "inline-block", color: "#4D869C" }}>{com.username}</a>
+                      <p className="card-subtitle text-muted text-primary">{com.text}</p>
+                      <span className="d-flex justify-content-end" style={{ gap: "5px" }}>
+                        <button className="btn btn-success" onClick={() => handleEditComment(com)} style={{ width: "30px", height: "30px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                          <i className="fa-solid fa-pen" style={{ fontSize: "16px" }}></i>
+                        </button>
+                        <button className="btn btn-danger" onClick={() => deleteComment(com._id)} style={{ width: "30px", height: "30px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                          <i className="fa-solid fa-trash" style={{ fontSize: "16px" }}></i>
+                        </button>
+                      </span>
+                    </div>
+                  ))} */}
+
                 </div>
-                {showCommentForm ? (
-                  <div className="mt-3">
-                    <textarea
-                      value={text}
-                      onChange={(e) => setText(e.target.value)}
-                      className={`form-control ${ss.formControl} mb-2`}
-                      placeholder="Write your comment..."
-                    ></textarea>
-                    <button onClick={handleNewCommentSubmit} className={`btn ${ss.btnPrimary}`}>
-                      Submit
+                {showCommentForm && (
+                    <div>
+                      <textarea
+                        value={text}
+                        onChange={(e) => setText(e.target.value)}
+                        className="form-control mb-2"
+                        placeholder="Write your comment..."
+                      ></textarea>
+                      <button onClick={handleNewCommentSubmit} className="btn btn-primary">
+                        {editingCommentId ? 'Update' : 'Submit'}
+                      </button>
+                    </div>
+                  )}
+                  {!showCommentForm && (
+                    <button onClick={() => setShowCommentForm(true)} className="btn btn-primary mt-2">
+                      Add New Comment
                     </button>
-                  </div>
-                ) : (
-                  <button onClick={() => setShowCommentForm(true)} className={`btn ${ss.btnPrimary} mt-2`}>
-                    Add New Comment
-                  </button>
-                )}
+                  )}
+
               </div>
             </div>
           </div>

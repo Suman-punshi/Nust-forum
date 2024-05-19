@@ -12,20 +12,15 @@ const searchRouter = require('./routes/search'); // Import the route for handlin
 const com = require('./routes/group_r_c');
 const jg = require('./routes/joinGroup');
 const path = require('path'); // Import the path module
-<<<<<<< HEAD
-const delCommentRouter = require('./routes/del_comment');
-=======
 const postsRouter = require('./routes/posts');
-
->>>>>>> origin/test2
+const commentRoutes = require('./routes/comment');
 
 const app = express();
-const commentRoutes = require('./routes/comment');
 
 // Enable CORS
 app.use(cors());
 app.use(express.json());
-
+app.use('/api', commentRoutes);
 mongoose.connect('mongodb+srv://hira:hira@nust-forum.r2zvg63.mongodb.net/database?retryWrites=true&w=majority&appName=NUST-forum', {});
 
 app.get('/favicon.ico', (req, res) => {
@@ -49,21 +44,11 @@ db.once('open', () => {
     app.use('/tags', group_r);
     app.use('/tag', tag_r);
     app.use('/search', searchRouter); // Mount the route for handling post search
-<<<<<<< HEAD
-    //app.use('/posts', postsRouter);
-
-    app.use('/comment', comment_r);
-    app.use('/communities', com);
-    app.use('/join-group', jg);
-    app.use('/deleteComment', delCommentRouter);
-   
-=======
     app.use('/comment', comment_r);
     app.use('/communities', com);
     app.use('/join-group', jg);
     app.use('/posts', postsRouter);
->>>>>>> origin/test2
-    
+    app.use('/api', commentRoutes);
    
     
 
