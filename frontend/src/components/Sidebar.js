@@ -5,6 +5,7 @@ import "./style.css"; // Importing style.css from the src folder
 
 const Sidebar = (props) => {
   const [tags, setTags] = useState([]);
+  const [showSidebar, setShowSidebar] = useState(false);
 
   useEffect(() => {
     const fetchTags = async () => {
@@ -17,6 +18,8 @@ const Sidebar = (props) => {
     };
     fetchTags();
   }, []);
+
+  const toggleSidebar = () => setShowSidebar(!showSidebar);
 
   return (
     <div className="sidebar-container" style={{ marginTop: "80px" }}>

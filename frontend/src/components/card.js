@@ -5,11 +5,11 @@ import "../hover.css";
 import Sidebar from "./Sidebar";
 import CommunitySidebar from "./community";
 import { authContext } from "../context/AuthContext";
+import "./css/Card.css"; // Import custom CSS
 
 export const Card = () => {
   const { userId } = useParams();
   const { user } = useContext(authContext); // Get the logged-in user's information
-
 
   const cardcolor = { 
     backgroundColor: '#e0f7ff', // Light blue background
@@ -113,7 +113,6 @@ export const Card = () => {
 };
 
 export default Card;
-
 
 
 // const handleJoinClick = async () => {
