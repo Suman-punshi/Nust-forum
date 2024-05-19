@@ -28,6 +28,7 @@ exports.addUser = (req, res) => {
   if (password.length < 8) {
       return res.status(400).json('Password must be at least 8 characters long');
   }
+  
 
   // Check if the user already exists
   User.findOne({ $or: [{ username }, { email }] })
