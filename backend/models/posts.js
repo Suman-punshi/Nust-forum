@@ -36,7 +36,7 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: true
   }
-}, { collection: 'posts' });
+}, {timestamps:true}, { collection: 'posts' });
 
 const User = mongoose.model('posts', postSchema);
 
