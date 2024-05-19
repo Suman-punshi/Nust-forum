@@ -1,0 +1,25 @@
+/* Responsive.css */
+@media (max-width: 768px) {
+    .sidebar-container, .community-sidebar-container {
+      display: none;
+    }
+  
+    .dropdown-menu.sidebar-dropdown {
+      display: block;
+      position: static;
+      float: none;
+      width: 100%;
+      box-shadow: none;
+    }
+  
+    .card-wrapper {
+      width: 100%;
+    }
+  }
+  
+  @media (min-width: 769px) {
+    .navbar-sidebar-dropdown {
+      display: none;
+    }
+  }
+  
