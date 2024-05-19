@@ -42,9 +42,9 @@ export const GroupPosts = () => {
 
   return (
     <Layout>
-      <div className="container mt-5">
-        <div className="row">
-          <div className="mt-4 w-75 d-flex justify-content-center">
+      <div className="d-flex justify-content-center mt-5" style = {{overflowX : 'hidden', left : '0'}}>
+        <div className="row" style = {{overflowX : 'hidden'}}>
+          <div className="mt-4 w-75 d-flex justify-content-center" style = {{overflowX : 'hidden'}}>
             <Link to={`/create/${userId}/${group}`} className="btn btn-success">
               New Post
             </Link>
@@ -53,9 +53,9 @@ export const GroupPosts = () => {
             </button>
           </div>
           <div className="col">
-            <Sidebar id={userId} />{" "}
+            <Sidebar id={userId} />
           </div>
-          <div className="col-12">
+          <div className="col-12 overflow-hidden" style = {{overflowX : 'hidden'}}>
             {groupPosts.map((post) => (
               <div
                 key={post._id}
@@ -65,7 +65,16 @@ export const GroupPosts = () => {
                 <div className="card-header">
                   <p className="card-subtitle text-muted">{post.username}</p>
                   <h5 className="card-title">{post.Title}</h5>
+
+                  <Link to={`/tags/${userId}/${post.tags}/${group}`} style={{ color: "inherit", textDecoration: "none" }}>
+                  <div className="tags">
+                    <span className="badge badge-dark ms-1" style={{ background: 'linear-gradient(45deg, #1e90ff, #00bfff)', color: 'white', borderRadius: '12px', padding: '5px 15px' }}>
+                      {post.tags}
+                    </span>
+                  </div>
+                </Link>
                 </div>
+                <Link to={`/post/${userId}/${post._id}`} style={{ color: "inherit", textDecoration: "none" }}>
                 <div className="card-body">
                   <p className="card-text">{post.text}</p>
                   {post.images && (
@@ -78,10 +87,11 @@ export const GroupPosts = () => {
                     {post.num_comments} comments
                   </span>
                 </div>
+                </Link>
               </div>
             ))}
           </div>
-          <div className="col">
+          <div className="col-lg-3">
             <CommunitySidebar id={userId} />
           </div>
         </div>
