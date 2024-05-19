@@ -4,70 +4,90 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import "../hover.css";
 import Layout from "./Layout"; // Import the layout component
+import Sidebar from "./Sidebar";
+import CommunitySidebar from "./community";
+
 export const GroupPosts = () => {
-    const { group } = useParams();
-    const { userId } = useParams();
-    const cardcolor = { backgroundColor: "#EEF7FF" };
-    const [groupPosts, setGroupPosts] = useState([]);
-  
-    useEffect(() => {
-      const fetchGroupPosts = async () => {
-        try {
-          console.log(`In groupss.js, Sending get request with userId: ${userId} and group: ${group}`);
-          const response = await axios.get(`http://localhost:4000/group/${userId}/${group}`);
-          setGroupPosts(response.data);
-        } catch (error) {
-          console.error('Error fetching group posts:', error);
-        }
-      };
-      fetchGroupPosts();
-    }, [group]);
+  const { group } = useParams();
+  const { userId } = useParams();
+  const cardcolor = { backgroundColor: "#EEF7FF" };
+  const [groupPosts, setGroupPosts] = useState([]);
 
-
-
-    const handleJoinGroup = async () => {
+  useEffect(() => {
+    const fetchGroupPosts = async () => {
       try {
-        await axios.post(`http://localhost:4000/join-group`, { userId, group });
-        alert('Successfully joined the group!');
+        console.log(
+          `In groupss.js, Sending get request with userId: ${userId} and group: ${group}`
+        );
+        const response = await axios.get(
+          `http://localhost:4000/group/${userId}/${group}`
+        );
+        setGroupPosts(response.data);
       } catch (error) {
-        console.error('Error joining group:', error);
-        alert('Failed to join the group.');
+        console.error("Error fetching group posts:", error);
       }
     };
-  
-    return (
-      <Layout>
-      <div className="w-75 container d-flex justify-content-center mt-5">
-        <Link to={`/create/${userId}/${group}`}>
-          <p className="card-subtitle text-success">New Post</p>
-        </Link>
-        <button onClick= {handleJoinGroup}>
-          <p className="btn">Join</p>
-        </button>
+    fetchGroupPosts();
+  }, [group, userId]);
+
+  const handleJoinGroup = async () => {
+    try {
+      await axios.post(`http://localhost:4000/join-group`, { userId, group });
+      alert("Successfully joined the group!");
+    } catch (error) {
+      console.error("Error joining group:", error);
+      alert("Failed to join the group.");
+    }
+  };
+
+  return (
+    <Layout>
+      <div className="container mt-5">
         <div className="row">
+          <div className="mt-4 w-75 d-flex justify-content-center">
+            <Link to={`/create/${userId}/${group}`} className="btn btn-success">
+              New Post
+            </Link>
+            <button onClick={handleJoinGroup} className="btn btn-primary">
+              Join
+            </button>
+          </div>
           <div className="col">
-            <div className="">
-              {groupPosts.map(post => (
-                <div key={post._id} className="card rounded-4 mb-3" style={cardcolor}>
-                  <div className="card-header">
-                    <p className="card-subtitle text-muted">{post.username}</p>
-                    <h5 className="card-title">{post.Title}</h5>
-                  </div>
-                  <div className="card-body">
-                    <p className="card-text">{post.text}</p>
-                    {post.images && <img src={post.images} className="card-img-top" alt="" />}
-                    <span className="badge badge-dark ms-1" style={{ backgroundColor: '#4D869C', color: 'white' }}>
-                      {post.num_comments} comments
-                    </span>
-                  </div>
+            <Sidebar id={userId} />{" "}
+          </div>
+          <div className="col-12">
+            {groupPosts.map((post) => (
+              <div
+                key={post._id}
+                className="card w-100 rounded-4 mb-3"
+                style={cardcolor}
+              >
+                <div className="card-header">
+                  <p className="card-subtitle text-muted">{post.username}</p>
+                  <h5 className="card-title">{post.Title}</h5>
                 </div>
-              ))}
-            </div>
+                <div className="card-body">
+                  <p className="card-text">{post.text}</p>
+                  {post.images && (
+                    <img src={post.images} className="card-img-top" alt="" />
+                  )}
+                  <span
+                    className="badge badge-dark ms-1"
+                    style={{ backgroundColor: "#4D869C", color: "white" }}
+                  >
+                    {post.num_comments} comments
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="col">
+            <CommunitySidebar id={userId} />
           </div>
         </div>
       </div>
-      </Layout>
-    );
-  };
-  
+    </Layout>
+  );
+};
+
 export default GroupPosts;
