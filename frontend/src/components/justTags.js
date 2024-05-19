@@ -10,7 +10,7 @@ import CommunitySidebar from './community';
 
 const JustTagPosts = () => {
   const { userId, tag_name } = useParams(); // Destructure all parameters
-  const cardcolor = { backgroundColor: "#EEF7FF" };
+  const cardcolor = { backgroundColor: "#8aa7bf" };
   const [tagPosts, setTagPosts] = useState([]);
 
   useEffect(() => {
@@ -27,8 +27,8 @@ const JustTagPosts = () => {
 
   return (
     <Layout>
-      <div className="d-flex justify-content-center mt-5" style = {{overflowX : 'hidden', left : '0'}}>
-        <div className="row d-flex justify-content-center" style = {{overflowX : 'hidden'}}>
+      <div className="d-flex justify-content-left mt-5" style = {{overflowX : 'hidden', left : '0'}}>
+        <div className="row" style = {{overflowX : 'hidden'}}>
         <div className="col-lg-3">
             <Sidebar id={userId} />
         </div>
@@ -36,7 +36,7 @@ const JustTagPosts = () => {
             <div className="w-100">
               {tagPosts.map(post => (
                 <div key={post._id} className="card w-100 rounded-4 mb-3" style={cardcolor}>
-                  <div className="card-header">
+                  <div className="card-header" style={{ background: 'linear-gradient(to bottom, #1a1a2e, #16213e)', borderTopLeftRadius: '16px', borderTopRightRadius: '16px', color: '#FFFFFF', fontWeight: 'bold' }}>
                     <p className="card-subtitle text-muted">{post.username}</p>
                     <h5 className="card-title">{post.Title}</h5>
                   </div>

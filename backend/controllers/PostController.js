@@ -7,10 +7,11 @@ console.log('a');
 const getProjects = async (req, res) => {
   const userId = req.params.userId
     try {
-        console.log('a');
+        console.log('in getProjects() of PostController');
         const user = await User.findById(userId);
+        console.log(`userId fetched from URI= ${userId}`);
         // const projects = await Project.find();
-        const projects = await Project.find({ group_name: { $in: user.groups_joined } });
+        const projects = await Project.find({ group: { $in: user.groups_joined } });
         console.log('Projects:', projects); // Log the projects to see if they are fetched correctly
         res.json(projects);
        
