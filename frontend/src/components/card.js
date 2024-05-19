@@ -58,7 +58,7 @@ export const Card = () => {
       <div className="container mt-5">
         <div className="row">
           <div className="col-12 mb-3">
-            <h3 style={{ color: "linear-gradient(to bottom, #1a1a2e, #16213e)" }}>
+            <h3 style={{ color: "white" }}>
               <b>{greeting}, {user ? user.username : 'User'}!</b>
             </h3>
           </div>
