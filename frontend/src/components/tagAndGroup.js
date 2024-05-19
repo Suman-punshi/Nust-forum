@@ -41,7 +41,7 @@ const TagPosts = () => {
                 <div className="card-header">
                   <p className="card-subtitle text-muted">{post.username}</p>
                   <h5 className="card-title">{post.Title}</h5>
-                </div>
+                </div> 
                 <div className="card-body">
                   <p className="card-text">{post.text}</p>
                   {post.images && <img src={post.images} className="card-img-top" alt="" />}
