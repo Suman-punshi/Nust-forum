@@ -171,7 +171,7 @@ const IndividualPost = () => {
                       ></textarea>
                     </div>
                     <div className="d-flex justify-content-between">
-                      <button onClick={() => setShowEditForm(false)} className="btn btn-secondary me-2">Cancel</button>
+                      <button onClick={() => setShowEditForm(false)} className="btn btn-primary me-2" style={{backgroundColor: 'gray'}}>Cancel</button>
                       <button onClick={handleEditSubmit} className="btn btn-primary">Save</button>
                     </div>
                   </div>
