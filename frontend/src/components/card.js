@@ -27,6 +27,7 @@ export const Card = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
+        console.log(`Sending request to fetch all posts at: /cards/${userId}`);
         const response = await axios.get(`http://localhost:4000/cards/${userId}`);
         setPosts(response.data);
       } catch (error) {
