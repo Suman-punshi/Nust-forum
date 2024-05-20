@@ -65,122 +65,122 @@ const Navbar = () => {
 
   return (
     <nav
-  className="navbar navbar-expand-lg navbar-dark fixed-top"
-  style={{
-    background: "linear-gradient(114.9deg, rgb(34, 34, 34) 8.3%, rgb(0, 40, 60) 41.6%, rgb(0, 143, 213) 93.4%)", // Dark blue background
-    fontFamily: "Arial, sans-serif", // Consistent font with sidebar
-    fontSize: "1rem", // Slightly larger base font size
-  }}
->
-  <div className="container-fluid">
-    <Link
-      className="navbar-brand"
-      to={`/cards/${user.id}`}
+      className="navbar navbar-expand-lg navbar-dark fixed-top"
       style={{
-        color: "#FFFFFF", // White color for the brand name
-        fontSize: "1.5rem", // Larger font size for brand name
-        fontFamily: "Helvetica Neue, Arial, sans-serif", // Professional and modern font
-        fontWeight: "bold", // Bold font weight for emphasis
+        background:
+          "linear-gradient(114.9deg, rgb(34, 34, 34) 8.3%, rgb(0, 40, 60) 41.6%, rgb(0, 143, 213) 93.4%)", // Dark blue background
+        fontFamily: "Arial, sans-serif", // Consistent font with sidebar
+        fontSize: "1rem", // Slightly larger base font size
       }}
     >
-      NUST Forums
-    </Link>
-    <button
-      className="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarNavDropdown"
-      aria-controls="navbarNavDropdown"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span className="navbar-toggler-icon"></span>
-    </button>
-    <div
-      className="collapse navbar-collapse justify-content-center"
-      id="navbarNavDropdown"
-    >
-      <div
-        className="d-flex"
-        style={{ position: "relative", width: "50%" }}
-        ref={ref}
-      >
-        <input
-          className="form-control me-2"
-          type="search"
-          placeholder="Search by group or user"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+      <div className="container-fluid">
+        <Link
+          className="navbar-brand"
+          to={`/cards/${user.id}`}
           style={{
-            fontSize: "1rem", // Consistent font size for search
-            padding: "10px", // Larger input area
+            color: "#FFFFFF", // White color for the brand name
+            fontSize: "1.5rem", // Larger font size for brand name
+            fontFamily: "Helvetica Neue, Arial, sans-serif", // Professional and modern font
+            fontWeight: "bold", // Bold font weight for emphasis
           }}
-        />
-        {suggestions.length > 0 && (
-          <ul
-            className="list-group position-absolute w-100"
-            style={{
-              top: "38px",
-              zIndex: 1000,
-              backgroundColor: "#e0f7ff",
-            }}
+        >
+          NUST Forums
+        </Link>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div
+          className="collapse navbar-collapse justify-content-center"
+          id="navbarNavDropdown"
+        >
+          <div
+            className="d-flex"
+            style={{ position: "relative", width: "50%" }}
+            ref={ref}
           >
-            {suggestions.map((item, index) => (
-              <li
-                key={index}
-                className="list-group-item list-group-item-action"
-                onClick={() => handleSelection(item)}
+            <input
+              className="form-control me-2"
+              type="search"
+              placeholder="Search by group or user"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              style={{
+                fontSize: "1rem", // Consistent font size for search
+                padding: "10px", // Larger input area
+              }}
+            />
+            {suggestions.length > 0 && (
+              <ul
+                className="list-group position-absolute w-100"
                 style={{
-                  backgroundColor: "#FFFFFF", // White background for visibility
-                  color: "#333", // Dark text for readability
-                  "&:hover": {
-                    backgroundColor: "#a6c0fe", // Light blue on hover
-                    color: "#000000", // Black text on hover
-                  },
+                  top: "38px",
+                  zIndex: 1000,
+                  backgroundColor: "#e0f7ff",
                 }}
               >
-                {item.label}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-      <ul className="navbar-nav ms-auto">
-        <li className="nav-item dropdown">
-          <a
-            className="nav-link dropdown-toggle"
-            href="#"
-            id="navbarDropdown"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            Account
-          </a>
-          <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li>
-              <Link
-                className="dropdown-item"
-                to={`/profile/${user.username}`}
+                {suggestions.map((item, index) => (
+                  <li
+                    key={index}
+                    className="list-group-item list-group-item-action"
+                    onClick={() => handleSelection(item)}
+                    style={{
+                      backgroundColor: "#FFFFFF", // White background for visibility
+                      color: "#333", // Dark text for readability
+                      "&:hover": {
+                        backgroundColor: "#a6c0fe", // Light blue on hover
+                        color: "#000000", // Black text on hover
+                      },
+                    }}
+                  >
+                    {item.label}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+          <ul className="navbar-nav ms-auto">
+            <li className="nav-item dropdown">
+              <a
+                className="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
               >
-                Profile
-              </Link>
-            </li>
-            <li>
-              <hr className="dropdown-divider" />
-            </li>
-            <li>
-              <a className="dropdown-item" onClick={handleLogout}>
-                Log out
+                Account
               </a>
+              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li>
+                  <Link
+                    className="dropdown-item"
+                    to={`/profile/${user.username}`}
+                  >
+                    Profile
+                  </Link>
+                </li>
+                <li>
+                  <hr className="dropdown-divider" />
+                </li>
+                <li>
+                  <button onClick={handleLogout} className="dropdown-item">
+                    Log out
+                  </button>
+                </li>
+              </ul>
             </li>
           </ul>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
+        </div>
+      </div>
+    </nav>
   );
 };
 
