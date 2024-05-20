@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 
 
 const createToken = (id) => {
-  return jwt.sign({id}, 'SECRET_KEY = WebEngineering123SecretKey', {expiresIn: '1d'});
+  return jwt.sign({id}, 'SECRET_KEY = WebEngineering123SecretKey', {expiresIn: '1h'});
 }
 
 exports.addUser = (req, res) => {
