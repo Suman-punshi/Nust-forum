@@ -63,7 +63,7 @@ export const GroupPosts = () => {
                 style={cardcolor}
               >
                 <div className="card-header">
-                  <Link to={`/users/${post.username}`}><p className="card-subtitle text-muted">{post.username}</p></Link>
+                  <Link to={`/profile/${post.username}`}><p className="card-subtitle text-muted">{post.username}</p></Link>
                   
                   <h5 className="card-title">{post.Title}</h5>
 
