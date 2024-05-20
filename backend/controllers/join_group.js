@@ -20,3 +20,17 @@ exports.joinGroup = async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 };
+
+
+
+exports.checkMembership = async (req, res) => {
+    const { userId, groupId } = req.params;
+    try {
+        const user = await User.findById(userId);
+        const isMember = user.groups_joined.includes(groupId);
+        res.status(200).json({ isMember });
+    } catch (error) {
+        console.error('Failed to check group membership:', error);
+        res.status(500).json({ message: "Error checking membership", error: error });
+    }
+};

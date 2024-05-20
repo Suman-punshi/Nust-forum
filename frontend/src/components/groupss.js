@@ -12,6 +12,8 @@ export const GroupPosts = () => {
   const { userId } = useParams();
   const cardcolor = { backgroundColor: "#EEF7FF" };
   const [groupPosts, setGroupPosts] = useState([]);
+  const [isMember, setIsMember] = useState(false);
+
 
   useEffect(() => {
     const fetchGroupPosts = async () => {
@@ -27,7 +29,17 @@ export const GroupPosts = () => {
         console.error("Error fetching group posts:", error);
       }
     };
+    const checkMembership = async () => {
+      try {
+          const response = await axios.get(`http://localhost:4000/join-group/check-membership/${userId}/${group}`);
+          setIsMember(response.data.isMember);
+      } catch (error) {
+          console.error("Error checking group membership:", error);
+      }
+  };
     fetchGroupPosts();
+    checkMembership();
+
   }, [group, userId]);
 
   const handleJoinGroup = async () => {
@@ -45,12 +57,17 @@ export const GroupPosts = () => {
       <div className="d-flex justify-content-left mt-5" style = {{overflowX : 'hidden', left : '0'}}>
         <div className="row" style = {{overflowX : 'hidden'}}>
           <div className="mt-4 w-75 d-flex justify-content-center" style = {{overflowX : 'hidden'}}>
-            <Link to={`/create/${userId}/${group}`} className="btn btn-success col">
+            <Link to={`/create/${userId}/${group}`} className="btn btn-success col" style={{marginBottom: '20px'}}>
               New Post
             </Link>
-            <button onClick={handleJoinGroup} className="btn btn-primary col">
-              Join
-            </button>
+            {
+    !isMember && (
+        <button onClick={handleJoinGroup} className="btn btn-primary col" style={{marginLeft: "10px", marginBottom: '20px'}}>
+            Join
+        </button>
+    )
+}
+
           </div>
           <div className="col">
             <Sidebar id={userId} />
