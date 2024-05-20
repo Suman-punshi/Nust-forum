@@ -125,7 +125,7 @@ const UserProfileComponent = () => {
         <div className="container mt-5">
   <div className="overflow-hidden ml-0 w-25 h-100">
     <div className="profile-header rounded mb-4 mt-3 w-25 h-100 text-center overflow-hidden" style={{ backgroundColor: "#16213e", color: "#FFFFFF", position: 'fixed', padding: '20px', boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)' }}>
-      <img src={user.avatarUrl || "default-avatar.png"} alt="user avatar" className="rounded-circle mb-3" width="150" height="150" style={{ border: '4px solid #1a1a2e' }} />
+      <img src={user.avatarUrl || "/default-avatar.png"} alt="user avatar" className="rounded-circle mb-3" width="150" height="150" style={{ border: '4px solid #1a1a2e' }} />
       <h1 className="display-4" ><b>{user.username}</b></h1>
       <p className="text-muted">Joined on: {new Date(user.createdAt).toLocaleDateString()}</p>
     </div>
