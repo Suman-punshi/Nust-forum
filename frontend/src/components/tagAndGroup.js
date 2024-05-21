@@ -38,8 +38,12 @@ const TagPosts = () => {
           <div className="">
             {tagPosts.map(post => (
               <div key={post._id} className="card rounded-4 mb-3" style={cardcolor}>
-                <div className="card-header">
-                  <p className="card-subtitle text-muted">{post.username}</p>
+                <div className="card-header" style={{ background: 'linear-gradient(to bottom, #1a1a2e, #16213e)', borderTopLeftRadius: '16px', borderTopRightRadius: '16px', color: '#FFFFFF', fontWeight: 'bold' }}>
+                <Link to={`/profile/${post.username}`} style={{ color: '#e6e6e4', textDecoration: 'none' }}>
+                          <p className="card-subtitle" style={{ color: "#e6e6e4", fontSize: "small", fontFamily: "'Roboto', sans-serif" }}>
+                            {"u/" + post.username}
+                          </p>
+                </Link>
                   <h5 className="card-title">{post.Title}</h5>
                 </div>
                 <Link to={`/post/${userId}/${post._id}`} style={{ color: "inherit", textDecoration: "none" }}>
