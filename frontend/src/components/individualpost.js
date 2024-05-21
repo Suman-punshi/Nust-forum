@@ -175,7 +175,7 @@ const IndividualPost = () => {
                     </p>
                   </Link>
                   <Link to = {`/profile/${post.username}`} className="card-subtitle" style={{ fontSize: "medium", textDecoration: 'none' }}>{"u/" + post.username}</Link>
-                  <h5 className="card-title" style={{ fontSize: "x-large", fontStyle: "italic", fontFamily: "'Lobster', cursive" }}>{post.Title}</h5>
+                  <h5 className="card-title" style={{ fontSize: "large" }}>{post.Title}</h5>
                 </div>
                 {user && user.username === post.username && (
                   <Dropdown>

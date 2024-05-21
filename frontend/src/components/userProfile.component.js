@@ -136,20 +136,22 @@ const UserProfileComponent = () => {
         <div className="card shadow-sm" style={{ backgroundColor: "#FFFFFF", color: "#000000", borderRadius: '16px' }}>
           <div className="card-header" style={{ background: 'linear-gradient(to bottom, #1a1a2e, #16213e)', borderTopLeftRadius: '16px', borderTopRightRadius: '16px', padding: '10px', color: '#FFFFFF' }}>
             <div className="d-flex justify-content-between align-items-center">
-              <Link to={`/tags/${user.userId}/${post.tags}/${post.group}`} className="text-decoration-none" style={{ color: '#8ee5ee' }}>
+              <Link to={`/group/${user._id}/${post.group}`} className="text-decoration-none" style={{ color: '#8ee5ee' }}>
                 <span className="badge" style={{ backgroundColor: '#1e90ff', color: '#FFFFFF' }}>{post.group}</span>
               </Link>
               <span className="text-muted" style={{ color: '#8ee5ee' }}>{post.username}</span>
             </div>
             <h5 className="mt-2 mb-0" style={{ color: '#FFFFFF' }}>{post.title}</h5>
           </div>
+          <Link to={`/post/${user._id}/${post._id}`} className="stretched-link">
           <div className="card-body" style={{ backgroundColor: '#e0f7ff', borderBottomLeftRadius: '16px', borderBottomRightRadius: '16px', padding: '20px' }}>
             <Link to={`/tags/${post.tags}/${post.group}`} className="text-decoration-none">
               <span className="badge bg-dark me-1" style={{ backgroundColor: '#1e90ff', color: '#FFFFFF' }}>{post.tags}</span>
             </Link>
-            <p className="card-text mt-2" style={{ color: '#000000' }}>{post.text}</p>
-            <Link to={`/post/${user.userId}/${post._id}`} className="stretched-link"></Link>
+            <p className="card-text mt-2 text-decoration-none" style={{ color: '#000000' }}>{post.text}</p>
+      
           </div>
+          </Link>
           <div className="card-footer" style={{ backgroundColor: '#16213e', borderBottomLeftRadius: '16px', borderBottomRightRadius: '16px', padding: '10px' }}>
           {post.images && <img src={`http://localhost:4000${post.images}`} className="card-img-top" alt="Post image" />}
             <span className="badge bg-primary" style={{ backgroundColor: '#1e90ff', color: '#FFFFFF' }}>{post.num_comments} comments</span>
